@@ -12,7 +12,7 @@
           <div class="content-wrapper">
             <div class="page-header">
               <h3 class="page-title">
-                <span class="page-title-icon bg-gradient-primary text-white me-2">
+                <span class="page-title-icon bg-gradient-success text-white me-2">
                   <i class="mdi mdi-home"></i>
                 </span> Home
               </h3>
@@ -41,13 +41,13 @@
                 <p class="card-header" style="margin-bottom: 20px;">Menu Umum</p>
                 <div class="row justify-content no-gutters text-center">
                   <a href="/about"class="col mb-3 text-center" style="margin-right: 20px">
-                      <div class="card mb-1 bg-gradient-primary  text-white text-center" >
+                      <div class="card mb-1 bg-gradient-success  text-white text-center" >
                         <span><i class="fas fa-building" style="margin: 21px;"></i></span>
                       </div>
                       <p class="text-secondary"><small>About Ponpes</small></p>
                     </a>
                   <a href="/info" class="col mb-3" style="margin-right: 20px">
-                    <div class="card mb-1 bg-gradient-primary  text-white text-center">
+                    <div class="card mb-1 bg-gradient-success  text-white text-center">
                       <span><i class="fas fa-info-circle" style="margin: 21px;"></i></span>
                     </div>
                     <p class="text-secondary"><small>Informasi</small></p>
@@ -56,13 +56,13 @@
 
                 <div class="row justify-content no-gutters text-center">
                 <a href="/gallery-content" class="col mb-3" style="margin-right: 20px">
-                  <div class="card mb-1 bg-gradient-primary  text-white text-center">
+                  <div class="card mb-1 bg-gradient-success  text-white text-center">
                     <span><i class="fas fa-photo-video" style="margin: 21px;"></i></span>
                   </div>
                   <p class="text-secondary"><small>Gallery</small></p>
                 </a>
                 <a href="/login-page" class="col mb-3" style="margin-right: 20px">
-                  <div class="card mb-1 bg-gradient-primary  text-white text-center">
+                  <div class="card mb-1 bg-gradient-success  text-white text-center">
                     <span><i class="fas fa-sign-in-alt" style="margin: 21px;"></i></span>
                   </div>
                   <p class="text-secondary"><small>Login</small></p>

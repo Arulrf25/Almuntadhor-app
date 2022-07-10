@@ -11,36 +11,38 @@
           <div class="content-wrapper">
             <div class="page-header">
               <h3 class="page-title">
-                <span class="page-title-icon bg-default-light text-white me-2">
-                  <i class="fas fa-arrow-circle-left"></i>
-                </span> Informasi
+                <span class="page-title-icon bg-gradient-success text-white me-2">
+                  <a href="{{ URL::previous() }}" style="color:white"><i class="fas fa-arrow-circle-left"></i></a>
+                </span> Informasi Santri
               </h3>
             </div>
           <div class="row">
           <div class="col-md-7 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
-                <p class="card-title text-center" style="margin-bottom: 20px;">Informasi Umum</p>
-                @foreach($informations as $information)
-                <div class="card-body bg-gradient-light" style="margin-bottom: 20px">
-                  <h5>{{ $information->judul }}</h5>
-                  <span ><small >Terbit : {{ $information->created_at }}</small></span>
-                  <p>{{ $information->deskripsi }}</p>
-                  <!-- <img src="{{ URL::to('/')}}/informasi/{{ $information->gambar }}" alt="" width="100%" style="margin-bottom: 10px; margin-top:10px"> -->
-                  <a href="{{ asset('/informasi/'. $information->gambar) }}" class="btn btn-light">Lihat Selengkapnya</a>
-                  <!-- <p>{{ $information->deskripsi }}</p> -->
-                  <!-- <div class="text-center">
-                    <button href="#" class="btn btn-light">Selengkapnya...</button>
-                  </div> -->
-                </div>
-                @endforeach
-            </div>
+                <h5>Informasi Santri</h5>
+                <ul class="list-unstyled">
+                  @foreach($informations as $information)
+                  <li class="media">
+                    <img src="..." class="mr-3" alt="..." width="64px" height="64px">
+                    <div class="media-body">
+                      <h5 class="mt-0 mb-1">{{ $information->judul }}</h5>
+                      <small>{{ $information->created_at }}</small>
+                      <p>{{ $information->deskripsi }}</p>
+                      <a href="#" class="btn btn-gradient-success">Selengkapnya..</a>
+                    </div>
+                  </li>
+                  @endforeach
+                </ul>
+                
+               
+          </div>
           </div>
           </div>
           <div class="col-md-5 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
-                <h3>Arsip Informasi</h3>
+                <h5>Arsip Informasi</h5>
                 <div class="list-group" style="margin-bottom: 50px">
                   @foreach($informations as $information)
                   <a href="#" class="list-group-item list-group-item-action"> {{ $information->judul }}</a>

@@ -10,13 +10,13 @@
   <div class="content-wrapper">
     <div class="page-header">
       <h3 class="page-title">
-        <span class="page-title-icon bg-gradient-primary text-white me-2">
+        <span class="page-title-icon bg-gradient-success text-white me-2">
           <i class="mdi mdi-home"></i>
         </span> Dashboard
       </h3>
     </div>
     <div class="row">
-      <div class="col-md-6 grid-margin stretch-card">
+      <div class="col-md-6 grid-margin stretch-card ">
         <div class="card">
           <div class="card-body">
             <h3>WELCOME TO SI MAS DHOR</h3>
@@ -38,12 +38,12 @@
         <div class="card-body text-center">
           <p class="card-header" style="margin-bottom: 20px;">Menu Utama</p>
           <div class="row justify-content no-gutters text-center">
-            <div class="col mb-3 text-center" style="margin-right: 5px">
-                <a href="/nilai" class="mb-1   text-white text-center" >
-                  <span><img src="{{ asset('NiceAdmin/') }}/assets/img/exam.png" alt="" width="50"></i></span>
-                </a>
-                <p class="text-secondary"><small>Nilai</small></p>
-              </div>
+            <div class="col mb-3" style="margin-right: 5px">
+              <a href="/jadwal" class="mb-1   text-white text-center">
+                <span><span><img src="{{ asset('NiceAdmin/') }}/assets/img/jadwal.png" alt="" width="50"></span>
+              </a>
+              <p class="text-secondary"><small>Jadwal Kegiatan</small></p>
+            </div>
             <div class="col mb-3" style="margin-right: 5px">
               <a href="/tagihan" class="mb-1   text-white text-center">
                 <span><img src="{{ asset('NiceAdmin/') }}/assets/img/pembayaran.png" alt="" width="50"></span>
@@ -61,25 +61,25 @@
           </div>
           <div class="row justify-content no-gutters text-center">
             <div class="col mb-3" style="margin-right: 5px">
-              <a href="/jadwal" class="mb-1   text-white text-center">
-                <span><span><img src="{{ asset('NiceAdmin/') }}/assets/img/jadwal.png" alt="" width="50"></span>
-              </a>
-              <p class="text-secondary"><small>Jadwal Kegiatan</small></p>
-            </div>
-          <div class="col mb-3" style="margin-right: 5px">
-              <a href="hafalan" class="mb-1   text-white text-center">
+              <a href="hafalan-santri" class="mb-1   text-white text-center">
                   <span><img src="{{ asset('NiceAdmin/') }}/assets/img/hafalan.png" alt="" width="50"></span>
               </a>
-              <p class="text-secondary"><small>Hafalan</small></p>
+              <p class="text-secondary"><small>Pencapaian Prestasi</small></p>
             </div>
             <div class="col mb-3 text-center" style="margin-right: 5px">
               <a href="#" class="mb-1   text-white text-center">
                   <span><img src="{{ asset('NiceAdmin/') }}/assets/img/info.png" alt="" width="50"></span>
               </a>
-              <p class="text-secondary"><small>Pengumuman</small></p>
+              <p class="text-secondary"><small>Info Santri</small></p>
             </div>
-
+            <div class="col mb-3 text-center" style="margin-right: 5px">
+              <a href="/nilai" class="mb-1   text-white text-center" >
+                <span><img src="{{ asset('NiceAdmin/') }}/assets/img/exam.png" alt="" width="50"></i></span>
+              </a>
+              <p class="text-secondary"><small>Nilai</small></p>
+            </div>
           </div>
+    </div>
     </div>
     </div>
     </div>
@@ -95,7 +95,7 @@
               </div>
               <p class="mb-1">Pukul 07.00 - 13.00 WIB</p>
               <p><small>Tempat : Sekolah masing-masing</small></p>
-              <p><small class="badge bg-danger">Telah selesai</small></p>
+              <p><small class="badge rounded bg-danger">Telah selesai</small></p>
             </div>
             <div class="list-group-item list-group-item" aria-current="true" style="margin-bottom: 10px">
               <div class="d-flex w-100 justify-content-between">
@@ -103,7 +103,7 @@
               </div>
               <p class="mb-1">Pukul 13.30 - 15.30 WIB</p>
               <p><small>Tempat : Kelas 2</small></p>
-              <p><small class="badge bg-success">Sedang berlansung</small></p>
+              <p><small class="badge rounded bg-success">Sedang berlansung</small></p>
             </div>
             <div class="list-group-item list-group-item" aria-current="true" style="margin-bottom: 10px">
               <div class="d-flex w-100 justify-content-between">
@@ -111,7 +111,7 @@
               </div>
               <p class="mb-1">Pukul 16.00 - 17.30 WIB</p>
               <p><small>Tempat : Mushola</small></p>
-              <p><small class="badge bg-warning">Akan datang</small></p>
+              <p><small class="badge rounded bg-warning">Akan datang</small></p>
             </div>
           </div>
          </div>
@@ -129,7 +129,7 @@
            <p><small>10/20/20</small></p>
            <p><small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis ad amet nisi quidem maiores magnam dolor</small></p>
            <div class="text-center">
-           <p><small class="btn btn-secondary">Selengkapnya</small></p>
+           <p><small class="btn btn-sm btn-success">Selengkapnya</small></p>
          </div>
         </div>
         <div class="list-group-item list-group-item" aria-current="true" style="margin-bottom: 10px">
@@ -139,7 +139,7 @@
           <p><small>10/20/20</small></p>
           <p><small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis ad amet nisi quidem maiores magnam dolor</small></p>
           <div class="text-center">
-          <p><small class="btn btn-secondary">Selengkapnya</small></p>
+            <p><small class="btn btn-sm btn-success">Selengkapnya</small></p>
         </div>
        </div>
        <div class="list-group-item list-group-item" aria-current="true" style="margin-bottom: 10px">
@@ -149,7 +149,7 @@
         <p><small>10/20/20</small></p>
         <p><small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis ad amet nisi quidem maiores magnam dolor</small></p>
         <div class="text-center">
-        <p><small class="btn btn-secondary">Selengkapnya</small></p>
+          <p><small class="btn btn-sm btn-success">Selengkapnya</small></p>
       </div>
      </div>
       </div>
@@ -164,4 +164,4 @@
 
         </div>
       </div>
-   
+    </div>

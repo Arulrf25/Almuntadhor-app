@@ -10,8 +10,8 @@
   <div class="content-wrapper">
     <div class="page-header">
       <h3 class="page-title">
-        <span class="page-title-icon bg-default-light text-white me-2">
-            <i href="/dashboard" class="fas fa-arrow-circle-left"></i>
+        <span class="page-title-icon bg-gradient-success text-white me-2">
+          <a href="{{ URL::previous() }}" style="color:white"><i class="fas fa-arrow-circle-left"></i></a>
         </span> Jadwal Kegiatan
       </h3>
     </div>

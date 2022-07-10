@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Pembayaran;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
 use Carbon\Carbon;
+
+use Dompdf\Dompdf;
+use App\Models\Pembayaran;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+
 class PembayaranController extends Controller
 {
     public function index()
@@ -59,7 +62,7 @@ class PembayaranController extends Controller
         $input_data = $request->all();
 
         //  Array 1 dimensi
-        $id = DB::select("SHOW TABLE STATUS LIKE 'data_pembayaran'");
+        $id = DB::select("SHOW TABLE STATUS LIKE 'data_tagihan'");
         $next_id = $id[0]->Auto_increment;
         // jika id terbaru lebih dari sama dengan 10 maka keluaranya 00 + id terbaru
         if ($next_id >= 10) {
@@ -130,8 +133,36 @@ class PembayaranController extends Controller
     public function riwayat()
     {
         $santri = Auth::user()->username;
-        $riwayatPembayaran = Pembayaran::where('nis', $santri)->where('keterangan', 'Lunas')->get();
-        return view('users.riwayat_bayar', ['riwayatPembayaran' => $riwayatPembayaran]);
+        $pembayaran = Pembayaran::where('nis', $santri)->where('status', 'settlement' )->get();
+        $pembayaran1 = Pembayaran::where('nis', $santri)->where('status', 'capture' )->get();
+        return view('users.riwayat_bayar', ['riwayatPembayaran' => $pembayaran, 'riwayatPembayaran1' => $pembayaran1]);
+    }
+
+    public function cetak($id)
+    {
+        $santri = Auth::user()->username;
+        $tanggal = Carbon::now();
+        $pembayaran = Pembayaran::where('nis', $santri)->where('order_id', $id )->get();
+
+        // instantiate and use the dompdf class
+        $html = view('users.kwitansi', ['riwayatPembayaran' => $pembayaran, 'tanggal'=>$tanggal, 'title'=>$id]);
+        // $dompdf = new Dompdf();
+        // $dompdf->loadHtml($html);
+
+        // // (Optional) Setup the paper size and orientation
+        // $dompdf->setPaper('A5', 'landscape');
+        // $options = $dompdf->getOptions();
+        // $options->setIsHtml5ParserEnabled(true);
+        // $dompdf->setOptions($options);
+
+
+        // // Render the HTML as PDF
+        // $dompdf->render();
+
+        // // Output the generated PDF to Browser
+        // $dompdf->stream();
+
+        return $html;
     }
 
     public function detail($id)
@@ -140,13 +171,7 @@ class PembayaranController extends Controller
         $detail = Pembayaran::findOrFail($id);
         return view('users.detail_riwayat', ['detail' => $detail]);
     }
-
-    public function tagihan()
-    {
-        $santri = Auth::user()->username;
-        $tagihan = Pembayaran::where('nis', $santri)->where('tagihan', '<', Carbon::now()->year)->where('keterangan', 'Belum diverifikasi')->paginate(5);
-        return view('users.tagihan', ['dataTagihan' => $tagihan]);
-    }
+  
 
     public function editTagihan($id)
     {

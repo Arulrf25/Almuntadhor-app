@@ -10,7 +10,7 @@
             <div class="page-header">
                 <h3 class="page-title">
                     <span class="page-title-icon bg-default-light text-white me-2">
-                        <i class="fas fa-arrow-circle-left"></i>
+                        <a href="{{ URL::previous() }}" style="color:white"><i class="fas fa-arrow-circle-left"></i></a>
                     </span> Form Pembayaran
                 </h3>
             </div>

@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiController;
+use App\Http\Controllers\TagihanController;
+use App\Http\Controllers\PembayaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +19,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/about', function () {
     return view('pages.about');
 });
-Route::get('gallery-content', [App\Http\Controllers\ContentController::class, 'tampilContent'])->name('gallery-content.tampilContent');
-Route::get('info', [App\Http\Controllers\ContentController::class, 'infoContent'])->name('infoContent');
-Route::get('/', [App\Http\Controllers\ContentController::class, 'homeContent'])->name('homeContent');
+Route::get('/alumni', function () {
+    return view('users.alumni');
+});
+Route::get('gallery-content', [App\Http\Controllers\KontenController::class, 'tampilContent'])->name('gallery-content.tampilContent');
+Route::get('info', [App\Http\Controllers\KontenController::class, 'infoContent'])->name('infoContent');
+Route::get('/', [App\Http\Controllers\KontenController::class, 'homeContent'])->name('homeContent');
 
 
 Route::get('/login-page', [App\Http\Controllers\LoginController::class, 'index'])->name('login-page');
@@ -78,9 +84,13 @@ Route::group(['middleware' => ['auth','ceklevel:santri']], function() {
     Route::get('/riwayat', function () {
         return view('users.riwayat_bayar');
     });
-    Route::get('tagihan', [App\Http\Controllers\PembayaranController::class, 'tagihan'])->name('tagihan');
+    Route::get('/tagihan', [TagihanController::class, 'tagihan'])->name('tagihan');
+    Route::post('/tagihan', [TagihanController::class, 'detail'])->name('detail');
+    Route::get('/waiting-payment/{id}', [TagihanController::class, 'waiting'])->name('waiting');
+    Route::post('/payment', [TagihanController::class, 'payment'])->name('payment');
+    Route::get('/cetak-kwitansi/{id}', [PembayaranController::class, 'cetak'])->name('cetak');
     Route::get('/tagihan/edit/{id?}', 'PembayaranController@editTagihan')->name('tagihan.edit');
-    Route::get('dashboard', [App\Http\Controllers\ContentController::class, 'homeUser'])->name('homeUser');
+    Route::get('dashboard', [App\Http\Controllers\KontenController::class, 'homeUser'])->name('homeUser');
     Route::get('hafalan-santri', [App\Http\Controllers\HafalanController::class, 'hafalan'])->name('hafalan-santri.hafalan');
     Route::put('/upload/update/{id?}', 'UploadController@update')->name('upload.update');
     Route::get('detail-riwayat/{id?}', [App\Http\Controllers\PembayaranController::class, 'detail'])->name('detail-riwayat.riwayat');
@@ -135,13 +145,13 @@ Route::group(['middleware' => ['auth','ceklevel:pengurus,pendidik']], function()
     Route::get('/data-santri/cetak', 'SantriController@cetakPdf')->name('data-santri.cetak');
 
     // Content
-    Route::get('data-content', [App\Http\Controllers\ContentController::class, 'index'])->name('data-content.index');
-    Route::post('/data-content/create', 'ContentController@create')->name('data-content.create');
-    Route::post('/data-content/store', 'ContentController@store')->name('data-content.store');
-    Route::get('/data-content/edit/{id?}', 'ContentController@edit')->name('data-content.edit');
-    Route::put('/data-content/update/{id?}', 'ContentController@update')->name('data-content.update');
-    Route::delete('/data-content/destroy/{id?}', 'ContentController@destroy')->name('data-content.destroy');
-    Route::post('/data-content/search', 'ContentController@search')->name('search');
+    Route::get('data-content', [App\Http\Controllers\KontenController::class, 'index'])->name('data-content.index');
+    Route::post('/data-content/create', 'KontenController@create')->name('data-content.create');
+    Route::post('/data-content/store', 'KontenController@store')->name('data-content.store');
+    Route::get('/data-content/edit/{id?}', 'KontenController@edit')->name('data-content.edit');
+    Route::put('/data-content/update/{id?}', 'KontenController@update')->name('data-content.update');
+    Route::delete('/data-content/destroy/{id?}', 'KontenController@destroy')->name('data-content.destroy');
+    Route::post('/data-content/search', 'KontenController@search')->name('search');
 
     // Informasi Pribadi
     Route::get('data-informasi', [App\Http\Controllers\InformasiPribadiController::class, 'index'])->name('data-informasi.index');
@@ -163,5 +173,4 @@ Route::group(['middleware' => ['auth','ceklevel:pengurus,pendidik']], function()
 
 
 Auth::routes();
-Route::get('/tagihan', 'PembayaranController@tagihan')->name('tagihan');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

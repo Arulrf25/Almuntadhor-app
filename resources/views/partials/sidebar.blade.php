@@ -1,6 +1,6 @@
-<div class="container-fluid page-body-wrapper">
+<div class="container-fluid page-body-wrapper ">
     <!-- partial:../../partials/_sidebar.html -->
-    <nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <nav class="sidebar sidebar-offcanvas" id="sidebar" style="">
         <ul class="nav">
           <li class="nav-item nav-profile">
             <a href="#" class="nav-link">
@@ -52,7 +52,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/pengumuman">
-              <span class="menu-title">Pengumuman</span>
+              <span class="menu-title">Info Santri</span>
               <i class="fas fa-exclamation-circle menu-icon"></i>
             </a>
           </li>

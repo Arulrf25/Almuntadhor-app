@@ -2,10 +2,14 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\Models\Pembayaran;
-use App\Models\User;
 use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Tagihan;
+use App\Models\DataAkun;
+use App\Models\Pembayaran;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class CronJob extends Command
 {
@@ -40,17 +44,22 @@ class CronJob extends Command
      */
     public function handle()
     {
-        // return 0;
-
-        // $dataTagihan = Pembayaran::where('user_id', );
-        // $tanggal = explode(' ', $dataTagihan[3]->tagihan);
-        dd(Carbon::parse('1 April')->addMonth(1)->format('M'));
-        // dd(Carbon::parse('1 April')->addMonth(1));
-
-        // foreach($dataTagihan as $tagihan)
-        // {
-        //     Pembayaran::get();
-        // }
-        
+        $data = DataAkun::where('level', 'santri')->count();
+        $data2 = DataAkun::where('level', 'santri')->get();
+        $waktu = Carbon::now();
+        $angka = 0;
+            foreach ($data2 as $d) {
+                Tagihan::create([
+                    'nis'=>$d->username,
+                    'tagihan' =>'Syariah'.' '. $waktu->isoFormat('MMMM Y'),
+                    'bulan' => $waktu->isoFormat('MMMM'),
+                    'tahun' => $waktu->isoFormat('Y'),
+                    'nominal' => '350000',
+                    'keterangan' => 'Belum Lunas',
+                    'status' =>'aktif',
+                ]);
+            }
+    
+            \Log::info('Cron Tagihan Berhasil Dijalankan');
     }
 }

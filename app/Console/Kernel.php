@@ -16,15 +16,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('command:tagihan')->everyMinute();
+        $schedule->command('command:tagihan')->monthly();
 
         // Masukkan Kode Anda Disini
-        // $schedule->call(function () {
-            
-            //Pengecekan apakah cronjob berhasil atau tidak
-            //Mencatat info log 
-        //         Log::info('Cronjob berhasil dijalankan');
-        // })->everyMinute();
+    
     }
 
     /**

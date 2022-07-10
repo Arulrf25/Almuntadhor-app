@@ -1,6 +1,6 @@
 <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-      <a class="navbar-brand brand-logo" href="/dashboard">AL MUNTADHOR</a>
+      <a class="navbar-brand brand-logo" href="/dashboard"><img src="{!! asset('assets/images/almun-logo.png') !!}"/></a>
       <a class="navbar-brand brand-logo-mini" href="/dashboard"><img src="{!! asset('assets/images/logo.jpg') !!}" alt="logo" style="width: 50px; height: 30px"/></a>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-stretch">

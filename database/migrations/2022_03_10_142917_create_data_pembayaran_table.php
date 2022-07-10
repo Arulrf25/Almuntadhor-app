@@ -16,12 +16,22 @@ class CreateDataPembayaranTable extends Migration
         Schema::create('data_pembayaran', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('nis');
-            $table->String('nama');
-            $table->date('tanggal')->nullable();
-            $table->String('tagihan');
-            $table->String('nominal')->nullable();
-            $table->String('bukti')->nullable();
-            $table->String('keterangan')->default('Belum diverifikasi');
+            $table->string('tagihan');
+            $table->string('bulan');
+            $table->string('tahun');
+            $table->String('status');
+            $table->String('transaction_id');
+            $table->String('order_id');
+            $table->String('gross_amount');
+            $table->String('payment_type');
+            $table->String('store')->nullable();
+            $table->String('bank')->nullable();
+            $table->String('payment_code')->nullable();
+            $table->String('kode_bank')->nullable();
+            $table->String('bill_key')->nullable();
+            $table->String('va_number')->nullable();
+            $table->String('pdf_url')->nullable();
+
             $table->timestamps();
         });
     }

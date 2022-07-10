@@ -15247,6 +15247,7 @@ html:not(.layout-menu-fixed) .menu-inner-shadow {
   flex: 1 1 auto;
   flex-direction: column;
   justify-content: space-between;
+  margin-top: 100px;
 }
 
 .content-backdrop {
@@ -15272,13 +15273,14 @@ html:not(.layout-menu-fixed) .menu-inner-shadow {
 }
 
 .layout-navbar {
-  position: relative;
-  padding-top: 0.25rem;
-  padding-bottom: 0.2rem;
+  position:fixed;
+  padding-top: 2.25rem;
+  padding-bottom: 2.2rem;
   height: 3.875rem;
   flex-wrap: nowrap;
   color: #697a8d;
   z-index: 2;
+ 
 }
 .layout-navbar .navbar {
   transform: translate3d(0, 0, 0);

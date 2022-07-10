@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\Models\Tagihan;
 use App\Models\DataAkun;
 use App\Models\Pembayaran;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
 class AkunController extends Controller
 {
@@ -16,7 +17,8 @@ class AkunController extends Controller
     public $akunPendidik;
 
     public function index()
-    {
+    {   
+        
         $data_akun = DataAkun::orderBy('level', 'ASC')->paginate(5);
         return view('admin.v_akun', [
             'accounts' => $data_akun, "title" => "Data Akun"
@@ -44,12 +46,14 @@ class AkunController extends Controller
         if ($next_id >= 10) {
             $input_akun['id'] = '0' . $next_id;
             for($i = 1; $i<72; $i++) {
-                Pembayaran::create([
-                    'nis' => $request->username,
-                    'nama' => $request->name,
-                    'tagihan' => Carbon::parse('1 April')->addMonth($i)->format('M-Y'),
-                    'nominal' => $request->nominal,
-                    'keterangan' => 'Belum diverifikasi',
+                Tagihan::create([
+                    'nis'=>$request->username,
+                    'tagihan' =>'Syariah'.' '. Carbon::parse('1 Juni')->addMonth($i)->isoFormat('MMMM'). ' '.Carbon::parse('1 Juni')->addMonth($i)->isoFormat('Y'),
+                    'bulan' => Carbon::parse('1 Juni')->addMonth($i)->isoFormat('MMMM'),
+                    'tahun' => Carbon::parse('1 Juni')->addMonth($i)->isoFormat('Y'),
+                    'nominal' => '350000',
+                    'keterangan' => 'Belum Lunas',
+                    'status' =>'aktif',
                 ]);
             }
             DataAkun::create($input_akun);
