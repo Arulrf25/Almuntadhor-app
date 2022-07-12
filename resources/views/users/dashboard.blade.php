@@ -51,7 +51,7 @@
               <p class="text-secondary"><small>Pembayaran</small></p>
             </div>
             <div class="col mb-3" style="margin-right: 5px">
-              <a href="/tagihan" class="mb-1 text-white text-center">
+              <a href="/riwayat-pembayaran" class="mb-1 text-white text-center">
                 <span><img src="{{ asset('NiceAdmin/') }}/assets/img/history.png" alt="" width="50"></span>
               </a>
               <p class="text-secondary"><small>History Pembayaran</small></p>
@@ -67,7 +67,7 @@
               <p class="text-secondary"><small>Pencapaian Prestasi</small></p>
             </div>
             <div class="col mb-3 text-center" style="margin-right: 5px">
-              <a href="#" class="mb-1   text-white text-center">
+              <a href="pengumuman" class="mb-1   text-white text-center">
                   <span><img src="{{ asset('NiceAdmin/') }}/assets/img/info.png" alt="" width="50"></span>
               </a>
               <p class="text-secondary"><small>Info Santri</small></p>

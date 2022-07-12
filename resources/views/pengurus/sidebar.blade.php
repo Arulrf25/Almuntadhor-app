@@ -42,7 +42,7 @@
   </li>
   @endif
 
-  @if (auth()->user()->level == "pendidik")
+  @if (auth()->user()->level == "pengurus")
   <li class="nav-item">
     <a class="nav-link collapsed" href="/data-hafalan">
       <i class="bi bi-menu-button-wide"></i><span>Data Hafalan</span>

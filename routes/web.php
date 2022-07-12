@@ -59,6 +59,13 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function() {
     Route::get('/data-mapel/edit/{id?}', 'MapelController@edit')->name('data-mapel.edit');
     Route::put('/data-mapel/update/{id?}', 'MapelController@update')->name('data-mapel.update');
     Route::delete('/data-mapel/destroy/{id?}', 'MapelController@destroy')->name('data-mapel.destroy');
+
+    Route::get('data-prestasi', [App\Http\Controllers\PrestasiController::class, 'index'])->name('data-prestasi');
+    Route::post('/data-prestasi/create', 'PrestasiController@create')->name('data-prestasi.create');
+    Route::post('/data-prestasi/store', 'PrestasiController@store')->name('data-prestasi.store');
+    Route::get('/data-prestasi/edit/{id?}', 'PrestasiController@edit')->name('data-prestasi.edit');
+    Route::put('/data-prestasi/update/{id?}', 'PrestasiController@update')->name('data-prestasi.update');
+    Route::delete('/data-prestasi/destroy/{id?}', 'PrestasiController@destroy')->name('data-prestasi.destroy');
 });
 
 

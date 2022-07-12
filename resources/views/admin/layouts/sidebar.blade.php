@@ -28,6 +28,11 @@
       </a>
     </li>
     <li class="menu-item">
+      <a href="/data-prestasi" class="menu-link">
+        <div data-i18n="Account">Data Prestasi</div>
+      </a>
+    </li>
+    <li class="menu-item">
       <a href="/data-konten" class="menu-link">
         <div data-i18n="Account">Data Konten</div>
       </a>
