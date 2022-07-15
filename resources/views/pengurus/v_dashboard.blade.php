@@ -18,7 +18,7 @@
                                         </div>
                                         <div class="col-sm-5">
                                             <h5 class="card-title">Data Santri</h5>
-                                            <h5 style="margin-top: -10px">124</h5>
+                                            <h5 style="margin-top: -10px">{{ $santri }}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -33,7 +33,7 @@
                                         </div>
                                         <div class="col-sm-7">
                                             <h5 class="card-title">Data Pembayaran</h5>
-                                            <h5 style="margin-top: -10px">124</h5>
+                                            <h5 style="margin-top: -10px">{{ $pembayaran }}</h5>
                                         </div>
                                     </div>
                                 
@@ -53,7 +53,7 @@
                                         </div>
                                         <div class="col-sm-7">
                                             <h5 class="card-title">Data Santri</h5>
-                                            <h5 style="margin-top: -10px">124</h5>
+                                            <h5 style="margin-top: -10px">{{ $santri }}</h5>
                                         </div>
                                     </div>
                                 
@@ -68,8 +68,8 @@
                                             <i class="bi bi-journal-text fa-3x"></i>
                                         </div>
                                         <div class="col-sm-5">
-                                            <h5 class="card-title">Data Nilai</h5>
-                                            <h5 style="margin-top: -10px">124</h5>
+                                            <h5 class="card-title">Data Guru</h5>
+                                            <h5 style="margin-top: -10px">{{ $guru }}</h5>
                                         </div>
                                     </div>
                                 </div>

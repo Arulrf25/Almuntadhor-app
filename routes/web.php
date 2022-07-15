@@ -82,9 +82,7 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function() {
 
 
 Route::group(['middleware' => ['auth','ceklevel:pengurus,pendidik']], function() {
-    Route::get('/dashboard-pengurus', function () {
-        return view('pengurus.v_dashboard');
-    });
+    Route::get('/dashboard-pengurus', [App\Http\Controllers\SantriController::class, 'countData'])->name('dashboard-pengurus');
     // Profil saya
     Route::get('akun-saya', [App\Http\Controllers\ProfilController::class, 'tampilPengurus'])->name('akun-saya');
     Route::put('/akun-saya/update/{id?}', 'ProfilController@updatePengurus')->name('akun-saya.update');
@@ -144,9 +142,9 @@ Route::group(['middleware' => ['auth','ceklevel:santri']], function() {
     Route::get('/tutorial', function () {
         return view('users.tutorial');
     });
-    Route::get('/jadwal', function () {
-        return view('users.jadwal');
-    });
+    // Route::get('/jadwal', function () {
+    //     return view('users.jadwal');
+    // });
     Route::get('/account', function () {
         return view('users.account');
     });
@@ -161,6 +159,7 @@ Route::group(['middleware' => ['auth','ceklevel:santri']], function() {
     });
     Route::get('/tagihan', [TagihanController::class, 'tagihan'])->name('tagihan');
     Route::post('/tagihan', [TagihanController::class, 'detail'])->name('detail');
+    Route::get('/jadwal', [App\Http\Controllers\JadwalKegiatanController::class, 'jadwalKegiatan'])->name('jadwal');
     Route::get('/waiting-payment/{id}', [TagihanController::class, 'waiting'])->name('waiting');
     Route::post('/payment', [TagihanController::class, 'payment'])->name('payment');
     Route::get('/cetak-kwitansi/{id}', [PembayaranController::class, 'cetak'])->name('cetak');

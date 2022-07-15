@@ -31,7 +31,7 @@
             <div class="collapse" id="akademik">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="/jadwal">Jadwal Kegiatan</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/hafalan-santri">Hafalan Santri</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/hafalan-santri">Capaian Santri</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/nilai">Rekap Nilai</a></li>
               </ul>
             </div>

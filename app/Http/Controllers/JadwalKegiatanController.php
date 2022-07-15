@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\JadwalKegiatan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class JadwalKegiatanController extends Controller
 {
     public function index()
     {
-        $jadwal = JadwalKegiatan::orderBy('hari', 'asc')->paginate(5);
+        $jadwal = JadwalKegiatan::orderBy('created_at', 'asc')->paginate(5);
         return view('admin.v_jadwal', [
             'events' => $jadwal, 'title' => 'Jadwal Kegiatan'
         ]);
@@ -68,51 +69,16 @@ class JadwalKegiatanController extends Controller
         return redirect()->route('data-kegiatan');
     }
 
-    public function tampilSelasa()
+    public function jadwalKegiatan()
     {
-        $jadwal_kegiatan = JadwalKegiatan::where('hari', 'selasa')->orderBy('waktu', 'asc')->get();
-        return view('users.jadwal', [
-            'tampilSelasa' => $jadwal_kegiatan
-        ]);
+        $ahad = JadwalKegiatan::orderBy('waktu', 'asc')->where('hari', 'ahad')->get();
+        $senin = JadwalKegiatan::orderBy('waktu', 'asc')->where('hari', 'senin')->get();
+        $selasa = JadwalKegiatan::orderBy('waktu', 'asc')->where('hari', 'selasa')->get();
+        $rabu = JadwalKegiatan::orderBy('waktu', 'asc')->where('hari', 'rabu')->get();
+        $kamis = JadwalKegiatan::orderBy('waktu', 'asc')->where('hari', 'kamis')->get();
+        $jumat = JadwalKegiatan::orderBy('waktu', 'asc')->where('hari', 'jumat')->get();
+        $sabtu = JadwalKegiatan::orderBy('waktu', 'asc')->where('hari', 'sabtu')->get();
+        return view('users.jadwal', ['ahad' => $ahad, 'senin' => $senin, 'selasa' => $selasa, 'rabu' => $rabu, 'kamis' => $kamis, 'jumat' => $jumat, 'sabtu' => $sabtu]);
     }
 
-    // public function rabu()
-    // {
-    //     $jadwal_kegiatan = JadwalKegiatan::where('hari', 'rabu')->orderBy('waktu', 'asc')->get();
-    //     return view('users.jadwal', [
-    //         'rabu' => $jadwal_kegiatan
-    //     ]);
-    // }
-
-    // public function kamis()
-    // {
-    //     $jadwal_kegiatan = JadwalKegiatan::where('hari', 'kamis')->orderBy('waktu', 'asc')->get();
-    //     return view('users.jadwal', [
-    //         'kamis' => $jadwal_kegiatan
-    //     ]);
-    // }
-
-    // public function jumat()
-    // {
-    //     $jadwal_kegiatan = JadwalKegiatan::where('hari', 'jumat')->orderBy('waktu', 'asc')->get();
-    //     return view('users.jadwal', [
-    //         'jumat' => $jadwal_kegiatan
-    //     ]);
-    // }
-
-    // public function sabtu()
-    // {
-    //     $jadwal_kegiatan = JadwalKegiatan::where('hari', 'sabtu')->orderBy('waktu', 'asc')->get();
-    //     return view('users.jadwal', [
-    //         'sabtu' => $jadwal_kegiatan
-    //     ]);
-    // }
-
-    // public function ahad()
-    // {
-    //     $jadwal_kegiatan = JadwalKegiatan::where('hari', 'ahad')->orderBy('waktu', 'asc')->get();
-    //     return view('users.jadwal', [
-    //         'ahad' => $jadwal_kegiatan
-    //     ]);
-    // }
 }

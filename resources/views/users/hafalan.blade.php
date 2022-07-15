@@ -12,12 +12,12 @@
       <h3 class="page-title">
         <span class="page-title-icon bg-gradient-success text-white me-2">
           <a href="{{ URL::previous() }}" style="color:white"><i class="fas fa-arrow-circle-left"></i></a>
-        </span> Hafalan Santri
+        </span> Capaian Santri
       </h3>
     </div>
     <div class="card">
         <div class="card-body">
-            <div class="card-header">Hafalan Santri</div>
+            <div class="card-header">Capaian Santri</div>
             <div class="tabel table-responsive" style="margin-top: 20px">
             <table class="table table-striped">
                 <thead>
