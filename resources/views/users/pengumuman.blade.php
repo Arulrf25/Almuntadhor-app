@@ -24,12 +24,12 @@
                 <ul class="list-unstyled">
                   @foreach($informations as $information)
                   <li class="media">
-                    <img src="..." class="mr-3" alt="..." width="64px" height="64px">
+                    <img src="{{ URL::to('/')}}/informasi/{{ $information->gambar }}" class="img-thumbnail" height="10%" width="50%"></img>
                     <div class="media-body">
                       <h5 class="mt-0 mb-1">{{ $information->judul }}</h5>
                       <small>{{ $information->created_at }}</small>
                       <p>{{ $information->deskripsi }}</p>
-                      <a href="#" class="btn btn-gradient-success">Selengkapnya..</a>
+                      <!-- <a href="#" class="btn btn-gradient-success">Selengkapnya..</a> -->
                     </div>
                   </li>
                   @endforeach
