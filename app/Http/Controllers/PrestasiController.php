@@ -9,7 +9,7 @@ class PrestasiController extends Controller
 {
     public function index()
     {
-        $data_prestasi = Prestasi::orderBy('nama_prestasi', 'ASC')->get();
+        $data_prestasi = Prestasi::orderBy('created_at', 'ASC')->paginate(5);
         return view('admin.v_prestasi', [
             'prestasi' => $data_prestasi, "title" => "Data Prestasi"
         ]);

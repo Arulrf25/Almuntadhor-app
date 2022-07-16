@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Tagihan;
+use App\Models\Konten;
+use App\Models\Informasi;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 class ProfilController extends Controller
 {
@@ -68,8 +72,18 @@ class ProfilController extends Controller
     public function tampilUser()
     {
         $user = User::where('id', Auth::user()->id)->first();
+
+        $santri = Auth::user()->username;
+        $waktu = Carbon::now();
+        $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $santri)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
+        $notif_info = Informasi::where('penerima', $santri)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
+        $tampilContent = Konten::where('kategori', 'Dashboard')->get();
+        
         return view('users.account', [
-            'accounts' => $user
+            'accounts' => $user,
+            'tampilContent' => $tampilContent,
+            'notif_tagihan'=>$notif_tagihan,
+            'notif_info'=>$notif_info
         ]);
     }
 
@@ -105,28 +119,16 @@ class ProfilController extends Controller
         return redirect('profil-user');
     }
 
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
+    public function homeUser()
+    {   $santri = Auth::user()->username;
+        $waktu = Carbon::now();
+        $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $santri)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
+        $notif_info = Informasi::where('penerima', $santri)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
+        $tampilContent = Konten::where('kategori', 'Dashboard')->get();
+        return view('users.dashboard', [
+            'tampilContent' => $tampilContent,
+            'notif_tagihan'=>$notif_tagihan,
+            'notif_info'=>$notif_info,
+        ]);
     }
 }

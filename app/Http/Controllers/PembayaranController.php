@@ -6,6 +6,9 @@ use Carbon\Carbon;
 
 use Dompdf\Dompdf;
 use App\Models\Pembayaran;
+use App\Models\Tagihan;
+use App\Models\Konten;
+use App\Models\Informasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -135,7 +138,19 @@ class PembayaranController extends Controller
         $santri = Auth::user()->username;
         $pembayaran = Pembayaran::where('nis', $santri)->where('status', 'settlement' )->get();
         $pembayaran1 = Pembayaran::where('nis', $santri)->where('status', 'capture' )->get();
-        return view('users.riwayat_bayar', ['riwayatPembayaran' => $pembayaran, 'riwayatPembayaran1' => $pembayaran1]);
+
+        $waktu = Carbon::now();
+        $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $santri)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
+        $notif_info = Informasi::where('penerima', $santri)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
+        $tampilContent = Konten::where('kategori', 'Dashboard')->get();
+
+        return view('users.riwayat_bayar', [
+            'riwayatPembayaran' => $pembayaran, 
+            'riwayatPembayaran1' => $pembayaran1,
+            'tampilContent' => $tampilContent,
+            'notif_tagihan'=>$notif_tagihan,
+            'notif_info'=>$notif_info
+        ]);
     }
 
     public function cetak($id)
@@ -187,6 +202,20 @@ class PembayaranController extends Controller
         $this->printData = Pembayaran::where('nama', 'like', '%' . $keyword . '%')->orderBy('nama', 'asc')->get();
         return view('pengurus.v_pembayaran')->with([
             'colleges' => $this->printData
+        ]);
+    }
+
+    public function tutorial()
+    {   
+        $santri = Auth::user()->username;
+        $waktu = Carbon::now();
+        $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $santri)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
+        $notif_info = Informasi::where('penerima', $santri)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
+        $tampilContent = Konten::where('kategori', 'Dashboard')->get();
+        return view('users.tutorial', [
+            'tampilContent' => $tampilContent,
+            'notif_tagihan'=>$notif_tagihan,
+            'notif_info'=>$notif_info
         ]);
     }
 }

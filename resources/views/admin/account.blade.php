@@ -6,25 +6,15 @@
           @include('admin.layouts.navbar')
           <div class="content-wrapper">
             <div class="container-xxl flex-grow-1 container-p-y">
-              <!-- <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> Account</h4> -->
               <div class="card mb-4">
                 <h5 class="card-header">Profile Details</h5>
-                <!-- Account -->
-                <!-- <div class="card-body">
                   <form action="#" method="POST" enctype="multipart/form-data">
                     <div class="d-flex align-items-start align-items-sm-center gap-4">
                       <div class="button-wrapper">
                         <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
                           <span class="d-none d-sm-block">Upload Foto Baru</span>
                           <i class="bx bx-upload d-block d-sm-none"></i>
-                          <input
-                            type="file"
-                            name="foto"
-                            id="foto"
-                            class="account-file-input"
-                            hidden
-                            accept="image/png, image/jpeg"
-                          />
+                          <input type="file" name="foto" id="foto" class="account-file-input" hidden accept="image/png, image/jpeg"/>
                         </label>
                         <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
                           <i class="bx bx-reset d-block d-sm-none"></i>
@@ -34,7 +24,7 @@
                       </div>
                     </div>
                   </form>
-                </div> -->
+                </div>
                 <hr class="my-0" />
                 <div class="card-body">
                   <form id="formAccountSettings" action="{{ route('update-admin', $user->id) }}" method="POST">
@@ -50,7 +40,7 @@
                         <input class="form-control" type="text" name="username" id="username" value="{{auth()->user()->username}}" />
                       </div>
                       <div class="mb-3 col-md-6">
-                        <label for="email" class="form-label">E-mail</label>
+                        <label for="email" class="form-label">Email</label>
                         <input class="form-control" type="text" id="email" name="email" value="{{auth()->user()->email}}"/>
                       </div>
                       <div class="mb-3 col-md-6">

@@ -83,9 +83,15 @@
                         </table>
                     </div>
                       </div>
-                    <!-- </div>
-    <div class="row"> -->
-          
+                      <div class="page-bottom" style="margin: 20px">
+                        <br/>
+                        <!-- pagination -->
+                          Current Page: {{ $prestasi->currentPage() }}<br>
+                          Jumlah Data: {{ $prestasi->total() }}<br>
+                          Data perhalaman: {{ $prestasi->perPage() }}<br>
+                          <br>
+                          {{ $prestasi->links() }}
+                      </div>
               </div>
             </div>
             <!-- / Content -->

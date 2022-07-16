@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\PembayaranController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -139,17 +140,8 @@ Route::group(['middleware' => ['auth','ceklevel:santri']], function() {
     Route::get('/kehadiran', function () {
         return view('users.kehadiran');
     });
-    Route::get('/tutorial', function () {
-        return view('users.tutorial');
-    });
-    // Route::get('/jadwal', function () {
-    //     return view('users.jadwal');
-    // });
     Route::get('/account', function () {
         return view('users.account');
-    });
-    Route::get('/rekening', function () {
-        return view('users.rekening');
     });
     Route::get('/upload', function () {
         return view('users.upload_bukti');
@@ -169,6 +161,7 @@ Route::group(['middleware' => ['auth','ceklevel:santri']], function() {
     Route::put('/upload/update/{id?}', 'UploadController@update')->name('upload.update');
     Route::get('detail-riwayat/{id?}', [App\Http\Controllers\PembayaranController::class, 'detail'])->name('detail-riwayat.riwayat');
     Route::get('riwayat-pembayaran', [App\Http\Controllers\PembayaranController::class, 'riwayat'])->name('riwayat-pembayaran.riwayat');
+    Route::get('tutorial', [App\Http\Controllers\PembayaranController::class, 'tutorial']);
     Route::get('upload', [App\Http\Controllers\UploadController::class, 'index'])->name('upload.index');
     Route::get('nilai', [App\Http\Controllers\NilaiController::class, 'tampilUser'])->name('nilai');
     Route::get('pengumuman', [App\Http\Controllers\InformasiPribadiController::class, 'show'])->name('pengumuman');

@@ -26,7 +26,7 @@
                   <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">{{ $tagihan->tagihan }}</h5>
                   </div>
-                  <p class="mb-1 text-warning" ><b>Rp. {{ $tagihan->nominal }}</b></p>
+                  <p class="mb-1 text-warning" ><b>Rp. {{ number_format($tagihan->nominal) }}</b></p>
                   <small class="badge bg-warning rounded">Menunggu Dibayar</small>
                   <form action="" method="post">
                     @csrf
@@ -44,7 +44,7 @@
                   <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">{{ $tagihan->tagihan }}</h5>
                   </div>
-                  <p class="mb-1 text-danger" ><b>Rp. {{ $tagihan->nominal }}</b></p>
+                  <p class="mb-1 text-danger" ><b>Rp. {{ number_format($tagihan->nominal) }}</b></p>
                     <small class="badge bg-danger rounded">Belum Lunas</small>
                   <form action="" method="post">
                     @csrf
@@ -78,7 +78,7 @@
                         <div class="d-flex w-100 justify-content-between">
                           <h5 class="mb-1">{{ $tagihan2->tagihan }}</h5>
                         </div>
-                        <p class="mb-1 text-warning" ><b>Rp. {{ $tagihan2->nominal }}</b></p>
+                        <p class="mb-1 text-warning" ><b>Rp. {{ number_format($tagihan->nominal) }}</b></p>
                         <small class="badge bg-warning rounded">Menunggu Dibayar</small>
                         <form action="" method="post">
                           @csrf
@@ -96,7 +96,7 @@
                         <div class="d-flex w-100 justify-content-between">
                           <h5 class="mb-1">{{ $tagihan2->tagihan }}</h5>
                         </div>
-                        <p class="mb-1 text-danger" ><b>Rp. {{ $tagihan2->nominal }}</b></p>
+                        <p class="mb-1 text-danger" ><b>Rp. {{ number_format($tagihan->nominal) }}</b></p>
                           <small class="badge bg-danger rounded">Belum Lunas</small>
                         <form action="" method="post">
                           @csrf

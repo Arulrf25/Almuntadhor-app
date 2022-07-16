@@ -9,50 +9,49 @@
       </button>
       <ul class="navbar-nav navbar-nav-right">
         <li class="nav-item dropdown">
-            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+            <a class="nav-link  @if ($notif_tagihan->isNotEmpty() && $notif_info->isNotEmpty()) count-indicator  @endif dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
               <i class="mdi mdi-bell-outline"></i>
               <span class="count-symbol bg-danger"></span>
             </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown" style="overflow:auto">
               <h6 class="p-3 mb-0">Notifications</h6>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
+              @if ($notif_tagihan->isEmpty() && $notif_info->isEmpty())
+                  <div class="text-center">
+                    <small>Tidak ada Notifikasi</small>
+                  </div>
+              @endif
+              @if ($notif_tagihan->isNotEmpty())
+              @foreach ($notif_tagihan as $t)
+              <a href="/tagihan" class="dropdown-item preview-item">
                 <div class="preview-thumbnail">
-                  <div class="preview-icon bg-success">
-                    <i class="mdi mdi-calendar"></i>
+                  <div class="preview-icon bg-gradient-success">
+                    <i class="mdi mdi-wallet"></i>
                   </div>
                 </div>
                 <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h6 class="preview-subject font-weight-normal mb-1">Event today</h6>
-                  <p class="text-gray ellipsis mb-0"> Just a reminder that you have an event today </p>
+                  <h6 class="preview-subject font-weight-normal mb-1">Tagihan Baru</h6>
+                  <p class="text-gray ellipsis mb-0"> <small>{{$t->tagihan}}</small></p>
                 </div>
               </a>
+              @endforeach
+              @endif
+              @if ($notif_info->isNotEmpty())
+              @foreach ($notif_info as $info)
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
+              <a href="/pengumuman" class="dropdown-item preview-item">
                 <div class="preview-thumbnail">
                   <div class="preview-icon bg-warning">
-                    <i class="mdi mdi-settings"></i>
+                    <i class="fas fa-info-circle"></i>
                   </div>
                 </div>
                 <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h6 class="preview-subject font-weight-normal mb-1">Settings</h6>
-                  <p class="text-gray ellipsis mb-0"> Update dashboard </p>
+                  <h6 class="preview-subject font-weight-normal mb-1">Informasi Terbaru</h6>
+                  <p class="text-gray ellipsis mb-0"><small>{{$info->created_at}}</small></p>
                 </div>
               </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-info">
-                    <i class="mdi mdi-link-variant"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h6 class="preview-subject font-weight-normal mb-1">Launch Admin</h6>
-                  <p class="text-gray ellipsis mb-0"> New admin wow! </p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <h6 class="p-3 mb-0 text-center">See all notifications</h6>
+              @endforeach
+              @endif
             </div>
           </li>
         <li class="nav-item nav-profile dropdown">

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Tagihan;
+use App\Models\Konten;
+use App\Models\Informasi;
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +21,11 @@ class TagihanController extends Controller
         $tahun =  Carbon::now()->year;
         $tagihan = Tagihan::where('status', 'aktif')->where('nis', $username)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->get();
         $tagihan2 = Tagihan::where('status', 'aktif')->where('nis', $username)->paginate(5);
+
+        $waktu = Carbon::now();
+        $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $username)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
+        $notif_info = Informasi::where('penerima', $username)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
+        $tampilContent = Konten::where('kategori', 'Dashboard')->get();
       
     return view('users.tagihan', 
     [
@@ -27,6 +34,9 @@ class TagihanController extends Controller
         'waktu'=>$waktu, 
         'tahun'=>$tahun,
         'data_bayar' => $pembayaran,
+        'tampilContent' => $tampilContent,
+        'notif_tagihan'=>$notif_tagihan,
+        'notif_info'=>$notif_info
     ]);
     }
 

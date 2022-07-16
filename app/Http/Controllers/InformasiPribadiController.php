@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Informasi;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use App\Models\Konten;
+use App\Models\Tagihan;
 
 class InformasiPribadiController extends Controller
 {
@@ -43,15 +46,25 @@ class InformasiPribadiController extends Controller
     {
         $santri = Auth::user()->username;
         $informations = Informasi::where('penerima', $santri)->get();
-        return view('users.pengumuman', ['informations' => $informations]);
+
+        $waktu = Carbon::now();
+        $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $santri)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
+        $notif_info = Informasi::where('penerima', $santri)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
+        $tampilContent = Konten::where('kategori', 'Dashboard')->get();
+
+        return view('users.pengumuman', [
+            'informations' => $informations,
+            'tampilContent' => $tampilContent,
+            'notif_tagihan'=>$notif_tagihan,
+            'notif_info'=>$notif_info
+        ]);
     }
 
     public function edit($id)
     {
         $informasi = Informasi::findOrFail($id);
         return view('pengurus.edit_informasi')->with([
-            'uploads' => $informasi
-        ]);
+            'uploads' => $informasi]);
     }
 
     public function update(Request $request, $id)

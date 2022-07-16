@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Hafalan;
+use App\Models\Prestasi;
+use App\Models\Tagihan;
+use App\Models\Konten;
+use App\Models\Informasi;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -71,7 +76,21 @@ class HafalanController extends Controller
     {
         $santri = Auth::user()->username;
         $riwayatHafalan = Hafalan::where('nis', $santri)->get();
-        return view('users.hafalan', ['riwayatHafalan' => $riwayatHafalan]);
+
+        $prestasi = Prestasi::orderBy('tingkatan', 'asc')->get();
+
+        $waktu = Carbon::now();
+        $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $santri)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
+        $notif_info = Informasi::where('penerima', $santri)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
+        $tampilContent = Konten::where('kategori', 'Dashboard')->get();
+
+        return view('users.hafalan', [
+            'riwayatHafalan' => $riwayatHafalan,
+            'prestasi' => $prestasi,
+            'tampilContent' => $tampilContent,
+            'notif_tagihan'=>$notif_tagihan,
+            'notif_info'=>$notif_info
+        ]);
     }
 
     public function cari(Request $request)

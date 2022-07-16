@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Nilai;
+use App\Models\Tagihan;
+use App\Models\Konten;
+use App\Models\Informasi;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Ui\Presets\React;
@@ -71,8 +75,17 @@ class NilaiController extends Controller
     public function tampilUser()
     {
         $nilai = Nilai::get();
+        $santri = Auth::user()->username;
+        $waktu = Carbon::now();
+        $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $santri)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
+        $notif_info = Informasi::where('penerima', $santri)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
+        $tampilContent = Konten::where('kategori', 'Dashboard')->get();
+        
         return view('users.nilai', [
-            'tampilUser' => $nilai
+            'tampilUser' => $nilai,
+            'tampilContent' => $tampilContent,
+            'notif_tagihan'=>$notif_tagihan,
+            'notif_info'=>$notif_info
         ]);
     }
 
@@ -86,6 +99,19 @@ class NilaiController extends Controller
         $nilai_akhir    = ($kehadiran + $tugas + $uts + $uas) / 4;
 
         return redirect('data-nilai', $nilai_akhir);
+    }
+
+    public function homeUser()
+    {   $santri = Auth::user()->username;
+        $waktu = Carbon::now();
+        $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $santri)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
+        $notif_info = Informasi::where('penerima', $santri)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
+        $tampilContent = Konten::where('kategori', 'Dashboard')->get();
+        return view('users.dashboard', [
+            'tampilContent' => $tampilContent,
+            'notif_tagihan'=>$notif_tagihan,
+            'notif_info'=>$notif_info,
+        ]);
     }
 
 }

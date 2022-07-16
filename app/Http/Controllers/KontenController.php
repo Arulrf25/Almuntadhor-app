@@ -2,17 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Models\Konten;
+use App\Models\Tagihan;
+use App\Models\Informasi;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class KontenController extends Controller
 {
     public function index()
-    {
+    {   
+        $santri = Auth::user()->username;
         $content = Konten::latest()->paginate(5);
+       
         return view('admin.v_konten', [
-            'uploads' => $content, 'title' => 'Data Konten'
+            'uploads' => $content, 
+            'title' => 'Data Konten',
+
         ]);
     }
 
@@ -105,9 +113,16 @@ class KontenController extends Controller
     }
 
     public function homeUser()
-    {
+    {   $santri = Auth::user()->username;
+        $waktu = Carbon::now();
+        $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $santri)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
+        $notif_info = Informasi::where('penerima', $santri)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
         $tampilContent = Konten::where('kategori', 'Dashboard')->get();
-        return view('users.dashboard', ['tampilContent' => $tampilContent]);
+        return view('users.dashboard', [
+            'tampilContent' => $tampilContent,
+            'notif_tagihan'=>$notif_tagihan,
+            'notif_info'=>$notif_info,
+        ]);
     }
 
     public function search(Request $request)

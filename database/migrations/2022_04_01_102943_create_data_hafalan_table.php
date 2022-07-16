@@ -17,7 +17,6 @@ class CreateDataHafalanTable extends Migration
             $table->increments('id');
             $table->String('nis');
             $table->String('nama');
-            $table->date('tanggal');
             $table->String('hafalan');
             $table->String('keterangan');
             $table->timestamps();

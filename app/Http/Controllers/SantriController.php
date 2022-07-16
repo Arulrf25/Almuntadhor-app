@@ -17,7 +17,8 @@ class SantriController extends Controller
         ]);
     }
     
-    public function countData() {
+    public function countData() 
+    {
         $santri = DB::table('users')->where('level', '=', 'santri')->count();
         $guru = DB::table('users')->where('level', '=', 'pendidik')->count();
         $pembayaran = DB::table('data_pembayaran')->where('status', '=', 'settlement')->count();
