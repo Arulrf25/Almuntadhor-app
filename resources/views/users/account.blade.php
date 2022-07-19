@@ -136,7 +136,7 @@
                     <input class="form-control" name="kelas" type="text" id="kelas" value="{{auth()->user()->kelas}}" readonly/>
                   </div>
                 </div>
-            <div class="card-title">Data Oarangtua/wali</div>
+            <div class="card-title">Data Orangtua/wali</div>
                 <div class="row mb-3">
                   <label for="Email" class="col-md-4 col-lg-3 col-form-label">Nama Ayah</label>
                   <div class="col-md-8 col-lg-9">

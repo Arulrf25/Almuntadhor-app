@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ChangePasswordRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use Session;
+use Illuminate\Support\Facades\Session;
 class LoginController extends Controller
 {
     public function postlogin(Request $request)

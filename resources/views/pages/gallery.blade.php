@@ -12,9 +12,13 @@
             </span> Gallery
           </h3>
         </div>
+        <div class="card">
+          <div class="card-body">
+
+         
         <div class="row">
-          <div class="col-md-4 grid-margin stretch-card">
-            @foreach($tampilContent as $gallery)
+          @foreach($tampilContent as $gallery)
+          <div class="col-md-4 grid-margin stretch-card">   
             <div class="card">
                 <div class="card-body" style="margin-bottom: 20px">
                   <img src="{{ URL::to('/')}}/content/{{ $gallery->gambar }}" class="card-img-top" alt="...">
@@ -22,9 +26,11 @@
                   <span ><small >{{ $gallery->deskripsi }}</small></span>
                 </div>
             </div>
-            @endforeach
           </div>
+          @endforeach
         </div>
       </div>
+    </div>
+  </div>
       @include('umum.footer')
     </div>

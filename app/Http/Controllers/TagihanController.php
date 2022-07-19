@@ -21,8 +21,6 @@ class TagihanController extends Controller
         $tahun =  Carbon::now()->year;
         $tagihan = Tagihan::where('status', 'aktif')->where('nis', $username)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->get();
         $tagihan2 = Tagihan::where('status', 'aktif')->where('nis', $username)->paginate(5);
-
-        $waktu = Carbon::now();
         $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $username)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
         $notif_info = Informasi::where('penerima', $username)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
         $tampilContent = Konten::where('kategori', 'Dashboard')->get();
@@ -43,14 +41,20 @@ class TagihanController extends Controller
     public function waiting($id)
     {   
         $username = Auth::user()->username;
+        $waktu = Carbon::now();
+        $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $username)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
+        $notif_info = Informasi::where('penerima', $username)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
         $pembayaran = Pembayaran::where('nis', $username)->where('order_id', $id)->get();
 
     return view('users.waiting_payment', 
     [
         'data_bayar' => $pembayaran,
+        'notif_tagihan'=>$notif_tagihan,
+        'notif_info'=>$notif_info
     ]);
     }
 
+    
     public function detail(Request $request){
         $username = Auth::user()->username;
         $name = Auth::user()->name;
@@ -66,13 +70,33 @@ class TagihanController extends Controller
        // Set 3DS transaction for credit card to true
        \Midtrans\Config::$is3ds = true;
        
+       $bri = '10100';
+       $bni = '10200';
+       $bca = '103';
+       $mandiri = '1040';
        $params = array(
            'transaction_details' => array(
                'order_id' => rand(),
                'gross_amount' => 10000,
            ),
+           
+           'bca_va' => array(
+                'va_number'  => $bca.$username,
+           ),
+            'bri_va' => array(
+                'va_number' => $bri.$username,
+            ),
+            'bni_va' => array(
+                'va_number' => $username,
+            ),
+
+            'echannel' => array(
+                'bill_key' => $mandiri.$username,
+            ),
+           
            'item_details' => array(
                 [
+
                 'id' =>'1',
                 'price' =>  $request->nominal,
                 'quantity' => '1',
@@ -91,14 +115,19 @@ class TagihanController extends Controller
                'first_name' => $username .' | ',
                'last_name' => $name,
            ),
+
        );
        
        $snapToken = \Midtrans\Snap::getSnapToken($params);
+       $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $username)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
+       $notif_info = Informasi::where('penerima', $username)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
     return view('users.payment', 
     [
         'dataTagihan' => $tagihan, 
         'waktu'=>$waktu, 
-        'snap_token' => $snapToken
+        'snap_token' => $snapToken,
+        'notif_tagihan'=>$notif_tagihan,
+        'notif_info'=>$notif_info
     ]);
     }
 

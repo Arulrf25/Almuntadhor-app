@@ -25,8 +25,8 @@
                   <p><small>Sistem Monitoring Akademik Santri Perguruan Islam Pesantren Al-Muntadhor</small></p>
                   <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                      @foreach($tampilContent as $gallery)
-                      <div class="carousel-item active">
+                      @foreach($tampilContent as $key => $gallery)
+                      <div class="carousel-item {{ $key == 0 ? 'active' : ''}}">
                         <img src="{{ URL::to('/')}}/content/{{ $gallery->gambar }}" class="d-block w-100" alt="...">
                       </div>
                       @endforeach

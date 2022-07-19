@@ -75,13 +75,13 @@ class JadwalKegiatanController extends Controller
 
     public function jadwalKegiatan()
     {
-        $ahad = JadwalKegiatan::orderBy('waktu', 'asc')->where('hari', 'ahad')->get();
-        $senin = JadwalKegiatan::orderBy('waktu', 'asc')->where('hari', 'senin')->get();
-        $selasa = JadwalKegiatan::orderBy('waktu', 'asc')->where('hari', 'selasa')->get();
-        $rabu = JadwalKegiatan::orderBy('waktu', 'asc')->where('hari', 'rabu')->get();
-        $kamis = JadwalKegiatan::orderBy('waktu', 'asc')->where('hari', 'kamis')->get();
-        $jumat = JadwalKegiatan::orderBy('waktu', 'asc')->where('hari', 'jumat')->get();
-        $sabtu = JadwalKegiatan::orderBy('waktu', 'asc')->where('hari', 'sabtu')->get();
+        $ahad = JadwalKegiatan::orderBy('mulai', 'asc')->where('hari', 'ahad')->get();
+        $senin = JadwalKegiatan::orderBy('mulai', 'asc')->where('hari', 'senin')->get();
+        $selasa = JadwalKegiatan::orderBy('mulai', 'asc')->where('hari', 'selasa')->get();
+        $rabu = JadwalKegiatan::orderBy('mulai', 'asc')->where('hari', 'rabu')->get();
+        $kamis = JadwalKegiatan::orderBy('mulai', 'asc')->where('hari', 'kamis')->get();
+        $jumat = JadwalKegiatan::orderBy('mulai', 'asc')->where('hari', 'jumat')->get();
+        $sabtu = JadwalKegiatan::orderBy('mulai', 'asc')->where('hari', 'sabtu')->get();
 
         $santri = Auth::user()->username;
         $waktu = Carbon::now();

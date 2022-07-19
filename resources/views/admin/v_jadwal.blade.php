@@ -18,7 +18,7 @@
                       @csrf
                       <div class="mb-3">
                         <label for="" class="form-label">Hari</label>
-                        <select name="hari" class="form-select" aria-label="Default select example">
+                        <select name="hari" class="form-select" aria-label="Default select example" required>
                           <option hidden selected>Pilih hari pelaksanaan</option>
                           <option value="ahad">Ahad</option>
                           <option value="senin">Senin</option>
@@ -34,12 +34,16 @@
                         <input required name="kegiatan" type="text" class="form-control" placeholder="Masukkan kegiatan">
                       </div>
                       <div class="mb-3">
-                        <label for="" class="form-label">Waktu</label>
-                        <input required name="waktu" type="text" class="form-control" placeholder="Masukkan waktu pelaksanaan">
+                        <label for="" class="form-label">Waktu Mulai</label>
+                        <input required name="mulai" type="time" class="form-control" placeholder="Masukkan waktu pelaksanaan">
+                      </div>
+                      <div class="mb-3">
+                        <label for="" class="form-label">Waktu Selesai</label>
+                        <input required name="selesai" type="time" class="form-control" placeholder="Masukkan waktu pelaksanaan">
                       </div>
                       <div class="mb-3">
                         <label for="" class="form-label">Tempat</label>
-                        <input name="tempat" type="text" class="form-control" placeholder="Masukkan tempat kegiatan">
+                        <input name="tempat" type="text" class="form-control" placeholder="Masukkan tempat kegiatan" required>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -73,7 +77,7 @@
                           <td class="text-center">{{ $loop->index + 1 }}</td>
                           <td>{{ $event->hari }}</td>
                           <td>{{ $event->kegiatan }}</td>
-                          <td>{{ $event->waktu }}</td>
+                          <td>{{ $event->mulai }} - {{ $event->selesai }}</td>
                           <td>{{ $event->tempat }}</td>
                           <td class="text-center">
                             <form action="{{route('data-kegiatan.destroy', $event->id)}}" method="POST">

@@ -9,5 +9,5 @@ class Nilai extends Model
 {
     use HasFactory;
     protected $table= 'data_nilai';
-    protected $fillable = ['nis', 'pelajaran', 'kehadiran', 'tugas', 'uts', 'uas'];
+    protected $fillable = ['nis', 'pelajaran','kelas', 'kehadiran', 'tugas', 'uts', 'uas'];
 }

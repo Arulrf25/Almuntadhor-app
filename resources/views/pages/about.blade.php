@@ -22,7 +22,7 @@
                     <p><b>Nama Pesantren</b></p>
                   </div>
                   <div class="col">
-                    <p>Perguruan Islam Pesantren Al Muntadhor</p>
+                    <p>{{$setting->nama_pesantren}}</p>
                   </div>
                 </div>
                 <div class="row">
@@ -30,7 +30,7 @@
                     <p><b>Alamat Pesantren</b></p>
                   </div>
                   <div class="col">
-                    <p>Jl. Merdeka No. 61 RT. 02 RW. 03 Desa Babakan Kecamatan Ciwaringin Kabupaten Cirebon 45167</p>
+                    <p>{{$setting->alamat}}</p>
                   </div>
                 </div>
                 <div class="row">
@@ -38,7 +38,7 @@
                     <p><b>Pengasuh Pesantren</b></p>
                   </div>
                   <div class="col">
-                    <p>KH. Burhanuddin Halim,MA</p>
+                    <p>{{$setting->pengasuh}}</p>
                   </div>
                 </div>
                 <div class="row">
@@ -46,7 +46,23 @@
                     <p><b>Izin Pesantren</b></p>
                   </div>
                   <div class="col">
-                    <p>20/21/G7833/2022</p>
+                    <p>{{$setting->izin}}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <p><b>Telp Pesantren</b></p>
+                  </div>
+                  <div class="col">
+                    <p>{{$setting->telp}}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <p><b>Website Pesantren</b></p>
+                  </div>
+                  <div class="col">
+                    <p><a href="http://{{$setting->website}}" target="_blank">{{$setting->website}}</a></p>
                   </div>
                 </div>
               </div>

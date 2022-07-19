@@ -21,9 +21,12 @@
                 <div class="card-body bg-gradient-light" style="margin-bottom: 20px">
                   <h5>{{ $gallery->judul }}</h5>
                   <span ><small >Terbit : {{ $gallery->created_at }}</small></span>
-                  <p>{{ $gallery->deskripsi }}</p>
+                  @php
+                  $isi = substr($gallery->deskripsi, 0, 90).'...' ;
+                  @endphp
+                  <p>{{ $isi }}</p>
                   <div class="text-center">
-                    <a href="{{ asset('/content/'. $gallery->gambar) }}" class="btn btn-light">Lihat Selengkapnya</a>
+                    <a href="{{route('info.detail', $gallery->id)}}" class="btn btn-light">Lihat Selengkapnya</a>
                   </div>
                 </div>
                 @endforeach

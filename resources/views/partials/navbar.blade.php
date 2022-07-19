@@ -9,7 +9,7 @@
       </button>
       <ul class="navbar-nav navbar-nav-right">
         <li class="nav-item dropdown">
-            <a class="nav-link  @if ($notif_tagihan->isNotEmpty() && $notif_info->isNotEmpty()) count-indicator  @endif dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+            <a class="nav-link  @if ($notif_tagihan->isNotEmpty() or $notif_info->isNotEmpty()) count-indicator  @endif dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
               <i class="mdi mdi-bell-outline"></i>
               <span class="count-symbol bg-danger"></span>
             </a>
@@ -39,7 +39,7 @@
               @if ($notif_info->isNotEmpty())
               @foreach ($notif_info as $info)
               <div class="dropdown-divider"></div>
-              <a href="/pengumuman" class="dropdown-item preview-item">
+              <a href="/info-santri" class="dropdown-item preview-item">
                 <div class="preview-thumbnail">
                   <div class="preview-icon bg-warning">
                     <i class="fas fa-info-circle"></i>

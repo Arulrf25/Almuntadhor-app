@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 
 use Dompdf\Dompdf;
-use App\Models\Pembayaran;
-use App\Models\Tagihan;
 use App\Models\Konten;
+use App\Models\Tagihan;
 use App\Models\Informasi;
+use App\Models\Pembayaran;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -159,22 +160,23 @@ class PembayaranController extends Controller
         $tanggal = Carbon::now();
         $pembayaran = Pembayaran::where('nis', $santri)->where('order_id', $id )->get();
 
+        
         // instantiate and use the dompdf class
         $html = view('users.kwitansi', ['riwayatPembayaran' => $pembayaran, 'tanggal'=>$tanggal, 'title'=>$id]);
         // $dompdf = new Dompdf();
         // $dompdf->loadHtml($html);
 
-        // // (Optional) Setup the paper size and orientation
+        // // // (Optional) Setup the paper size and orientation
         // $dompdf->setPaper('A5', 'landscape');
         // $options = $dompdf->getOptions();
         // $options->setIsHtml5ParserEnabled(true);
         // $dompdf->setOptions($options);
 
 
-        // // Render the HTML as PDF
+        // // // Render the HTML as PDF
         // $dompdf->render();
 
-        // // Output the generated PDF to Browser
+        // // // Output the generated PDF to Browser
         // $dompdf->stream();
 
         return $html;

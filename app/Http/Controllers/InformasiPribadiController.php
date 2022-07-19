@@ -52,9 +52,24 @@ class InformasiPribadiController extends Controller
         $notif_info = Informasi::where('penerima', $santri)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
         $tampilContent = Konten::where('kategori', 'Dashboard')->get();
 
-        return view('users.pengumuman', [
+        return view('users.info_santri', [
             'informations' => $informations,
             'tampilContent' => $tampilContent,
+            'notif_tagihan'=>$notif_tagihan,
+            'notif_info'=>$notif_info
+        ]);
+    }
+
+    public function detail($id){
+
+        $santri = Auth::user()->username;
+        $waktu = Carbon::now();
+        $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $santri)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
+        $notif_info = Informasi::where('penerima', $santri)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
+
+        $informations = Informasi::findOrFail($id);
+        return view('users.info_santri_detail', [
+            'informations' => $informations,
             'notif_tagihan'=>$notif_tagihan,
             'notif_info'=>$notif_info
         ]);

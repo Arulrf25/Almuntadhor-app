@@ -86,6 +86,7 @@
           <div class="alert alert-danger">
             <b>Maaf!</b> {{session('error')}}
           </div>
+          @endif
           <div class="card">
             <div class="card-body">
               <div class="row" style="margin-left: 10px; margin-top:20px">

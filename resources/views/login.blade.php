@@ -13,7 +13,7 @@
 
 <body>
     <div class="wrapper">
-        <div class="logo"> <img src="{{asset('NiceAdmin/')}}/assets/img/logo.jpg" alt="">
+        <div class="logo"> <img src="{{asset('NiceAdmin/')}}/assets/img/logo.png" alt="">
         </div>
         <div class="text-center mt-4 "> <b>PERGURUAN ISLAM PESANTREN</b> </div>
         <div class="text-center "> <b>AL MUNTADHOR</b> </div>
@@ -31,8 +31,8 @@
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
 
-        <div class="text-center fs-6"> <a href="{{ route('password.request') }}">Forgot password?</a> or <a
-                href="{{ URL::previous() }}">Beranda</a> </div>
+        <div class="text-center fs-6"> <a href="{{ route('password.request') }}" style="color: #ffff">Forgot password?</a> or <a
+                href="{{ URL::previous() }}" style="color: #ffff">Beranda</a> </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>

@@ -20,7 +20,6 @@
 
 <script src="{!! asset('sneat/vendor/js/menu.js') !!}"></script>
 <!-- endbuild -->
-
 <!-- Vendors JS -->
 <script src="{!! asset('sneat/vendor/libs/apex-charts/apexcharts.js') !!}"></script>
 

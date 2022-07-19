@@ -22,8 +22,12 @@
                                 <input name="kegiatan" value="{{$events->kegiatan}}" type="text" class="form-control">
                               </div>
                               <div class="mb-3">
-                                <label for="" class="form-label">Waktu</label>
-                                <input name="waktu" value="{{$events->waktu}}" type="text" class="form-control">
+                                <label for="" class="form-label">Waktu Mulai</label>
+                                <input required name="mulai" type="time" class="form-control" placeholder="Masukkan waktu pelaksanaan">
+                              </div>
+                              <div class="mb-3">
+                                <label for="" class="form-label">Waktu Selesai</label>
+                                <input required name="selesai" type="time" class="form-control" placeholder="Masukkan waktu pelaksanaan">
                               </div>
                               <div class="mb-3">
                                 <label for="" class="form-label">Tempat</label>

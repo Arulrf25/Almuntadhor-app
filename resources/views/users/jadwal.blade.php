@@ -31,7 +31,7 @@
                       <tr>
                           <td>{{ $loop->index +1 }}</td>
                           <td>{{ $jadwal->kegiatan }}</td>
-                          <td>{{ $jadwal->waktu }}</td>
+                          <td>{{ $jadwal->mulai }} - {{ $jadwal->selesai }}</td>
                           <td>{{ $jadwal->tempat }}</td>
                       </tr>
                     </tbody>
@@ -60,7 +60,7 @@
                       <tr>
                           <td>{{ $loop->index +1 }}</td>
                           <td>{{ $jadwal->kegiatan }}</td>
-                          <td>{{ $jadwal->waktu }}</td>
+                          <td>{{ $jadwal->mulai }} - {{ $jadwal->selesai }}</td>
                           <td>{{ $jadwal->tempat }}</td>
                       </tr>
                     </tbody>
@@ -89,7 +89,7 @@
                       <tr>
                           <td>{{ $loop->index +1 }}</td>
                           <td>{{ $jadwal->kegiatan }}</td>
-                          <td>{{ $jadwal->waktu }}</td>
+                          <td>{{ $jadwal->mulai }} - {{ $jadwal->selesai }}</td>
                           <td>{{ $jadwal->tempat }}</td>
                       </tr>
                     </tbody>
@@ -118,7 +118,7 @@
                       <tr>
                           <td>{{ $loop->index +1 }}</td>
                           <td>{{ $jadwal->kegiatan }}</td>
-                          <td>{{ $jadwal->waktu }}</td>
+                          <td>{{ $jadwal->mulai }} - {{ $jadwal->selesai }}</td>
                           <td>{{ $jadwal->tempat }}</td>
                       </tr>
                     </tbody>
@@ -147,7 +147,7 @@
                       <tr>
                           <td>{{ $loop->index +1 }}</td>
                           <td>{{ $jadwal->kegiatan }}</td>
-                          <td>{{ $jadwal->waktu }}</td>
+                          <td>{{ $jadwal->mulai }} - {{ $jadwal->selesai }}</td>
                           <td>{{ $jadwal->tempat }}</td>
                       </tr>
                     </tbody>
@@ -176,7 +176,7 @@
                       <tr>
                           <td>{{ $loop->index +1 }}</td>
                           <td>{{ $jadwal->kegiatan }}</td>
-                          <td>{{ $jadwal->waktu }}</td>
+                          <td>{{ $jadwal->mulai }} - {{ $jadwal->selesai }}</td>
                           <td>{{ $jadwal->tempat }}</td>
                       </tr>
                     </tbody>
@@ -205,7 +205,7 @@
                       <tr>
                           <td>{{ $loop->index +1 }}</td>
                           <td>{{ $jadwal->kegiatan }}</td>
-                          <td>{{ $jadwal->waktu }}</td>
+                          <td>{{ $jadwal->mulai }} - {{ $jadwal->selesai }}</td>
                           <td>{{ $jadwal->tempat }}</td>
                       </tr>
                     </tbody>

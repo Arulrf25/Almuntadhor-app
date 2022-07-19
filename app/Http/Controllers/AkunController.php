@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use App\Models\Tagihan;
+use App\Models\User;
 use App\Models\DataAkun;
+use App\Models\Nilai;
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -42,20 +43,32 @@ class AkunController extends Controller
         //  Array 1 dimensi
         $id = DB::select("SHOW TABLE STATUS LIKE 'users'");
         $next_id = $id[0]->Auto_increment;
+        $mapel = User::where('level', 'pendidik')->get();
+    
         // jika id terbaru lebih dari sama dengan 10 maka keluaranya 00 + id terbaru
         if ($next_id >= 10) {
             $input_akun['id'] = '0' . $next_id;
-            for($i = 1; $i<72; $i++) {
-                Tagihan::create([
-                    'nis'=>$request->username,
-                    'tagihan' =>'Syariah'.' '. Carbon::parse('1 Juni')->addMonth($i)->isoFormat('MMMM'). ' '.Carbon::parse('1 Juni')->addMonth($i)->isoFormat('Y'),
-                    'bulan' => Carbon::parse('1 Juni')->addMonth($i)->isoFormat('MMMM'),
-                    'tahun' => Carbon::parse('1 Juni')->addMonth($i)->isoFormat('Y'),
-                    'nominal' => '350000',
-                    'keterangan' => 'Belum Lunas',
-                    'status' =>'aktif',
+            foreach ($mapel as $mp) {
+                Nilai::create([
+                    'nis' => $request->username,
+                    'pelajaran' => $mp->kelas,
+                    'kelas' => $request->kelas,
+                    'kehadiran' => null,
+                    'tugas' => null,
+                    'uts' => null,
+                    'uas' => null,
                 ]);
             }
+            // for($i = 1; $i<72; $i++) {
+            //     Nilai::create([
+            //         'nis'=> $request->username,
+            //         'pelajaran' => auth()->user()->kelas,
+            //         'kehadiran' => Carbon::parse('1 Juni')->addMonth($i)->isoFormat('MMMM'),
+            //         'tugas' => Carbon::parse('1 Juni')->addMonth($i)->isoFormat('Y'),
+            //         'uts' => '350000',
+            //         'uas' => 'Belum Lunas',
+            //     ]);
+            // }
             DataAkun::create($input_akun);
         } else {
             // selain itu maka 0 + id terbaru
@@ -87,6 +100,20 @@ class AkunController extends Controller
         
         $update_data = DataAkun::findOrFail($id);
         $update_data->update($update_akun);
+
+        $mapel = User::where('level', 'pendidik')->get();
+        
+        foreach ($mapel as $mp) {
+            Nilai::create([
+                'nis' => $request->username,
+                'pelajaran' => $mp->kelas,
+                'kelas' => $request->kelas,
+                'kehadiran' => null,
+                'tugas' => null,
+                'uts' => null,
+                'uas' => null,
+            ]);
+        }
         return redirect('data-akun');
     }
 

@@ -17,7 +17,8 @@ class CreateJadwalKegiatanTable extends Migration
             $table->increments('id');
             $table->String('hari');
             $table->String('kegiatan');
-            $table->String('waktu');
+            $table->String('mulai');
+            $table->String('selesai');
             $table->String('tempat');
             $table->timestamps();
         });
