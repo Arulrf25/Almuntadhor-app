@@ -12,13 +12,14 @@
         <h3 class="page-title">
           <span class="page-title-icon bg-gradient-success text-white me-2">
             <a href="{{ URL::previous() }}" style="color:white"><i class="fas fa-arrow-circle-left"></i></a>
-          </span> Menunggu Pembayaran
+          </span> Proses Pembayaran
         </h3>
       </div>
       <div class="card">
         <div class="card-body">
           <ul class="list-group list-group-flush">
             @foreach ($data_bayar as $bayar)
+                @if ($bayar->status =='pending')
                 @if ($bayar->payment_type == 'cstore')
                 <div class="text-center mb-3">
                   <h4>Kode Bayar</h4>
@@ -68,17 +69,17 @@
                   <p><b>{{$bayar->tagihan}}</b></p>
                 </li>
                 <li class="list-group-item">Nominal
-                  <p><b>{{$bayar->tagihan}}</b></p>
+                  <p><b>{{$bayar->gross_amount}}</b></p>
                 </li>
                 <li class="list-group-item">Methode
                   <p><b>Bank Mandiri</b></p>
                 </li>
-                <li class="text-center bg-warning">Mohon Dibayarkan sebelum :  <b>{{$bayar->created_at->isoFormat('DD')+1}}-{{$bayar->created_at->format('m-Y')}} Pukul : {{$bayar->created_at->format('H:i:s')}}</b></li>
                 @endif
-            @endforeach
-          </ul>
-            
-            <div class="accordion mt-4" id="accordionPanelsStayOpenExample">
+                <li class="list-group-item text-center bg-warning">Mohon Dibayarkan sebelum :  <b>{{$bayar->created_at->isoFormat('DD')+1}}-{{$bayar->created_at->format('m-Y')}} Pukul : {{$bayar->created_at->format('H:i:s')}}</b></li>
+               
+                <li class="list-group-item text-center"><a href="/waiting-payment/{{$bayar->order_id}}" class="btn btn-info"> Cek status pembayaran</a></li>
+              </ul>
+              <div class="accordion mt-4" id="accordionPanelsStayOpenExample">
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
@@ -264,6 +265,19 @@
                 </div>
                 
               </div>
+                @else
+                    <div class="text-center">
+                      <img src="{{ asset('NiceAdmin/') }}/assets/img/success.png" alt="" width="100px">
+                      <p>Pembayaran telah berhasil !</p>
+                      <a href="/cetak-kwitansi/{{ $bayar->id }}" class="btn btn-sm btn-success mb-1"><i class="fas fa-download"></i> Download Kwitansi</a>
+                      <p>Silahkan periksa seluruh riwayat pembayaran pada menu <a href="/riwayat-pembayaran">Riwayat Pembayaran</a></p>
+                    </div>
+                @endif
+            @endforeach
+          
+          
+            
+           
 
         </div>
       </div>

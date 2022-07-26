@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Tagihan;
 use App\Models\Konten;
+use App\Models\Setting;
+use App\Models\Tagihan;
 use App\Models\Informasi;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+
 class ProfilController extends Controller
 {
     public function tampilAdmin()
@@ -72,7 +74,7 @@ class ProfilController extends Controller
     public function tampilUser()
     {
         $user = User::where('id', Auth::user()->id)->first();
-
+        $setting = Setting::findOrFail(1);
         $santri = Auth::user()->username;
         $waktu = Carbon::now();
         $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $santri)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
@@ -83,7 +85,8 @@ class ProfilController extends Controller
             'accounts' => $user,
             'tampilContent' => $tampilContent,
             'notif_tagihan'=>$notif_tagihan,
-            'notif_info'=>$notif_info
+            'notif_info'=>$notif_info,
+            'setting'=>$setting,
         ]);
     }
 

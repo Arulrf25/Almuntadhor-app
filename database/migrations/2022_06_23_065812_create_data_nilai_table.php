@@ -17,10 +17,12 @@ class CreateDataNilaiTable extends Migration
             $table->id();
             $table->String('nis');
             $table->String('pelajaran');
-            $table->integer('kehadiran');
-            $table->integer('tugas');
-            $table->integer('uts');
-            $table->integer('uas');
+            $table->String('kelas');
+            $table->String('tahun_ajar');
+            $table->integer('kehadiran')->nullable();
+            $table->integer('tugas')->nullable();
+            $table->integer('uts')->nullable();
+            $table->integer('uas')->nullable();
             $table->timestamps();
         });
     }

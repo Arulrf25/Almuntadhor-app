@@ -37,7 +37,7 @@
                           </div>
                           <div class="col-sm-5 text-center" style="margin-top: 10px">
                             <h4>{{ $akunAdmin }}</h4>
-                            <p><h5>Administrator</h5> </p>
+                            <p><h5>Admin</h5> </p>
                           </div>
                         </div>
                       </div>
@@ -76,9 +76,7 @@
                       <a href="/data-akun" class="btn btn-primary"> Lihat Selengkapnya</a>
                     </div>
                   </div>
-                </div>
-              
-                <div class="row" style="margin-top:20px">
+          
                   <div class="col-lg-4 col-md-12 col-6 mb-4">
                     <div class="card">
                       <div class="card-body">

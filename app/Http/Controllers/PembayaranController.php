@@ -4,25 +4,33 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 
-use Dompdf\Dompdf;
-use App\Models\Pembayaran;
-use App\Models\Tagihan;
+use App\Models\User;
 use App\Models\Konten;
+use App\Models\Setting;
+use App\Models\Tagihan;
 use App\Models\Informasi;
+use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use PDF;
 
 class PembayaranController extends Controller
 {
     public function index()
     {
+        $setting = Setting::findOrFail(1);
+        $user = User::where('level', 'santri')->get();
+
         $data_pembayaran = Pembayaran::orderBy('created_at', 'asc')->get();
         return view('pengurus.v_pembayaran', [
-            'colleges' => $data_pembayaran
+            'colleges' => $data_pembayaran,
+            'setting'=>$setting,
+            'user'=>$user
         ]);
     }
+    
 
     public function create(Request $request)
     {
@@ -65,7 +73,7 @@ class PembayaranController extends Controller
         $input_data = $request->all();
 
         //  Array 1 dimensi
-        $id = DB::select("SHOW TABLE STATUS LIKE 'data_tagihan'");
+        $id = DB::select("SHOW TABLE STATUS LIKE 'data_pembayaran'");
         $next_id = $id[0]->Auto_increment;
         // jika id terbaru lebih dari sama dengan 10 maka keluaranya 00 + id terbaru
         if ($next_id >= 10) {
@@ -80,6 +88,8 @@ class PembayaranController extends Controller
             Pembayaran::create($input_data);
             // Session::flash('error', 'Data gagal ditambahkan!');
         }
+        $tagihan = Tagihan::finOrFail($request->nis);
+        $tagihan->delete();
         return redirect()->route('data-pembayaran.index');
     }
 
@@ -107,9 +117,6 @@ class PembayaranController extends Controller
     public function destroy($id)
     {
         $data_spesifik = Pembayaran::findOrFail($id);
-        $image_path = public_path("img/{$data_spesifik->bukti}");
-        File::delete($image_path);
-
         $data_spesifik->delete();
         return redirect()->route('data-pembayaran.index');
     }
@@ -133,11 +140,82 @@ class PembayaranController extends Controller
         return view('users.upload_bukti', compact('buktiPembayaran'));
     }
 
-    public function riwayat()
+    // public function riwayat()
+    // {
+    //     $setting = Setting::findOrFail(1);
+    //     $santri = Auth::user()->username;
+    //     $pembayaran = Pembayaran::where('nis', $santri)->where('status', 'settlement' )->get();
+    //     $pembayaran1 = Pembayaran::where('nis', $santri)->where('status', 'capture' )->get();
+
+    //     $waktu = Carbon::now();
+    //     $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $santri)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
+    //     $notif_info = Informasi::where('penerima', $santri)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
+    //     $tampilContent = Konten::where('kategori', 'Dashboard')->get();
+
+    //     return view('users.riwayat_bayar', [
+    //         'riwayatPembayaran' => $pembayaran, 
+    //         'riwayatPembayaran1' => $pembayaran1,
+    //         'tampilContent' => $tampilContent,
+    //         'notif_tagihan'=>$notif_tagihan,
+    //         'notif_info'=>$notif_info,
+    //         'setting'=>$setting,
+    //     ]);
+    // }
+
+    public function cetak($id)
     {
         $santri = Auth::user()->username;
-        $pembayaran = Pembayaran::where('nis', $santri)->where('status', 'settlement' )->get();
-        $pembayaran1 = Pembayaran::where('nis', $santri)->where('status', 'capture' )->get();
+        $tanggal = Carbon::now();
+        $pembayaran = Pembayaran::findOrFail($id);
+
+        $pdf = PDF::loadview('users.kwitansi', ['riwayatPembayaran' => $pembayaran, 'tanggal'=>$tanggal, 'title'=>$pembayaran->order_id]);
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->download('Kwitansi'.$pembayaran->order_id.'.pdf');
+    }
+
+
+    public function cetak_perbulan_user(Request $request){
+        
+        $santri = Auth::user()->username;
+        $bulan = $request->bulan;
+        $tahun = $request->tahun;
+        $tanggal = Carbon::now();
+        $data = Pembayaran::where('nis', $santri)->where('bulan', $bulan)->where('tahun', $tahun)->get();
+       
+        $pdf = PDF::loadview('users.cetak_riwayat_bayar', ['data' => $data, 'tanggal'=>$tanggal, 'title'=>'Riwayat Pembayaran'. $bulan.' '.$tahun]);
+        $pdf->setPaper('A4', 'potrait');
+        return $pdf->download('Riwayat Pembayaran '.$bulan.' '.$tahun.'.pdf');
+    }
+
+    public function cetak_all_user(){
+        $santri = Auth::user()->username;
+        $tanggal = Carbon::now();
+        $data = Pembayaran::where('nis', $santri)->get();
+       
+        $pdf = PDF::loadview('pengurus.laporan_pembayaran', ['data' => $data, 'tanggal'=>$tanggal, 'title'=>'Laporan Pembayaran Semua']);
+        $pdf->setPaper('A4', 'potrait');
+        return $pdf->download('Riwayat Pembayaran Semua.pdf');
+    }
+
+    public function cetak_pertahun_user(Request $request)
+    {
+        $santri = Auth::user()->username;
+        $tahun = $request->tahun;
+        $tanggal = Carbon::now();
+        $data = Pembayaran::where('nis', $santri)->where('tahun', $tahun)->get();
+       
+        $pdf = PDF::loadview('users.cetak_riwayat_bayar', ['data' => $data, 'tanggal'=>$tanggal, 'title'=>'Riwayat Pembayaran'.$tahun]);
+        $pdf->setPaper('A4', 'potrait');
+        return $pdf->download('Riwayat Pembayaran '.$tahun.'.pdf');
+    }
+
+    public function cari_data_riwayat(Request $request){
+        $bulan = $request->bulan;
+        $tahun = $request->tahun;
+        $setting = Setting::findOrFail(1);
+        $santri = Auth::user()->username;
+        $pembayaran = Pembayaran::where('nis', $santri)->where('status', 'settlement')->where('bulan', $bulan)->where('tahun', $tahun)->get();
+        $pembayaran1 = Pembayaran::where('nis', $santri)->where('status', 'capture' )->where('bulan', $bulan)->where('tahun', $tahun)->get();
 
         $waktu = Carbon::now();
         $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $santri)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
@@ -149,35 +227,9 @@ class PembayaranController extends Controller
             'riwayatPembayaran1' => $pembayaran1,
             'tampilContent' => $tampilContent,
             'notif_tagihan'=>$notif_tagihan,
-            'notif_info'=>$notif_info
+            'notif_info'=>$notif_info,
+            'setting'=>$setting,
         ]);
-    }
-
-    public function cetak($id)
-    {
-        $santri = Auth::user()->username;
-        $tanggal = Carbon::now();
-        $pembayaran = Pembayaran::where('nis', $santri)->where('order_id', $id )->get();
-
-        // instantiate and use the dompdf class
-        $html = view('users.kwitansi', ['riwayatPembayaran' => $pembayaran, 'tanggal'=>$tanggal, 'title'=>$id]);
-        // $dompdf = new Dompdf();
-        // $dompdf->loadHtml($html);
-
-        // // (Optional) Setup the paper size and orientation
-        // $dompdf->setPaper('A5', 'landscape');
-        // $options = $dompdf->getOptions();
-        // $options->setIsHtml5ParserEnabled(true);
-        // $dompdf->setOptions($options);
-
-
-        // // Render the HTML as PDF
-        // $dompdf->render();
-
-        // // Output the generated PDF to Browser
-        // $dompdf->stream();
-
-        return $html;
     }
 
     public function detail($id)
@@ -207,6 +259,7 @@ class PembayaranController extends Controller
 
     public function tutorial()
     {   
+        $setting = Setting::findOrFail(1);
         $santri = Auth::user()->username;
         $waktu = Carbon::now();
         $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $santri)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
@@ -215,7 +268,30 @@ class PembayaranController extends Controller
         return view('users.tutorial', [
             'tampilContent' => $tampilContent,
             'notif_tagihan'=>$notif_tagihan,
-            'notif_info'=>$notif_info
+            'notif_info'=>$notif_info,
+            'setting'=>$setting,
         ]);
+    }
+    
+    public function cetak_perbulan(Request $request){
+       
+        $bulan = $request->bulan;
+        $tahun = $request->tahun;
+        $user = User::where('level', 'santri')->get();
+        $tanggal = Carbon::now();
+        $data = Pembayaran::where('bulan', $bulan)->where('tahun', $tahun)->get();
+        
+        $pdf = PDF::loadview('pengurus.laporan_pembayaran', ['data' => $data, 'tanggal'=>$tanggal, 'title'=>$bulan.'-'.$tahun, 'user'=>$user]);
+        $pdf->setPaper('A4', 'potrait');
+        return $pdf->download('Laporan-Pembayaran-'.$bulan.'-'.$tahun.'.pdf');
+    }
+    public function cetak_all(){
+        $user = User::where('level', 'santri')->get();
+        $tanggal = Carbon::now();
+        $data = Pembayaran::all();
+       
+        $pdf = PDF::loadview('pengurus.laporan_pembayaran', ['data' => $data, 'tanggal'=>$tanggal, 'title'=>'Laporan Pembayaran Semua', 'user'=>$user]);
+        $pdf->setPaper('A4', 'potrait');
+        return $pdf->download('Laporan-Pembayaran-Semua.pdf');
     }
 }

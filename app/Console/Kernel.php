@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('command:tagihan')->monthly();
+        // $schedule->command('command:tagihan')->everyMinute();
 
         // Masukkan Kode Anda Disini
     

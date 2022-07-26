@@ -51,7 +51,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/pengumuman">
+            <a class="nav-link" href="/info-santri">
               <span class="menu-title">Info Santri</span>
               <i class="fas fa-exclamation-circle menu-icon"></i>
             </a>

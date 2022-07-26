@@ -38,12 +38,30 @@
             </div>
             <div class="mb-3">
               <label for="" class="form-label">Kelas</label>
-              <input required name="kelas" type="text" class="form-control" placeholder="Masukkan Kelas">
+              <select class="form-select" name="kelas">
+                    <option notselected>Pilih kelas.. </option>
+                    <option value="1 Madrasah">1 Madrasah </option>
+                    <option value="2 Madrasah">2 Madrasah </option>
+                    <option value="3 Madrasah">3 Madrasah </option>
+                    <option value="4 Madrasah">4 Madrasah </option>
+                    <option value="5 Madrasah">5 Madrasah </option>
+                    <option value="6 Madrasah">6 Madrasah </option>
+                </select>
             </div>
             <div class="mb-3">
               <label for="" class="form-label">Angkatan</label>
               <input required name="angkatan" type="text" class="form-control" placeholder="Masukkan Angkatan">
             </div>
+            <div class="mb-3">
+              <label for="" class="form-label">Tahun Ajaran</label>
+               <select class="form-select" name="tahun_ajar">
+                    <option notselected>Pilih tahun ajar.. </option>
+                        @for ($i=date('Y'); $i>=date('Y')-32; $i-=1)
+                            <option value='{{$i.'-'.$i+1}}'> {{$i.'-'.$i+1}} </option>
+                        @endfor
+                </select>
+            </div>
+           
             <div class="mb-3">
               <label for="" class="form-label">Level</label>
               <select name="level" class="form-select" aria-label="Default select example">

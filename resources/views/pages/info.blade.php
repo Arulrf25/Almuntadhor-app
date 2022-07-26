@@ -7,8 +7,8 @@
       <div class="content-wrapper">
         <div class="page-header">
           <h3 class="page-title">
-            <span class="page-title-icon bg-default-light text-white me-2">
-              <i class="fas fa-arrow-circle-left"></i>
+            <span class="page-title-icon bg-gradient-success text-white me-2">
+              <a href="{{ URL::previous() }}" style="color:white"><i class="fas fa-arrow-circle-left"></i></a>
             </span> Informasi
           </h3>
         </div>
@@ -21,9 +21,12 @@
                 <div class="card-body bg-gradient-light" style="margin-bottom: 20px">
                   <h5>{{ $gallery->judul }}</h5>
                   <span ><small >Terbit : {{ $gallery->created_at }}</small></span>
-                  <p>{{ $gallery->deskripsi }}</p>
+                  @php
+                  $isi = substr($gallery->deskripsi, 0, 90).'...' ;
+                  @endphp
+                  <p>{{ $isi }}</p>
                   <div class="text-center">
-                    <a href="{{ asset('/content/'. $gallery->gambar) }}" class="btn btn-light">Lihat Selengkapnya</a>
+                    <a href="{{route('info.detail', $gallery->id)}}" class="btn btn-light">Lihat Selengkapnya</a>
                   </div>
                 </div>
                 @endforeach

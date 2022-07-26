@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('foto')->nullable();
             $table->string('tgl_lahir')->nullable();
             $table->string('angkatan')->nullable();
+            $table->string('tahun_ajar')->nullable();
             $table->string('alamat')->nullable();
             $table->string('nama_ayah')->nullable();
             $table->string('nama_ibu')->nullable();

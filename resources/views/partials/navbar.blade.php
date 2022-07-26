@@ -1,7 +1,7 @@
 <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-      <a class="navbar-brand brand-logo" href="/dashboard"><img src="{!! asset('assets/images/almun-logo.png') !!}"/></a>
-      <a class="navbar-brand brand-logo-mini" href="/dashboard"><img src="{!! asset('assets/images/logo.jpg') !!}" alt="logo" style="width: 50px; height: 30px"/></a>
+      <a class="navbar-brand brand-logo" href="/dashboard"><img src="{{ URL::to('/')}}/content/{{ $setting->logo_aplikasi }}" alt="logo" height="200px" /></a>
+      <a class="navbar-brand brand-logo-mini" href="/dashboard"><img src="{{ URL::to('/')}}/content/logo_mini.png" alt="logo" /></a>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-stretch">
       <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -9,7 +9,7 @@
       </button>
       <ul class="navbar-nav navbar-nav-right">
         <li class="nav-item dropdown">
-            <a class="nav-link  @if ($notif_tagihan->isNotEmpty() && $notif_info->isNotEmpty()) count-indicator  @endif dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+            <a class="nav-link  @if ($notif_tagihan->isNotEmpty() or $notif_info->isNotEmpty()) count-indicator  @endif dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
               <i class="mdi mdi-bell-outline"></i>
               <span class="count-symbol bg-danger"></span>
             </a>
@@ -39,7 +39,7 @@
               @if ($notif_info->isNotEmpty())
               @foreach ($notif_info as $info)
               <div class="dropdown-divider"></div>
-              <a href="/pengumuman" class="dropdown-item preview-item">
+              <a href="/info-santri" class="dropdown-item preview-item">
                 <div class="preview-thumbnail">
                   <div class="preview-icon bg-warning">
                     <i class="fas fa-info-circle"></i>

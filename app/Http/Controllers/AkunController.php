@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Nilai;
 use App\Models\Tagihan;
 use App\Models\DataAkun;
 use App\Models\Pembayaran;
@@ -42,20 +44,23 @@ class AkunController extends Controller
         //  Array 1 dimensi
         $id = DB::select("SHOW TABLE STATUS LIKE 'users'");
         $next_id = $id[0]->Auto_increment;
+        $mapel = User::where('level', 'pendidik')->get();
         // jika id terbaru lebih dari sama dengan 10 maka keluaranya 00 + id terbaru
         if ($next_id >= 10) {
             $input_akun['id'] = '0' . $next_id;
-            for($i = 1; $i<72; $i++) {
-                Tagihan::create([
+            foreach ($mapel as $mp) {
+                Nilai::create([
                     'nis'=>$request->username,
-                    'tagihan' =>'Syariah'.' '. Carbon::parse('1 Juni')->addMonth($i)->isoFormat('MMMM'). ' '.Carbon::parse('1 Juni')->addMonth($i)->isoFormat('Y'),
-                    'bulan' => Carbon::parse('1 Juni')->addMonth($i)->isoFormat('MMMM'),
-                    'tahun' => Carbon::parse('1 Juni')->addMonth($i)->isoFormat('Y'),
-                    'nominal' => '350000',
-                    'keterangan' => 'Belum Lunas',
-                    'status' =>'aktif',
+                    'pelajaran' =>$mp->kelas,
+                    'kelas' => $request->kelas,
+                    'tahun_ajar' => $request->tahun_ajar,
+                    'kehadiran' => null,
+                    'tugas' => null,
+                    'uts' =>null,
+                    'uas'=>null,
                 ]);
             }
+           
             DataAkun::create($input_akun);
         } else {
             // selain itu maka 0 + id terbaru
@@ -105,5 +110,39 @@ class AkunController extends Controller
         $akunPendidik = DB::table('users')->where('level', '=', 'pendidik')->count();
 
         return view('admin.dashboard', ["title" => "Dashboard", 'akunAdmin'=>$akunAdmin, 'akunSantri'=>$akunSantri, 'akunPengurus'=>$akunPengurus, 'akunPendidik'=>$akunPendidik]);
+    }
+
+    // Update Kelas
+    public function datakelas()
+    {   
+        
+        $data_akun = DataAkun::where('level', 'santri')->paginate(5);
+        return view('admin.edit_kelas', [
+            'accounts' => $data_akun, "title" => "Update Kelas"
+        ]);
+    }
+
+    public function updatekelas(Request $request, $id)
+    {
+        $update_kelas = $request->all();
+        // $update_akun['password'] = bcrypt($request->password);
+        
+        $update_data = User::findOrFail($id);
+        $update_data->update($update_kelas);
+        
+        $mapel = User::where('level', 'pendidik')->get();
+        foreach ($mapel as $mp) {
+            Nilai::create([
+                'nis'=>$update_data->username,
+                'pelajaran' =>$mp->kelas,
+                'kelas' => $request->kelas,
+                'tahun_ajar' => $request->tahun_ajar,
+                'kehadiran' => null,
+                'tugas' => null,
+                'uts' =>null,
+                'uas'=>null,
+            ]);
+        }
+        return redirect('data-kelas');
     }
 }

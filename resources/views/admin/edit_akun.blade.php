@@ -25,10 +25,10 @@
                                 <label for="" class="form-label">Email</label>
                                 <input name="email" value="{{$accounts->email}}" type="email" class="form-control">
                               </div>
-                              <div class="mb-3">
-                                <label for="" class="form-label">Password</label>
-                                <input name="password" value="{{$accounts->password}}" type="password" class="form-control">
-                              </div>
+                              <!--<div class="mb-3">-->
+                              <!--  <label for="" class="form-label">Kelas</label>-->
+                              <!--  <input name="kelas" value="{{$accounts->kelas}}" type="text" class="form-control">-->
+                              <!--</div>-->
                               <button type="submit" class="btn btn-primary">Update</button>
                           </form>
                         </div>

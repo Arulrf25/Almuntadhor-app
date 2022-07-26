@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use PDF;
+use App\Models\User;
 use App\Models\Nilai;
-use App\Models\Tagihan;
 use App\Models\Konten;
+use App\Models\Setting;
+use App\Models\Tagihan;
 use App\Models\Informasi;
+use Illuminate\Http\Request;
+use Laravel\Ui\Presets\React;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Ui\Presets\React;
+
 
 class NilaiController extends Controller
 {
@@ -23,6 +27,17 @@ class NilaiController extends Controller
         ]);
     }
 
+    public function tampil_nilai_guru(Request $request)
+    {
+        $kelas = $request->kelas;
+        $tahun = $request->tahun;
+        $guru = Auth::user()->kelas;
+        $nilai = Nilai::where('pelajaran', $guru)->where('kelas', $kelas)->where('tahun_ajar', $tahun)->paginate(10);
+        return view('guru.data_nilai', [
+            'nilai' => $nilai
+
+        ]);
+    }
     public function create(Request $request)
     {
         \App\Models\SantriMapel::create($request->all);
@@ -74,19 +89,109 @@ class NilaiController extends Controller
 
     public function tampilUser()
     {
-        $nilai = Nilai::get();
         $santri = Auth::user()->username;
+        $nilai = Nilai::where('nis',$santri)->get();
+        $mapel = User::where('level', 'pendidik')->get();
         $waktu = Carbon::now();
         $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $santri)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
         $notif_info = Informasi::where('penerima', $santri)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
         $tampilContent = Konten::where('kategori', 'Dashboard')->get();
+        $setting = Setting::findOrFail(1);
         
         return view('users.nilai', [
             'tampilUser' => $nilai,
             'tampilContent' => $tampilContent,
             'notif_tagihan'=>$notif_tagihan,
-            'notif_info'=>$notif_info
+            'notif_info'=>$notif_info,
+            'setting'=>$setting,
+            'mapel'=>$mapel
         ]);
+    }
+    
+    public function tampil_nilai(Request $request)
+    {
+        $santri = Auth::user()->username;
+        $kelas = $request->kelas;
+        $tahun = $request->tahun;
+        $nilai = Nilai::where('nis',$santri)->where('kelas', $kelas)->where('tahun_ajar', $tahun)->get();
+        $mapel = User::where('level', 'pendidik')->get();
+        $waktu = Carbon::now();
+        $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $santri)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
+        $notif_info = Informasi::where('penerima', $santri)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
+        $tampilContent = Konten::where('kategori', 'Dashboard')->get();
+        $setting = Setting::findOrFail(1);
+        
+        return view('users.nilai', [
+            'kelas'=>$kelas,
+            'tahun'=>$tahun,
+            'tampilUser' => $nilai,
+            'tampilContent' => $tampilContent,
+            'notif_tagihan'=>$notif_tagihan,
+            'notif_info'=>$notif_info,
+            'setting'=>$setting,
+            'mapel'=>$mapel
+        ]);
+    }
+    
+    public function cetak_nilai(Request $request)
+    {
+        $santri = Auth::user()->username;
+        $tanggal = Carbon::now();
+        $kelas = $request->kelas;
+        $tahun = $request->tahun;
+        $nilai = Nilai::where('nis',$santri)->where('kelas', $kelas)->where('tahun_ajar', $tahun)->get();
+        // return view('users.cetak_nilai', ['tampilUser' => $nilai, 'tanggal'=>$tanggal, 'title'=>'Rekap Nilai '.$kelas.' '.$tahun]);
+        $pdf = PDF::loadview('users.cetak_nilai', ['tampilUser' => $nilai, 'tanggal'=>$tanggal, 'title'=>'Rekap Nilai '.$kelas.' '.$tahun]);
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->download('Rekap Nilai '.$kelas.'' .$tahun.'.pdf');
+    }
+    public function cetak_nilai_pelajaran(Request $request)
+    {
+        $santri = Auth::user()->username;
+        $tanggal = Carbon::now();
+        $mapel = $request->pelajaran;
+        $kelas = $request->kelas;
+        $tahun = $request->tahun;
+        $nilai = Nilai::where('nis',$santri)->where('pelajaran', $mapel)->where('kelas', $kelas)->where('tahun_ajar', $tahun)->get();
+        // return view('users.cetak_nilai', ['tampilUser' => $nilai, 'tanggal'=>$tanggal, 'title'=>'Rekap Nilai '.$kelas.' '.$tahun]);
+        $pdf = PDF::loadview('users.cetak_nilai', ['tampilUser' => $nilai, 'tanggal'=>$tanggal, 'title'=>'Rekap Nilai '.$mapel.' '.$kelas.' '.$tahun]);
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->download('Rekap Nilai '.$mapel.' '.$kelas.' '.$tahun.'.pdf');
+    }
+    
+    public function cetak_nilai_all()
+    {
+        $santri = Auth::user()->username;
+        $tanggal = Carbon::now();
+        $nilai = Nilai::where('nis',$santri)->get();
+        // return view('users.cetak_nilai', ['tampilUser' => $nilai, 'tanggal'=>$tanggal, 'title'=>'Rekap Nilai '.$kelas.' '.$tahun]);
+        $pdf = PDF::loadview('users.cetak_nilai_all', ['tampilUser' => $nilai, 'tanggal'=>$tanggal, 'title'=>'Rekap Nilai Semua Kelas']);
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->download('Rekap Nilai Semua Kelas.pdf');
+    }
+
+    public function cetak_nilai_guru()
+    {
+        $guru = Auth::user()->kelas;
+        $tanggal = Carbon::now();
+        $nilai = Nilai::where('pelajaran',$guru)->get();
+        // return view('users.cetak_nilai', ['tampilUser' => $nilai, 'tanggal'=>$tanggal, 'title'=>'Rekap Nilai '.$kelas.' '.$tahun]);
+        $pdf = PDF::loadview('guru.cetak_nilai_all', ['nilai' => $nilai, 'tanggal'=>$tanggal, 'title'=>'Rekap Nilai Semua Kelas']);
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->download('Rekap Nilai Semua Kelas.pdf');
+    }
+    public function cetak(Request $request)
+    {
+        $pendidik = Auth::user()->kelas;
+        $tanggal = Carbon::now();
+        $kelas = $request->kelas;
+        $tahun = $request->tahun;
+        
+        $nilai = Nilai::where('pelajaran',$pendidik)->where('kelas', $kelas)->where('tahun_ajar', $tahun)->get();
+        // return view('users.cetak_nilai', ['tampilUser' => $nilai, 'tanggal'=>$tanggal, 'title'=>'Rekap Nilai '.$kelas.' '.$tahun]);
+        $pdf = PDF::loadview('guru.cetak_nilai_all', ['nilai' => $nilai, 'tanggal'=>$tanggal, 'title'=>'Rekap Nilai'.$kelas.' '.$tahun]);
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->download('Rekap Nilai'.$kelas.' '.$tahun.'.pdf');
     }
 
     public function hitung(Request $request)
@@ -111,6 +216,7 @@ class NilaiController extends Controller
             'tampilContent' => $tampilContent,
             'notif_tagihan'=>$notif_tagihan,
             'notif_info'=>$notif_info,
+            'mapel'=>$mapel,
         ]);
     }
 

@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Konten;
+use App\Models\Setting;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 
@@ -183,6 +185,39 @@ class UserSeeder extends Seeder
         //     'remember_token' => Str::random(60),
         //     'kelas' => 'Kelas 6',
         // ]);
+        
+        Setting::create([
+            'nama_aplikasi' =>'SIMASDHOR', 
+            'nama_pesantren' =>'ALMUNTADHOR', 
+            'alamat' =>'Jl.Merdeka', 
+            'telp'=>'0989878953', 
+            'website'=>'www.almuntadhor.web.id', 
+            'pengasuh'=>'KH. Burhanuddin', 
+            'izin'=>'12/izin', 
+            'logo_aplikasi'=>'logo_default.png', 
+            'maintenance'=>'TIDAK AKTIF', 
+            'nominal_syariyyah'=>'350000', 
+            'nominal_daftarulang'=>'750000',
 
+        ]);
+
+        Konten::create([
+            'judul'=>'Slide 1',
+            'kategori'=>'Dashboard',
+            'gambar'=>'893667819.jpg',
+            'deskripsi'=>'Slide 1'
+        ]);
+        Konten::create([
+            'judul'=>'Slide 2',
+            'kategori'=>'Dashboard',
+            'gambar'=>'893667819.jpg',
+            'deskripsi'=>'Slide 2'
+        ]);
+        Konten::create([
+            'judul'=>'Slide 2',
+            'kategori'=>'Dashboard',
+            'gambar'=>'893667819.jpg',
+            'deskripsi'=>'Slide 2'
+        ]);
     }
 }

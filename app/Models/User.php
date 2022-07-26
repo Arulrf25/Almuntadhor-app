@@ -27,6 +27,7 @@ class User extends Authenticatable
         'foto',
         'tgl_lahir',
         'angkatan',
+        'tahun_ajar',
         'alamat',
         'nama_ayah',
         'nama_ibu',

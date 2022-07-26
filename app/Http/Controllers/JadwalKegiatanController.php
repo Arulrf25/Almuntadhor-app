@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\JadwalKegiatan;
-use App\Models\Tagihan;
 use App\Models\Konten;
+use App\Models\Setting;
+use App\Models\Tagihan;
 use App\Models\Informasi;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\JadwalKegiatan;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class JadwalKegiatanController extends Controller
 {
@@ -75,19 +76,20 @@ class JadwalKegiatanController extends Controller
 
     public function jadwalKegiatan()
     {
-        $ahad = JadwalKegiatan::orderBy('waktu', 'asc')->where('hari', 'ahad')->get();
-        $senin = JadwalKegiatan::orderBy('waktu', 'asc')->where('hari', 'senin')->get();
-        $selasa = JadwalKegiatan::orderBy('waktu', 'asc')->where('hari', 'selasa')->get();
-        $rabu = JadwalKegiatan::orderBy('waktu', 'asc')->where('hari', 'rabu')->get();
-        $kamis = JadwalKegiatan::orderBy('waktu', 'asc')->where('hari', 'kamis')->get();
-        $jumat = JadwalKegiatan::orderBy('waktu', 'asc')->where('hari', 'jumat')->get();
-        $sabtu = JadwalKegiatan::orderBy('waktu', 'asc')->where('hari', 'sabtu')->get();
+        $ahad = JadwalKegiatan::orderBy('mulai', 'asc')->where('hari', 'ahad')->get();
+        $senin = JadwalKegiatan::orderBy('mulai', 'asc')->where('hari', 'senin')->get();
+        $selasa = JadwalKegiatan::orderBy('mulai', 'asc')->where('hari', 'selasa')->get();
+        $rabu = JadwalKegiatan::orderBy('mulai', 'asc')->where('hari', 'rabu')->get();
+        $kamis = JadwalKegiatan::orderBy('mulai', 'asc')->where('hari', 'kamis')->get();
+        $jumat = JadwalKegiatan::orderBy('mulai', 'asc')->where('hari', 'jumat')->get();
+        $sabtu = JadwalKegiatan::orderBy('mulai', 'asc')->where('hari', 'sabtu')->get();
 
         $santri = Auth::user()->username;
         $waktu = Carbon::now();
         $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $santri)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
         $notif_info = Informasi::where('penerima', $santri)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
         $tampilContent = Konten::where('kategori', 'Dashboard')->get();
+        $setting = Setting::findOrFail(1);
 
         return view('users.jadwal', [
             'ahad' => $ahad, 
@@ -101,6 +103,7 @@ class JadwalKegiatanController extends Controller
             'tampilContent' => $tampilContent,
             'notif_tagihan'=>$notif_tagihan,
             'notif_info'=>$notif_info,
+            'setting'=>$setting,
         ]);
     }
 }

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Informasi;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\Konten;
+use App\Models\Setting;
 use App\Models\Tagihan;
+use App\Models\Informasi;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class InformasiPribadiController extends Controller
 {
@@ -46,15 +47,32 @@ class InformasiPribadiController extends Controller
     {
         $santri = Auth::user()->username;
         $informations = Informasi::where('penerima', $santri)->get();
-
+        $setting = Setting::findOrFail(1);
         $waktu = Carbon::now();
         $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $santri)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
         $notif_info = Informasi::where('penerima', $santri)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
         $tampilContent = Konten::where('kategori', 'Dashboard')->get();
 
-        return view('users.pengumuman', [
+        return view('users.info_santri', [
             'informations' => $informations,
             'tampilContent' => $tampilContent,
+            'notif_tagihan'=>$notif_tagihan,
+            'notif_info'=>$notif_info,
+            'setting'=>$setting,
+
+        ]);
+    }
+
+    public function detail($id){
+
+        $santri = Auth::user()->username;
+        $waktu = Carbon::now();
+        $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $santri)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
+        $notif_info = Informasi::where('penerima', $santri)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
+
+        $informations = Informasi::findOrFail($id);
+        return view('users.info_santri_detail', [
+            'informations' => $informations,
             'notif_tagihan'=>$notif_tagihan,
             'notif_info'=>$notif_info
         ]);

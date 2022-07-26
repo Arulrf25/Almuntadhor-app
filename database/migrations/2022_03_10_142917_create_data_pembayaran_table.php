@@ -20,8 +20,8 @@ class CreateDataPembayaranTable extends Migration
             $table->string('bulan');
             $table->string('tahun');
             $table->String('status');
-            $table->String('transaction_id');
-            $table->String('order_id');
+            $table->String('transaction_id')->nullable();
+            $table->String('order_id')->nullable();
             $table->String('gross_amount');
             $table->String('payment_type');
             $table->String('store')->nullable();

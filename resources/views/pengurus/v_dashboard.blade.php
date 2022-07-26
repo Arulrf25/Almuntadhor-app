@@ -9,6 +9,7 @@
             <section class="section">
                 @if (auth()->user()->level == "pengurus")
                     <div class="row">
+                       
                         <div class="col-lg-6">
                             <div class="card">
                                 <div class="card-body">
@@ -44,6 +45,7 @@
                 @endif
                 @if (auth()->user()->level == "pendidik")
                     <div class="row">
+                       
                         <div class="col-lg-6">
                             <div class="card">
                                 <div class="card-body">
@@ -83,6 +85,12 @@
                             <p class="card-header" style="margin-bottom: 20px;">Menu Utama</p>
                                 <div class="row justify-content no-gutters text-center">
                                     @if (auth()->user()->level == "pengurus")
+                                    <div class="col mb-3" style="margin-right: 5px">
+                                            <a href="/data-tagihan" class="mb-1 bg-gradient-primary  text-white text-center">
+                                            <span><img src="{{ asset('NiceAdmin/') }}/assets/img/pembayaran.png" alt="" width="50"></span>
+                                            </a>
+                                            <p class="text-secondary"><small>Kelola Tagihan</small></p>
+                                        </div>
                                         <div class="col mb-3" style="margin-right: 5px">
                                             <a href="/data-pembayaran" class="mb-1 bg-gradient-primary  text-white text-center">
                                             <span><img src="{{ asset('NiceAdmin/') }}/assets/img/pembayaran.png" alt="" width="50"></span>
@@ -96,7 +104,7 @@
                                             <p class="text-secondary"><small>Kelola Hafalan</small></p>
                                         </div>
                                         <div class="col mb-3 text-center" style="margin-right: 5px">
-                                            <a href="#" class="mb-1 bg-gradient-primary  text-white text-center">
+                                            <a href="/data-informasi" class="mb-1 bg-gradient-primary  text-white text-center">
                                                 <span><img src="{{ asset('NiceAdmin/') }}/assets/img/info.png" alt="" width="50"></span>
                                             </a>
                                             <p class="text-secondary"><small>Kelola Informasi Pribadi</small></p>

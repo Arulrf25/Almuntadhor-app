@@ -7,11 +7,24 @@
       </a>
     </li>
     @if (auth()->user()->level == "pengurus")
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/data-pembayaran">
-          <i class="bi-solid bi-wallet"></i><span>Data Pembayaran</span>
-        </a>
-      </li>
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-menu-button-wide"></i><span>Data Pembayaran</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a class="nav-link collapsed" href="/data-tagihan">
+            <i class="bi-solid bi-wallet"></i><span>Data Tagihan</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link collapsed" href="/data-pembayaran">
+            <i class="bi-solid bi-wallet"></i><span>Laporan Pembayaran</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+     
     @endif
     @if (auth()->user()->level == "pendidik")
       <li class="nav-item">

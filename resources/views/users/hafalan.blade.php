@@ -14,6 +14,10 @@
         </div>
         <div class="card">
           <div class="card-body">
+            <div class="mb-3">
+              <a href="{{route('hafalan-santri.cetak')}}" class="btn btn-sm btn-primary"> <i class="fas fa-download"></i> Download Rekap Capaian (pdf)</a>
+            </div>
+            
             <div class="card-header">Capaian Santri</div>
             <div class="tabel table-responsive" style="margin-top: 20px">
               <table class="table table-striped">
@@ -25,16 +29,18 @@
                       <th>Keterangan</th>
                     </tr>
                   </thead>
-                  @foreach($riwayatHafalan as $santri)
+                  
                   <tbody>
+                    @foreach($riwayatHafalan as $santri)
                     <tr>
                       <td>{{ $loop->index +1 }}</td>
                       <td>{{ $santri->hafalan }}</td>
                       <td>{{ $santri->updated_at }}</td>
                       <td class="bg-success text-white">{{ $santri->keterangan }}</td>
                     </tr>
+                    @endforeach
                   </tbody>
-                  @endforeach
+                 
               </table>
             </div>
           </div>
