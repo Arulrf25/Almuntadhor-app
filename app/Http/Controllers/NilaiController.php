@@ -21,7 +21,7 @@ class NilaiController extends Controller
     public function index()
     {
         $guru = Auth::user()->kelas;
-        $nilai = Nilai::where('pelajaran', $guru)->paginate(5);
+        $nilai = Nilai::where('pelajaran', $guru)->get();
         return view('guru.data_nilai', [
             'nilai' => $nilai
         ]);

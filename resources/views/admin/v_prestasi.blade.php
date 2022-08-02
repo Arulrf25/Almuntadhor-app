@@ -29,7 +29,7 @@
             @method('POST')
             @csrf
             <div class="mb-3">
-              <label for="" class="form-label">Capaian Prestasi</label>
+              <label for="" class="form-label">Capaian Santri</label>
               <input required name="nama_prestasi" type="text" class="form-control" placeholder="Masukkan capaian prestasi">
             </div>
             <div class="mb-3">
@@ -57,7 +57,7 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Capaian Prestasi</th>
+                                    <th>Capaian Santri</th>
                                     <th>Tingkatan</th>
                                     <th>Aksi</th>
                                 </tr>

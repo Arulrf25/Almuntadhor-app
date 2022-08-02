@@ -61,7 +61,58 @@
             <button type="submit" class="btn btn-sm btn-primary" style="margin-top: 5px">Tampilkan</button>
           </div>
             </form>
-          <div class="table-responsive">
+            
+            <div class="list-group d-block d-sm-none">
+            @if($riwayatPembayaran->isEmpty())
+            <div class="alert alert-warning" role="alert">
+                  Belum ada data riwayat pembayaran
+                </div>
+            @endif
+            @foreach($riwayatPembayaran as $santri)
+              <div class="list-group-item list-group-item-action">
+                  {{ $santri->tagihan }}
+               <p>{{ $santri->updated_at }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                  <p style="margin-top:-20px" class="text-uppercase">
+                @if ($santri->payment_type == 'echannel')
+                  {{$santri->gross_amount}} | Bank Mandiri
+                @endif
+                @if ($santri->payment_type == 'cstore')
+                 {{$santri->gross_amount}} | Indomart/Alfamart
+                @endif
+                @if ($santri->payment_type == 'bank_transfer')
+                {{$santri->gross_amount}} | {{$santri->bank}}
+              @endif
+                       <span class="text-success">Lunas</span></td></p>
+                  <a href="/cetak-kwitansi/{{ $santri->id }}" class="btn btn-sm btn-success"><i class="fas fa-print"></i> Cetak</a></td>
+              </div>
+              </div>
+            @endforeach
+            
+             @foreach($riwayatPembayaran1 as $santri1)
+              <div class="list-group-item list-group-item-action">
+                  {{ $santri1->tagihan }}
+               <p>{{ $santri1->updated_at }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                  <p style="margin-top:-20px" class="text-uppercase">
+                @if ($santri1->payment_type == 'echannel')
+                  {{$santri1->gross_amount}} | Bank Mandiri
+                @endif
+                @if ($santri1->payment_type == 'cstore')
+                 {{$santri1->gross_amount}} | Indomart/Alfamart
+                @endif
+                @if ($santri1->payment_type == 'bank_transfer')
+                {{$santri1->gross_amount}} | {{$santri1->bank}}
+              @endif
+                       <span class="text-success">Lunas</span></td></p>
+                  <a href="/cetak-kwitansi/{{ $santri1->id }}" class="btn btn-sm btn-success"><i class="fas fa-print"></i> Cetak</a></td>
+              </div>
+              </div>
+            @endforeach
+            
+            </div>
+            
+          <div class="table-responsive d-none d-sm-block">
             <table class="table table-hover">
               <thead>
                 <th scope="col">NO</th>
@@ -72,9 +123,9 @@
                 <th scope="col">KET</th>
                 <th scope="col">KWITANSI</th>
               </thead>
-              @if ($riwayatPembayaran->isNotEmpty())
+               <tbody>
               @foreach($riwayatPembayaran as $santri)
-              <tbody>
+            <tr>
                 <td>{{ $loop->index + 1 }}</td>
                 <td>{{ $santri->tagihan }}</td>
                 <td>RP. {{ number_format($santri->gross_amount) }}</td>
@@ -90,21 +141,28 @@
               <td>{{ $santri->updated_at }}</td>
                 <td><span class="badge badge-success">Lunas</span></td>
                 <td><a href="/cetak-kwitansi/{{ $santri->id }}" class="btn btn-sm btn-success"><i class="fas fa-download"></i> Download</a></td>
-              </tbody>
+                </tr>
               @endforeach
-              @else
               @foreach($riwayatPembayaran1 as $santri1)
-              <tbody>
+              <tr>
                 <td>{{ $loop->index + 1 }}</td>
-                <td>{{ $santri1->tagihan }} {{ $santri1->bulan }} {{ $santri1->tahun }}</td>
-                <td>{{ $santri1->gross_amount }}</td>
-                <td>{{ $santri1->payment_type }}</td>
-                <td>{{ $santri1->updated_at }}</td>
+                <td>{{ $santri1->tagihan }}</td>
+                <td>RP. {{ number_format($santri1->gross_amount) }}</td>
+                @if ($santri1->payment_type == 'echannel')
+                  <td class="text-uppercase">Bank Mandiri</td>
+                @endif
+                @if ($santri1->payment_type == 'cstore')
+                  <td class="text-uppercase">Indomaret/Alfamart</td>
+                @endif
+                @if ($santri1->payment_type == 'bank_transfer')
+                <td class="text-uppercase">{{ $santri1->bank }}</td>
+              @endif
+              <td>{{ $santri1->updated_at }}</td>
                 <td><span class="badge badge-success">Lunas</span></td>
                 <td><a href="/cetak-kwitansi/{{ $santri1->id }}" class="btn btn-sm btn-success"><i class="fas fa-download"></i> Download</a></td>
-              </tbody>
+                </tr>
               @endforeach
-              @endif  
+              </tbody>
             </table>
           </div>
     </div>

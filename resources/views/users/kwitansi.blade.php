@@ -47,7 +47,16 @@
                            <tr>
                                <td width="400px" style="text-align:left">{{$riwayatPembayaran->tagihan}}</td>
                                <td width="400px" style="text-align:left">{{$riwayatPembayaran->gross_amount}}</td>
-                               <td width="400px" style="text-align:left">{{$riwayatPembayaran->payment_type}}</td>
+                               @if ($riwayatPembayaran->payment_type == 'echannel')
+                                  <td width="400px" style="text-align:left">Bank Mandiri</td>
+                                @endif
+                                @if ($riwayatPembayaran->payment_type == 'cstore')
+                                 <td width="400px" style="text-align:left">Alfamart/Indomaret</td>
+                                @endif
+                                @if ($riwayatPembayaran->payment_type == 'bank_transfer')
+                                <td width="400px" style="text-align:left">{{$riwayatPembayaran->bank}}</td>
+                              @endif
+                               
                            </tr>
                         </table>
 

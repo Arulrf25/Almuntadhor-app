@@ -8,6 +8,8 @@ use App\Http\Controllers\SetingController;
 use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\JadwalKegiatanController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +32,11 @@ Route::get('/', [DashboardController::class, 'homeContent'])->name('homeContent'
 Route::get('/login-page', [App\Http\Controllers\LoginController::class, 'index'])->name('login-page');
 Route::post('/postlogin', [App\Http\Controllers\LoginController::class, 'postlogin'])->name('postlogin');
 Route::get('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
-
+// Forgot password
+Route::get('forget-password', [ForgotPasswordController::class, 'ForgetPassword'])->name('ForgetPasswordGet');
+Route::post('forget-password', [ForgotPasswordController::class, 'ForgetPasswordStore'])->name('ForgetPasswordPost');
+Route::get('reset-password/{token}', [ForgotPasswordController::class, 'ResetPassword'])->name('ResetPasswordGet');
+Route::post('reset-password', [ForgotPasswordController::class, 'ResetPasswordStore'])->name('ResetPasswordPost');
 
 Route::group(['middleware' => ['auth','ceklevel:admin']], function() {
     Route::get('/dashboard-admin', [App\Http\Controllers\AkunController::class, 'countAkun'])->name('dashboard-admin');
@@ -121,6 +127,7 @@ Route::group(['middleware' => ['auth','ceklevel:pengurus,pendidik']], function()
     Route::delete('/data-tagihan/destroy/{id?}', [App\Http\Controllers\TagihanController::class, 'destroy'])->name('data-tagihan.destroy');
     Route::post('/data-tagihan/store', [App\Http\Controllers\TagihanController::class, 'store'])->name('data-tagihan.store');
     Route::post('/data-tagihan/cetak-perbulan', [App\Http\Controllers\TagihanController::class, 'cetak_perbulan'])->name('data-tagihan.cetak-perbulan');
+    Route::post('data-tagihan', [App\Http\Controllers\TagihanController::class, 'cari_data'])->name('data-tagihan.cari_data');
     // Data Pembayaran
     Route::get('data-pembayaran', [App\Http\Controllers\PembayaranController::class, 'index'])->name('data-pembayaran.index');
     Route::post('/data-pembayaran/create', 'PembayaranController@create')->name('data-pembayaran.create');
@@ -131,7 +138,7 @@ Route::group(['middleware' => ['auth','ceklevel:pengurus,pendidik']], function()
     Route::get('/data-pembayaran/cetak-form', 'PembayaranController@cetakForm')->name('data-pembayaran.cetak-form');
     Route::get('/data-pembayaran/cetak-pertanggal/{tglawal}/{tglakhir}', 'PembayaranController@cetakPertanggal')->name('data-pembayaran.cetak-pertanggal');
     Route::post('/data-pembayaran/search', 'PembayaranController@search')->name('search');
-    Route::post('/data-pembayaran/laporan-perbulan', 'PembayaranController@cetak_perbulan')->name('data-pembayaran.laporan-perbulan');
+    Route::get('/data-pembayaran/laporan-perbulan', 'PembayaranController@cetak_perbulan')->name('data-pembayaran.laporan-perbulan');
     Route::get('/data-pembayaran/laporan-all', 'PembayaranController@cetak_all')->name('data-pembayaran.laporan-all');
     // Data hafalan
     Route::get('data-hafalan', [App\Http\Controllers\HafalanController::class, 'index'])->name('data-hafalan.index');

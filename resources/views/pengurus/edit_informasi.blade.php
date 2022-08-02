@@ -7,10 +7,7 @@
   @include('pengurus.sidebar')
   <main id="main" class="main">
       <div class="card shadow">
-          <div class="card-body">
-              <div class="text-center display-4">
-                  Edit Pembayaran
-              </div>
+          <div class="card-body mt-3">
               <form method="POST" action="{{route('data-informasi.update', $uploads->id)}}" enctype="multipart/form-data">
                   @method('PUT')
                   @csrf

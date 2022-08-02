@@ -126,7 +126,7 @@ class TagihanController extends Controller
           // Set your Merchant Server Key
        \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-       \Midtrans\Config::$isProduction = false;
+       \Midtrans\Config::$isProduction = true;
        // Set sanitization on (default)
        \Midtrans\Config::$isSanitized = true;
        // Set 3DS transaction for credit card to true
@@ -142,9 +142,7 @@ class TagihanController extends Controller
                'gross_amount' => 10000,
            ),
            
-           'bca_va' => array(
-                'va_number'  => $bca.$username,
-           ),
+           
             'bri_va' => array(
                 'va_number' => $bri.$username,
             ),
@@ -237,5 +235,20 @@ class TagihanController extends Controller
         $pdf = PDF::loadview('pengurus.laporan_tagihan', ['data' => $data, 'tanggal'=>$tanggal, 'title'=>$bulan.'-'.$tahun, 'user'=>$user]);
         $pdf->setPaper('A4', 'potrait');
         return $pdf->download('Laporan-Tagihan-'.$bulan.'-'.$tahun.'.pdf');
+    }
+
+    public function cari_data(Request $request)
+    {   
+        $nis = $request->nis;
+        $setting = Setting::findOrFail(1);
+        $tagihan = Tagihan::where('nis', $nis)->get();
+        $user = User::where('level', 'santri')->get();
+
+    return view('pengurus.v_tagihan', 
+    [
+        'dataTagihan' => $tagihan, 
+        'setting'=>$setting,
+        'user'=>$user
+    ]);
     }
 }

@@ -66,11 +66,9 @@
           <!-- selesai content -->
           <!-- Footer -->
           <script type="text/javascript"
-          src="https://app.sandbox.midtrans.com/snap/snap.js"
-          data-client-key="SB-Mid-client-JMIhXrIiIrGNV5JZ"></script>
+          src="https://app.midtrans.com/snap/snap.js"
+          data-client-key="Mid-client-XMoUGIMR11cq2rPy"></script>
           <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
-        
 
           <script type="text/javascript">
             // For example trigger on button clicked, or any time you need

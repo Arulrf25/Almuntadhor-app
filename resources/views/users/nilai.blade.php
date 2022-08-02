@@ -59,7 +59,29 @@
             <button type="submit" class="btn btn-sm btn-primary" style="margin-top: 5px">Tampilkan</button>
           </div>
             </form>
-            <div class="table table-responsive">
+            
+            <ul class="list-group d-block d-sm-none">
+                @foreach($tampilUser as $show)
+              <li class="list-group-item">
+                  <div class="d-flex justify-content-between align-items-center">
+                       {{ $show->pelajaran }}
+                    <span class="badge badge-light badge-pill text-black"><i class="fas fa-ellipsis-v"></i></span>
+                  </div>
+                  @php
+                    $nilai_akhir = ($show->kehadiran +  $show->tugas +  $show->uts +  $show->uas) / 4
+                    @endphp
+                    
+                @if($nilai_akhir == "0")
+                <p><small>Nilai Akhir : - </small></p>
+                @else
+                <p><small>Nilai Akhir : {{$nilai_akhir}} </small></p>
+                @endif
+               
+              </li>
+              @endforeach
+            </ul>
+            
+            <div class="table table-responsive d-none d-none d-sm-block">
                 <table class="table table-bordered table-striped">
                 <thead>
                     <tr>

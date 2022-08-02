@@ -9,7 +9,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Tambah Konten</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Tambah Pengumuman</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -19,8 +19,8 @@
                                     @method('POST')
                                     @csrf
                                     <div class="mb-3">
-                                        <label for="" class="form-label">Judul Content</label>
-                                        <input required name="judul" type="text" class="form-control" placeholder="Masukkan Nama Lengkap Santri">
+                                        <label for="" class="form-label">Judul Pengumuman</label>
+                                        <input required name="judul" type="text" class="form-control" placeholder="Masukkan judul pengumuman">
                                     </div>
                                    <input type="text" name="kategori" value="pengumuman" hidden>
                                     <div class="mb-3">

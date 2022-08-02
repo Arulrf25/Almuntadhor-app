@@ -14,7 +14,6 @@
           <div class="content-wrapper">
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
-                <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> Edit Mata Pelajaran</h4>
                   <div class="card">
                       <div class="card-body">
                         <form method="POST" action="{{route('data-prestasi.update', $prestasi->id)}}">
@@ -22,7 +21,7 @@
                             @csrf
                             <input type="hidden" name="id" value="{{$prestasi->id}}">
                               <div class="mb-3">
-                                <label for="" class="form-label">Mata Pelajaran</label>
+                                <label for="" class="form-label">Capaian Santri</label>
                                 <input name="nama_prestasi" value="{{$prestasi->nama_prestasi}}" type="text" class="form-control">
                               </div>
                               <div class="mb-3">

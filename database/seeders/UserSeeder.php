@@ -23,16 +23,16 @@ class UserSeeder extends Seeder
             'username' => 'admin',
             'level' => 'admin',
             'email' => 'adminalmuntadhor@gmail.com',
-            'password' => bcrypt('admin123'),
+            'password' => bcrypt('@Dhoradmin123'),
             'remember_token' => Str::random(60),
         ]);
 
         User::create([
-            'name' => 'Andi Surandi',
-            'username' => 'andi',
+            'name' => 'Pengurus Aplikasi',
+            'username' => 'pengurus',
             'level' => 'pengurus',
-            'email' => 'andisurandi@gmail.com',
-            'password' => bcrypt('andi123'),
+            'email' => 'pengurus@gmail.com',
+            'password' => bcrypt('@Dhorpengurus123'),
             'remember_token' => Str::random(60),
         ]);
 
@@ -41,7 +41,7 @@ class UserSeeder extends Seeder
             'username' => 'matematika',
             'level' => 'pendidik',
             'email' => 'matematika@gmail.com',
-            'password' => bcrypt('Matematika123'),
+            'password' => bcrypt('@Dhormatematika123'),
             'remember_token' => Str::random(60),
             'kelas' => 'Matematika',
         ]);
@@ -51,7 +51,7 @@ class UserSeeder extends Seeder
             'username' => 'fiqh',
             'level' => 'pendidik',
             'email' => 'fiqh@gmail.com',
-            'password' => bcrypt('Fiqh123'),
+            'password' => bcrypt('@Dhorfiqh123'),
             'remember_token' => Str::random(60),
             'kelas' => 'Fiqh',
         ]);
@@ -61,7 +61,7 @@ class UserSeeder extends Seeder
             'username' => 'aqidah',
             'level' => 'pendidik',
             'email' => 'aqidah@gmail.com',
-            'password' => bcrypt('Aqidah123'),
+            'password' => bcrypt('@Dhoraqidah123'),
             'remember_token' => Str::random(60),
             'kelas' => 'Aqidah',
         ]);
@@ -71,7 +71,7 @@ class UserSeeder extends Seeder
             'username' => 'akhlak',
             'level' => 'pendidik',
             'email' => 'akhlak@gmail.com',
-            'password' => bcrypt('Akhlak123'),
+            'password' => bcrypt('@Dhorakhlak123'),
             'remember_token' => Str::random(60),
             'kelas' => 'Akhlak',
         ]);
@@ -81,7 +81,7 @@ class UserSeeder extends Seeder
             'username' => 'nahwu',
             'level' => 'pendidik',
             'email' => 'nahwu@gmail.com',
-            'password' => bcrypt('Nahwu123'),
+            'password' => bcrypt('@Dhornahwu123'),
             'remember_token' => Str::random(60),
             'kelas' => 'Nahwu',
         ]);
@@ -91,7 +91,7 @@ class UserSeeder extends Seeder
             'username' => 'tauhid',
             'level' => 'pendidik',
             'email' => 'tauhid@gmail.com',
-            'password' => bcrypt('Tauhid123'),
+            'password' => bcrypt('@Dhortauhid123'),
             'remember_token' => Str::random(60),
             'kelas' => 'Tauhid',
         ]);
@@ -101,7 +101,7 @@ class UserSeeder extends Seeder
             'username' => 'hadis',
             'level' => 'pendidik',
             'email' => 'hadis@gmail.com',
-            'password' => bcrypt('Hadis123'),
+            'password' => bcrypt('@Dhorhadis123'),
             'remember_token' => Str::random(60),
             'kelas' => 'Hadis',
         ]);
@@ -111,7 +111,7 @@ class UserSeeder extends Seeder
             'username' => 'tasawuf',
             'level' => 'pendidik',
             'email' => 'tasawuf@gmail.com',
-            'password' => bcrypt('Tasawuf123'),
+            'password' => bcrypt('@Dhortasawuf123'),
             'remember_token' => Str::random(60),
             'kelas' => 'Tasawuf',
         ]);
@@ -121,7 +121,7 @@ class UserSeeder extends Seeder
             'username' => 'tahajji',
             'level' => 'pendidik',
             'email' => 'tahajji@gmail.com',
-            'password' => bcrypt('Tahajji123'),
+            'password' => bcrypt('@Dhortahajji123'),
             'remember_token' => Str::random(60),
             'kelas' => 'Tahajji',
         ]);
@@ -131,7 +131,7 @@ class UserSeeder extends Seeder
             'username' => 'imla',
             'level' => 'pendidik',
             'email' => 'imla@gmail.com',
-            'password' => bcrypt('Imla123'),
+            'password' => bcrypt('@Dhorimla123'),
             'remember_token' => Str::random(60),
             'kelas' => 'Imla',
         ]);
@@ -141,7 +141,7 @@ class UserSeeder extends Seeder
             'username' => 'inggris',
             'level' => 'pendidik',
             'email' => 'inggris@gmail.com',
-            'password' => bcrypt('Inggris123'),
+            'password' => bcrypt('@Dhoringgris123'),
             'remember_token' => Str::random(60),
             'kelas' => 'Bahasa Inggris',
         ]);
@@ -151,7 +151,7 @@ class UserSeeder extends Seeder
             'username' => 'kromo',
             'level' => 'pendidik',
             'email' => 'kromo@gmail.com',
-            'password' => bcrypt('Kromo123'),
+            'password' => bcrypt('@Dhorkromo123'),
             'remember_token' => Str::random(60),
             'kelas' => 'Bahasa Kromo',
         ]);
@@ -161,31 +161,11 @@ class UserSeeder extends Seeder
             'username' => 'teknologi',
             'level' => 'pendidik',
             'email' => 'teknologis@gmail.com',
-            'password' => bcrypt('Teknologi123'),
+            'password' => bcrypt('@Dhorteknologi123'),
             'remember_token' => Str::random(60),
             'kelas' => 'Teknologi Informasi',
         ]);
 
-        // User::create([
-        //     'name' => 'Arul Rachman Faruqhy',
-        //     'username' => '1903064',
-        //     'level' => 'santri',
-        //     'email' => 'arulrachmanfaruqhy@gmail.com',
-        //     'password' => bcrypt('Arulrf_25'),
-        //     'remember_token' => Str::random(60),
-        //     'kelas' => 'Kelas 5',
-        // ]);
-
-        // User::create([
-        //     'name' => 'Melisah Rachman',
-        //     'username' => '1903065',
-        //     'level' => 'santri',
-        //     'email' => 'melisahridho@gmail.com',
-        //     'password' => bcrypt('Melisah123'),
-        //     'remember_token' => Str::random(60),
-        //     'kelas' => 'Kelas 6',
-        // ]);
-        
         Setting::create([
             'nama_aplikasi' =>'SIMASDHOR', 
             'nama_pesantren' =>'ALMUNTADHOR', 

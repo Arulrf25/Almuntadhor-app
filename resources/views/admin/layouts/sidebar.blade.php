@@ -43,7 +43,7 @@
           </li>
           <li class="menu-item">
             <a href="/data-prestasi" class="menu-link">
-              <div data-i18n="Container">Data Prestasi</div>
+              <div data-i18n="Container">Data Capaian</div>
             </a>
           </li>
           <li class="menu-item">
@@ -71,7 +71,7 @@
       <li class="menu-item">
         <a href="/data-galeri" class="menu-link">
           <i class="menu-icon tf-icons bx bxs-photo-album"></i>
-          <div data-i18n="Account">Galerri</div>
+          <div data-i18n="Account">Galeri</div>
         </a>
       </li>
      

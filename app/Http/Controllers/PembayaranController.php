@@ -140,27 +140,27 @@ class PembayaranController extends Controller
         return view('users.upload_bukti', compact('buktiPembayaran'));
     }
 
-    // public function riwayat()
-    // {
-    //     $setting = Setting::findOrFail(1);
-    //     $santri = Auth::user()->username;
-    //     $pembayaran = Pembayaran::where('nis', $santri)->where('status', 'settlement' )->get();
-    //     $pembayaran1 = Pembayaran::where('nis', $santri)->where('status', 'capture' )->get();
+    public function riwayat()
+    {
+        $setting = Setting::findOrFail(1);
+        $santri = Auth::user()->username;
+        $pembayaran = Pembayaran::where('nis', $santri)->where('status', 'settlement' )->get();
+        $pembayaran1 = Pembayaran::where('nis', $santri)->where('status', 'capture' )->get();
 
-    //     $waktu = Carbon::now();
-    //     $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $santri)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
-    //     $notif_info = Informasi::where('penerima', $santri)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
-    //     $tampilContent = Konten::where('kategori', 'Dashboard')->get();
+        $waktu = Carbon::now();
+        $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $santri)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
+        $notif_info = Informasi::where('penerima', $santri)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
+        $tampilContent = Konten::where('kategori', 'Dashboard')->get();
 
-    //     return view('users.riwayat_bayar', [
-    //         'riwayatPembayaran' => $pembayaran, 
-    //         'riwayatPembayaran1' => $pembayaran1,
-    //         'tampilContent' => $tampilContent,
-    //         'notif_tagihan'=>$notif_tagihan,
-    //         'notif_info'=>$notif_info,
-    //         'setting'=>$setting,
-    //     ]);
-    // }
+        return view('users.riwayat_bayar', [
+            'riwayatPembayaran' => $pembayaran, 
+            'riwayatPembayaran1' => $pembayaran1,
+            'tampilContent' => $tampilContent,
+            'notif_tagihan'=>$notif_tagihan,
+            'notif_info'=>$notif_info,
+            'setting'=>$setting,
+        ]);
+    }
 
     public function cetak($id)
     {
@@ -170,7 +170,7 @@ class PembayaranController extends Controller
 
         $pdf = PDF::loadview('users.kwitansi', ['riwayatPembayaran' => $pembayaran, 'tanggal'=>$tanggal, 'title'=>$pembayaran->order_id]);
         $pdf->setPaper('A4', 'landscape');
-        return $pdf->download('Kwitansi'.$pembayaran->order_id.'.pdf');
+        return $pdf->download('Kwitansi - '.$pembayaran->tagihan.'.pdf');
     }
 
 

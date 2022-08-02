@@ -14,11 +14,11 @@
               <span class="count-symbol bg-danger"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown" style="overflow:auto">
-              <h6 class="p-3 mb-0">Notifications</h6>
+              <h6 class="p-3 mb-0">Notifikasi</h6>
               <div class="dropdown-divider"></div>
               @if ($notif_tagihan->isEmpty() && $notif_info->isEmpty())
                   <div class="text-center">
-                    <small>Tidak ada Notifikasi</small>
+                    <small>Tidak ada notifikasi</small>
                   </div>
               @endif
               @if ($notif_tagihan->isNotEmpty())

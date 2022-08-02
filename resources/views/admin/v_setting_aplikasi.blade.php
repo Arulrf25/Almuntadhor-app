@@ -47,7 +47,7 @@
                             <div class="input-group mb-3">
                                 <div class="form-outline" style="margin-right: 5px; margin-top: 5px">
                                     <select name="maintenance" id="" class="form-select">
-                                        <option selected>{{$setting->maintenance}}</option>
+                                        <option hidden selected>{{$setting->maintenance}}</option>
                                         <option value="AKTIF">AKTIF</option>
                                         <option value="TIDAK AKTIF">TIDAK AKTIF</option>
                                     </select>

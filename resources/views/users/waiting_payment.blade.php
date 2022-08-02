@@ -29,12 +29,12 @@
                   <p><b>{{$bayar->tagihan}}</b></p>
                 </li>
                 <li class="list-group-item">Nominal
-                  <p><b>{{$bayar->tagihan}}</b></p>
+                  <p><b>Rp. {{number_format($bayar->gross_amount)}}</b></p>
                 </li>
                 <li class="list-group-item">Metode
-                  <p><b>Indomaret/Alfamart</b></p>
+                  <p class="text-uppercase"><b>Indomaret/Alfamart</b></p>
                 </li>
-                <li class="text-center bg-warning">Mohon Dibayarkan sebelum :  <b>{{$bayar->created_at->isoFormat('DD')+1}}-{{$bayar->created_at->format('m-Y')}} Pukul : {{$bayar->created_at->format('H:i:s')}}</b></li>
+               
                 @endif
                 @if ($bayar->payment_type == 'bank_transfer')
                 <div class="text-center mb-3">
@@ -45,12 +45,12 @@
                   <p><b>{{$bayar->tagihan}}</b></p>
                 </li>
                 <li class="list-group-item">Nominal
-                  <p><b>{{$bayar->tagihan}}</b></p>
+                  <p><b>Rp. {{number_format($bayar->gross_amount)}}</b></p>
                 </li>
                 <li class="list-group-item">Methode
-                  <p><b>{{$bayar->bank}}</b></p>
+                  <p class="text-uppercase"><b>{{$bayar->bank}}</b></p>
                 </li>
-                <li class="text-center bg-warning">Mohon Dibayarkan sebelum :  <b>{{$bayar->created_at->isoFormat('DD')+1}}-{{$bayar->created_at->format('m-Y')}} Pukul : {{$bayar->created_at->format('H:i:s')}}</b></li>
+               
                 @endif
                 @if ($bayar->payment_type == 'echannel')
                 <div class="text-center mb-3">
@@ -69,12 +69,13 @@
                   <p><b>{{$bayar->tagihan}}</b></p>
                 </li>
                 <li class="list-group-item">Nominal
-                  <p><b>{{$bayar->gross_amount}}</b></p>
+                  <p><b>Rp. {{number_format($bayar->gross_amount)}}</b></p>
                 </li>
                 <li class="list-group-item">Methode
-                  <p><b>Bank Mandiri</b></p>
+                  <p class="text-uppercase"><b>Bank Mandiri</b></p>
                 </li>
                 @endif
+                
                 <li class="list-group-item text-center bg-warning">Mohon Dibayarkan sebelum :  <b>{{$bayar->created_at->isoFormat('DD')+1}}-{{$bayar->created_at->format('m-Y')}} Pukul : {{$bayar->created_at->format('H:i:s')}}</b></li>
                
                 <li class="list-group-item text-center"><a href="/waiting-payment/{{$bayar->order_id}}" class="btn btn-info"> Cek status pembayaran</a></li>

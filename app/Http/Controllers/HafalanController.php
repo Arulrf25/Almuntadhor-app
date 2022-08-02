@@ -19,8 +19,9 @@ class HafalanController extends Controller
     public function index()
     {
         $data_hafalan = Hafalan::orderBy('created_at', 'desc')->get();
+        $datas = Prestasi::all();
         return view('pengurus.v_hafalan', [
-            'hafalan' => $data_hafalan
+            'hafalan' => $data_hafalan, 'prestasi' => $datas
         ]);
     }
 

@@ -142,12 +142,15 @@
     </div>
   </div>
   </div>
+</div>
+       
+       
           <!-- selesai content -->
           <!-- Footer -->
           @include('partials.footer')
   
 
 
-        </div>
+   
       </div>
     </div>

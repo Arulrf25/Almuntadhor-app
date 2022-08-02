@@ -17,8 +17,6 @@
             <div class="container-xxl flex-grow-1 container-p-y">
                   <div class="card">
                       <div class="card-body">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                       <i class="fas fa-plus-circle"></i> Tambah Data</button>
                     <div class="table-responsive">
                         <table class="table table-stiped table-hover">
                             <thead>

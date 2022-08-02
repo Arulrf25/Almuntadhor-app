@@ -143,15 +143,6 @@
           @endforeach
         </table>
 
-       <div class="page-bottom" style="margin: 20px">
-        <br/>
-        <!-- pagination -->
-          Current Page: {{ $nilai->currentPage() }}<br>
-          Jumlah Data: {{ $nilai->total() }}<br>
-          Data perhalaman: {{ $nilai->perPage() }}<br>
-          <br>
-          {{ $nilai->links() }}
-       </div>
       </div>
       </div>
   

@@ -29,16 +29,13 @@
                   <input required name="nis" type="text" class="form-control" placeholder="Masukkan NIS Santri">
                 </div>
                 <div class="mb-3">
-                  <label for="" class="form-label">Nama Lengkap Santri</label>
-                  <input required name="nama" type="text" class="form-control" placeholder="Masukkan Nama Lengkap Santri">
-                </div>
-                <div class="mb-3">
-                  <label for="" class="form-label">Tanggal Hafalan</label>
-                  <input required name="tanggal" type="date" class="form-control" placeholder="Masukkan tanggal hafalan">
-                </div>
-                <div class="mb-3">
                   <label for="" class="form-label">Hafalan Surat</label>
-                  <input required name="hafalan" type="text" class="form-control" placeholder="Masukkan hafalan surat">
+                  <select name="hafalan" class="form-select">
+                    <option notselected>Pilih hafalan</option>
+                    @foreach ($prestasi as $prestasi)
+                        <option value="{{$prestasi->nama_prestasi}}">{{$prestasi->nama_prestasi}}</option>
+                    @endforeach
+                  </select>
                 </div>
                 <div class="mb-3">
                   <label for="" class="form-label">Keterangan</label>

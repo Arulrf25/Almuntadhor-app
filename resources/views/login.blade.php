@@ -31,7 +31,7 @@
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
 
-        <div class="text-center fs-6"> <a href="{{ route('password.request') }}" style="color: #ffff">Forgot password?</a> or <a
+        <div class="text-center fs-6"> <a href="{{ route('ForgetPasswordGet') }}" style="color: #ffff">Forgot password?</a> or <a
                 href="{{ URL::previous() }}" style="color: #ffff">Beranda</a> </div>
     </div>
 

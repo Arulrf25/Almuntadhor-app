@@ -26,8 +26,8 @@
                                             <input readonly type="text" class="form-control mt-3" name="old_image" value="{{ $pengumuman->gambar }}">
                                         </div>
                                         <div class="col">
-                                            <label for="new_gambar" class="btn btn-info mt-3"><i class="fas fa-upload"></i> Ganti gambar/file</label>
-                                            <input name="gambar" id="new_gambar" type="file" class="form-control-file"> 
+                                            <input  name="gambar" id="new_gambar" type="file" class="form-control-file" style="z-index: 1; margin-right:-105px ; margin-top:20px;"> 
+                                            <label for="new_gambar" class="btn btn-info mt-3" style="z-index: 2; margin-left:-315px ;margin-bottom:20px;"><i class="fas fa-upload"></i> Ganti gambar/file</label>
                                         </div>
                                     </div>
                                     
