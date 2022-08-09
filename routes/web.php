@@ -126,7 +126,7 @@ Route::group(['middleware' => ['auth','ceklevel:pengurus,pendidik']], function()
     Route::get('data-tagihan', [App\Http\Controllers\TagihanController::class, 'viewPengurus'])->name('data-tagihan.viewPengurus');
     Route::delete('/data-tagihan/destroy/{id?}', [App\Http\Controllers\TagihanController::class, 'destroy'])->name('data-tagihan.destroy');
     Route::post('/data-tagihan/store', [App\Http\Controllers\TagihanController::class, 'store'])->name('data-tagihan.store');
-    Route::post('/data-tagihan/cetak-perbulan', [App\Http\Controllers\TagihanController::class, 'cetak_perbulan'])->name('data-tagihan.cetak-perbulan');
+    Route::get('/data-tagihan/cetak-perbulan', [App\Http\Controllers\TagihanController::class, 'cetak_perbulan'])->name('data-tagihan.cetak-perbulan');
     Route::post('data-tagihan', [App\Http\Controllers\TagihanController::class, 'cari_data'])->name('data-tagihan.cari_data');
     // Data Pembayaran
     Route::get('data-pembayaran', [App\Http\Controllers\PembayaranController::class, 'index'])->name('data-pembayaran.index');

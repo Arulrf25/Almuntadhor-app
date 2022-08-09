@@ -31,8 +31,8 @@
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
 
-        <div class="text-center fs-6"> <a href="{{ route('ForgetPasswordGet') }}" style="color: #ffff">Forgot password?</a> or <a
-                href="{{ URL::previous() }}" style="color: #ffff">Beranda</a> </div>
+        <div class="text-center fs-6"> <a href="{{ route('ForgetPasswordGet') }}" style="color: #ffff">Lupa password?</a> atau <a
+                href="/" style="color: #ffff">Beranda</a> </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>

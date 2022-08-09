@@ -51,12 +51,7 @@
 			<tr>
     			
 				<td>{{$loop->index + 1}}</td>
-				<td>{{$d->nis}}</td>
-				
-				@if($s->username == $d->nis)
-				<td>{{$s->name}}</td>
-				@endif
-				
+				<td>{{$d->nis}}</td>				
 				<td>{{$d->tagihan}}</td>
 				<td>{{$d->nominal}}</td>
 				<td>{{$d->keterangan}}</td>

@@ -41,24 +41,6 @@
                   <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
                     <div class="accordion-body">
                      <ol>
-                      
-                         <li><b>VIA INDOMARET</b></li>
-                         <ul class="mb-4">
-                          <li>Pergi ke Indomaret terdekat dan sampaikan pada kasir bahwa anda ingin melalukan pembayaran Midtrans.</li>
-                          <li> Berikan 
-                            Kode Pembayaran Anda ke kasir</li>
-                          <li>Kasir Indomaret akan mengkonfirmasi 
-                              transaksi dengan menanyakan Jumlah 
-                              Tagihan dan Nama Toko.</li>
-                          <li>
-                            Bayar sesuai Jumlah Tagihan Anda
-                          </li>
-                          <li>Setelah pembayaran diterima, Anda 
-                            akan menerima konfirmasi yang dikirimkan ke email</li>
-                            <li>Simpanlah struk transaksi Indomaret 
-                              Anda sebagai bukti pembayaran</li>
-
-                         </ul>
                          <li><b>VIA ALFAMART</b></li>
                          <ul class="mb-4">
                           <li>Pergi ke Alfamart terdekat dan sampaikan pada kasir bahwa anda ingin melalukan pembayaran Midtrans.</li>
@@ -79,38 +61,8 @@
 
                          <li><b>VIA BANK TRANSFER</b></li>
                          <ul style="list-style-type: upper-alpha">
-                          <li>BCA</li>
                             <ul style="list-style-type: upper-roman">
-                              <li>ATM BCA</li>
-                              <ul>
-                                <li>Pilih transaksi lainnya pada menu utama.</li>
-                                <li>Pilih transfer.</li>
-                                <li>Pilih ke rekening BCA Virtual Account.</li>
-                                <li>Masukkan nomor BCA virtual account.</li>
-                                <li> Masukkan jumlah yang akan dibayar, lalu konfirmasi.</li>
-                                <li> Pembayaran selesai.</li>
-                              </ul>
-                              <li>Klik BCA</li>
-                              <ul>
-                                <li>Pilih Transfer Dana. </li>
-                                  <li>Pilih Transfer ke BCA Virtual Account.</li>
-                                  <li> Masukkan nomor BCA Virtual Account.</li>
-                                  <li>Masukkan jumlah yang akan dibayar.</li>
-                                  <li>Konfirmasi pembayaran.</li>
-                                  <li>Pembayaran selesai.</li>
-                              </ul>
-                              <li>m-BCA</li>
-                              <ul>
-                                <li>Pilih m-Transfer.</li>
-                                <li>Pilih BCA Virtual Account.</li>
-                                <li>Masukkan nomor BCA Virtual Account.</li>
-                                <li>Masukkan jumlah yang akan dibayar.</li>
-                                <li>Konfirmasi pembayaran.</li>
-                                <li>Pembayaran selesai.</li>
-                              </ul>
-                            </ul>
-                            
-                            <li>MANDIRI</li>
+~                            <li>MANDIRI</li>
                             <ul style="list-style-type: upper-roman">
                             <li>ATM MANDIRI</li>
                           <ul>

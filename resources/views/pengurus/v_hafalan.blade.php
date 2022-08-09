@@ -29,7 +29,7 @@
                   <input required name="nis" type="text" class="form-control" placeholder="Masukkan NIS Santri">
                 </div>
                 <div class="mb-3">
-                  <label for="" class="form-label">Hafalan Surat</label>
+                  <label for="" class="form-label">Capaian Hafalan</label>
                   <select name="hafalan" class="form-select">
                     <option notselected>Pilih hafalan</option>
                     @foreach ($prestasi as $prestasi)
