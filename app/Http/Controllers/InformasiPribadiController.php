@@ -29,16 +29,16 @@ class InformasiPribadiController extends Controller
     public function store(Request $request)
     {
         $upload = $request->gambar;
-        $namaFile = time().rand(100,999).".".$upload->getClientOriginalExtension();
+        $namaFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
 
-            $dataUpload = new Informasi;
-            $dataUpload->penerima = $request->penerima;
-            $dataUpload->judul = $request->judul;
-            $dataUpload->gambar = $namaFile;
-            $dataUpload->deskripsi = $request->deskripsi;
+        $dataUpload = new Informasi;
+        $dataUpload->penerima = $request->penerima;
+        $dataUpload->judul = $request->judul;
+        $dataUpload->gambar = $namaFile;
+        $dataUpload->deskripsi = $request->deskripsi;
 
-            $upload->move(public_path().'/informasi', $namaFile);
-            $dataUpload->save();
+        $upload->move(public_path() . '/informasi', $namaFile);
+        $dataUpload->save();
 
         return redirect('data-informasi')->with('success', 'Upload content baru berhasil!');
     }
@@ -56,14 +56,15 @@ class InformasiPribadiController extends Controller
         return view('users.info_santri', [
             'informations' => $informations,
             'tampilContent' => $tampilContent,
-            'notif_tagihan'=>$notif_tagihan,
-            'notif_info'=>$notif_info,
-            'setting'=>$setting,
+            'notif_tagihan' => $notif_tagihan,
+            'notif_info' => $notif_info,
+            'setting' => $setting,
 
         ]);
     }
 
-    public function detail($id){
+    public function detail($id)
+    {
 
         $santri = Auth::user()->username;
         $waktu = Carbon::now();
@@ -74,9 +75,9 @@ class InformasiPribadiController extends Controller
         $informations = Informasi::findOrFail($id);
         return view('users.info_santri_detail', [
             'informations' => $informations,
-            'notif_tagihan'=>$notif_tagihan,
-            'notif_info'=>$notif_info,
-            'setting'=>$setting
+            'notif_tagihan' => $notif_tagihan,
+            'notif_info' => $notif_info,
+            'setting' => $setting
         ]);
     }
 
@@ -84,7 +85,8 @@ class InformasiPribadiController extends Controller
     {
         $informasi = Informasi::findOrFail($id);
         return view('pengurus.edit_informasi')->with([
-            'uploads' => $informasi]);
+            'uploads' => $informasi
+        ]);
     }
 
     public function update(Request $request, $id)
@@ -92,13 +94,13 @@ class InformasiPribadiController extends Controller
         $image_lama = $request->old_image;
         $image_baru = $request->file('gambar');
 
-        if($image_baru == '') {
+        if ($image_baru == '') {
             $gambar = $image_lama;
             $deskripsi = "Gambar Lama";
         } else {
-            $new_image = rand() .'.'. $image_baru->getClientOriginalExtension();
+            $new_image = rand() . '.' . $image_baru->getClientOriginalExtension();
             $gambar = $new_image;
-            $image_baru->move(public_path('informasi'), $new_image); 
+            $image_baru->move(public_path('informasi'), $new_image);
         }
 
         $informasi = Informasi::findOrFail($id);
@@ -109,7 +111,7 @@ class InformasiPribadiController extends Controller
             'gambar' => $gambar,
             'deskripsi' => $request->deskripsi,
         ));
-            
+
         return redirect('data-informasi');
     }
 

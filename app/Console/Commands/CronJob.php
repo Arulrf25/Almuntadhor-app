@@ -54,7 +54,7 @@ class CronJob extends Command
                     'tagihan' =>'Syariah'.' '. $waktu->isoFormat('MMMM Y'),
                     'bulan' => $waktu->isoFormat('MMMM'),
                     'tahun' => $waktu->isoFormat('Y'),
-                    'nominal' => '350000',
+                    'nominal' => Setting::findOrFail(1)->first()->nominal_syariyyah,
                     'keterangan' => 'Belum Lunas',
                     'status' =>'aktif',
                 ]);

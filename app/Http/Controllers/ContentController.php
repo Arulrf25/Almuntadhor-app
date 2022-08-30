@@ -43,17 +43,17 @@ class ContentController extends Controller
     public function store(Request $request)
     {
         $upload = $request->gambar;
-        $namaFile = time().rand(100,999).".".$upload->getClientOriginalExtension();
+        $namaFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
 
-            $dataUpload = new Content;
-            $dataUpload->content_id = $request->content_id;
-            $dataUpload->judul = $request->judul;
-            $dataUpload->kategori = $request->kategori;
-            $dataUpload->gambar = $namaFile;
-            $dataUpload->deskripsi = $request->deskripsi;
+        $dataUpload = new Content;
+        $dataUpload->content_id = $request->content_id;
+        $dataUpload->judul = $request->judul;
+        $dataUpload->kategori = $request->kategori;
+        $dataUpload->gambar = $namaFile;
+        $dataUpload->deskripsi = $request->deskripsi;
 
-            $upload->move(public_path().'/content', $namaFile);
-            $dataUpload->save();
+        $upload->move(public_path() . '/content', $namaFile);
+        $dataUpload->save();
 
         return redirect('data-content')->with('success', 'Upload content baru berhasil!');
     }
@@ -95,13 +95,13 @@ class ContentController extends Controller
         $image_lama = $request->old_image;
         $image_baru = $request->file('gambar');
 
-        if($image_baru == '') {
+        if ($image_baru == '') {
             $gambar = $image_lama;
             $deskripsi = "Gambar Lama";
         } else {
-            $new_image = rand() .'.'. $image_baru->getClientOriginalExtension();
+            $new_image = rand() . '.' . $image_baru->getClientOriginalExtension();
             $gambar = $new_image;
-            $image_baru->move(public_path('content'), $new_image); 
+            $image_baru->move(public_path('content'), $new_image);
         }
 
         $content = Content::findOrFail($id);
@@ -112,7 +112,7 @@ class ContentController extends Controller
             'gambar' => $gambar,
             'deskripsi' => $request->deskripsi,
         ));
-            
+
         return redirect('data-content');
     }
 

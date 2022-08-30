@@ -16,13 +16,14 @@ class CreateDataNilaiTable extends Migration
         Schema::create('data_nilai', function (Blueprint $table) {
             $table->id();
             $table->String('nis');
+            $table->String('nama');
             $table->String('pelajaran');
             $table->String('kelas');
             $table->String('tahun_ajar');
-            $table->integer('kehadiran')->nullable();
-            $table->integer('tugas')->nullable();
-            $table->integer('uts')->nullable();
-            $table->integer('uas')->nullable();
+            $table->floatval('kehadiran')->nullable();
+            $table->floatval('tugas')->nullable();
+            $table->floatval('uts')->nullable();
+            $table->floatval('uas')->nullable();
             $table->timestamps();
         });
     }

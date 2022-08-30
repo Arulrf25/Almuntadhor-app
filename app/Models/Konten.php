@@ -9,6 +9,6 @@ class Konten extends Model
 {
     use HasFactory;
 
-    protected $table= 'data_konten';
+    protected $table = 'data_konten';
     protected $fillable = ['judul', 'kategori', 'gambar', 'deskripsi', 'created_at', 'updated_at'];
 }

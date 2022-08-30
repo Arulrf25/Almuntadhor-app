@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\File;
 class GaleriController extends Controller
 {
     public function galeri()
-    {   
+    {
         $santri = Auth::user()->username;
         $galeri = Konten::where('kategori', 'galeri')->paginate(5);
-       
+
         return view('admin.v_galeri', [
-            'galeri' => $galeri, 
+            'galeri' => $galeri,
             'title' => 'Data Konten',
 
         ]);
@@ -29,31 +29,31 @@ class GaleriController extends Controller
     public function store(Request $request)
     {
         $upload = $request->gambar;
-        $namaFile = time().rand(100,999).".".$upload->getClientOriginalExtension();
-        
-           
-            if ($upload == "") {
-                $gambar = "null";
-                $dataUpload = new Konten;
-                $dataUpload->judul = $request->judul;
-                $dataUpload->kategori = $request->kategori;
-                $dataUpload->gambar = $gambar;
-                $dataUpload->deskripsi = $request->deskripsi;
-                $dataUpload->save();
-            } else {
-               $gambar = $namaFile;
-               $dataUpload = new Konten;
-                $dataUpload->judul = $request->judul;
-                $dataUpload->kategori = $request->kategori;
-                $dataUpload->gambar = $gambar;
-                $dataUpload->deskripsi = $request->deskripsi;
-                $upload->move(public_path().'/content', $namaFile);
-                $dataUpload->save();
-            }
-            
-          
-           
-            
+        $namaFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+
+
+        if ($upload == "") {
+            $gambar = "null";
+            $dataUpload = new Konten;
+            $dataUpload->judul = $request->judul;
+            $dataUpload->kategori = $request->kategori;
+            $dataUpload->gambar = $gambar;
+            $dataUpload->deskripsi = $request->deskripsi;
+            $dataUpload->save();
+        } else {
+            $gambar = $namaFile;
+            $dataUpload = new Konten;
+            $dataUpload->judul = $request->judul;
+            $dataUpload->kategori = $request->kategori;
+            $dataUpload->gambar = $gambar;
+            $dataUpload->deskripsi = $request->deskripsi;
+            $upload->move(public_path() . '/content', $namaFile);
+            $dataUpload->save();
+        }
+
+
+
+
 
         return redirect('data-galeri')->with('success', 'Upload galeri baru berhasil!');
     }
@@ -67,12 +67,12 @@ class GaleriController extends Controller
         ]);
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         $image_lama = $request->old_image;
         $image_baru = $request->file('gambar');
 
-        if($image_baru == '') {
+        if ($image_baru == '') {
             $gambar = $image_lama;
             $deskripsi = "Gambar Lama";
             $content = Konten::findOrFail($id);
@@ -83,9 +83,9 @@ class GaleriController extends Controller
                 'deskripsi' => $request->deskripsi,
             ));
         } else {
-            $new_image = rand() .'.'. $image_baru->getClientOriginalExtension();
+            $new_image = rand() . '.' . $image_baru->getClientOriginalExtension();
             $gambar = $new_image;
-            $image_baru->move(public_path('content'), $new_image); 
+            $image_baru->move(public_path('content'), $new_image);
             $content = Konten::findOrFail($id);
             $content->update(array(
                 'judul' => $request->judul,
@@ -93,7 +93,7 @@ class GaleriController extends Controller
                 'gambar' => $gambar,
                 'deskripsi' => $request->deskripsi,
             ));
-            File::delete('content/'.$request->old_image);
+            File::delete('content/' . $request->old_image);
         }
         return redirect('data-galeri');
     }

@@ -16,7 +16,7 @@ class ProfilController extends Controller
     public function tampilAdmin()
     {
         $user = User::where('id', Auth::user()->id)->first();
-        
+
         return view('admin.account', [
             "title" => "Profil", 'user' => $user
         ]);
@@ -47,12 +47,12 @@ class ProfilController extends Controller
         $image_lama = $request->old_image;
         $image_baru = $request->file('foto');
 
-        if($image_baru == '') {
+        if ($image_baru == '') {
             $gambar = $image_lama;
         } else {
-            $new_image = rand() .'.'. $image_baru->getClientOriginalExtension();
+            $new_image = rand() . '.' . $image_baru->getClientOriginalExtension();
             $gambar = $new_image;
-            $image_baru->move(public_path('profil'), $new_image); 
+            $image_baru->move(public_path('profil'), $new_image);
         }
 
         $updateProfil = User::findOrFail($id);
@@ -67,7 +67,7 @@ class ProfilController extends Controller
             'alamat' => $request->alamat,
             'no_hp' => $request->no_hp,
         ));
-            
+
         return redirect('akun-saya');
     }
 
@@ -80,27 +80,27 @@ class ProfilController extends Controller
         $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $santri)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
         $notif_info = Informasi::where('penerima', $santri)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
         $tampilContent = Konten::where('kategori', 'Dashboard')->get();
-        
+
         return view('users.account', [
             'accounts' => $user,
             'tampilContent' => $tampilContent,
-            'notif_tagihan'=>$notif_tagihan,
-            'notif_info'=>$notif_info,
-            'setting'=>$setting,
+            'notif_tagihan' => $notif_tagihan,
+            'notif_info' => $notif_info,
+            'setting' => $setting,
         ]);
     }
 
-    public function updateUser(Request $request, $id) 
+    public function updateUser(Request $request, $id)
     {
         $image_lama = $request->old_image;
         $image_baru = $request->file('foto');
 
-        if($image_baru == '') {
+        if ($image_baru == '') {
             $gambar = $image_lama;
         } else {
-            $new_image = rand() .'.'. $image_baru->getClientOriginalExtension();
+            $new_image = rand() . '.' . $image_baru->getClientOriginalExtension();
             $gambar = $new_image;
-            $image_baru->move(public_path('profil'), $new_image); 
+            $image_baru->move(public_path('profil'), $new_image);
         }
 
         $updateProfil = User::findOrFail($id);
@@ -118,20 +118,21 @@ class ProfilController extends Controller
             'nama_ibu' => $request->nama_ibu,
             'no_hp' => $request->no_hp,
         ));
-            
+
         return redirect('profil-user');
     }
 
     public function homeUser()
-    {   $santri = Auth::user()->username;
+    {
+        $santri = Auth::user()->username;
         $waktu = Carbon::now();
         $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $santri)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
         $notif_info = Informasi::where('penerima', $santri)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
         $tampilContent = Konten::where('kategori', 'Dashboard')->get();
         return view('users.dashboard', [
             'tampilContent' => $tampilContent,
-            'notif_tagihan'=>$notif_tagihan,
-            'notif_info'=>$notif_info,
+            'notif_tagihan' => $notif_tagihan,
+            'notif_info' => $notif_info,
         ]);
     }
 }

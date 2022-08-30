@@ -22,7 +22,7 @@
                                         <label for="" class="form-label">Judul Gambar</label>
                                         <input required name="judul" type="text" class="form-control" placeholder="Masukkan judul gambar">
                                     </div>
-                                   <input type="text" name="kategori" value="galeri" hidden>
+                                    <input type="text" name="kategori" value="galeri" hidden>
                                     <div class="mb-3">
                                         <label for="" class="form-label">Gambar/File</label>
                                         <input name="gambar" id="gambar" type="file" class="form-control">
@@ -32,11 +32,11 @@
                                         <textarea required name="deskripsi" class="form-control" placeholder="Tambahkan deskripsi"></textarea>
                                     </div>
                             </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Simpan</button>
-                                    </div>
-                                </form>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Simpan</button>
+                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                     <div class="card">
                         <div class="card-body">
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <i class="fas fa-plus-circle"></i> Tambah Galeri</button>
+                                <i class="fas fa-plus-circle"></i> Tambah Galeri</button>
                             <div class="table-responsive">
                                 <table class="table table-stiped table-hover">
                                     <thead>
@@ -66,13 +66,11 @@
                                             <td> <img src="{{ asset('/content/'. $g->gambar) }}" alt="" width="20%"> {{ $g->gambar }}</td>
                                             <td>{{ $g->deskripsi }}</td>
                                             <td class="text-center">
-                                                <a href="{{ asset('/content/'. $g->gambar) }}" 
-                                                    class="btn btn-warning"><i class="fas fa-download"></i></a>
-                                                <a href="{{route('data-galeri.edit', $g->id)}}" 
-                                                    class="btn btn-primary fas fa-edit"></a>
+                                                <a href="{{ asset('/content/'. $g->gambar) }}" class="btn btn-warning"><i class="fas fa-download"></i></a>
+                                                <a href="{{route('data-galeri.edit', $g->id)}}" class="btn btn-primary fas fa-edit"></a>
                                                 <form action="{{route('data-galeri.destroy', $g->id)}}" method="POST">
-                                                   
-                                                    @csrf    
+
+                                                    @csrf
                                                     @method('delete')
                                                     <button type="submit" class="btn btn-danger fas fa-trash-alt"></button>
                                                 </form>
@@ -84,7 +82,7 @@
                             </div>
                         </div>
                         <div class="page-bottom" style="margin: 20px">
-                            <br/>
+                            <br />
                             <!-- pagination -->
                             Current Page: {{ $galeri->currentPage() }}<br>
                             Jumlah Data: {{ $galeri->total() }}<br>
@@ -99,4 +97,3 @@
         </div>
     </div>
 </div>
-        

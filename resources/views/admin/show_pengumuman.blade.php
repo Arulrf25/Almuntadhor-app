@@ -10,14 +10,14 @@
                     <h4>Detail Pengumuman</h4>
                     <div class="card">
                         <div class="card-body">
-                               <h5>{{ $pengumuman->judul }}</h5>
-                               <p>{{ $pengumuman->deskripsi }}</p>
-                               @if (substr($pengumuman->gambar, -3) == "jpg" or substr($pengumuman->gambar, -3) == "png" or substr($pengumuman->gambar, -3) == "jpeg")
-                                   <img src="{{ asset('/content/'. $pengumuman->gambar) }}" alt="">
-                               @else
-                                <a href="{{ asset('/content/'. $pengumuman->gambar) }}" class="btn btn-info"><i class="fas fa-download"></i> Download file pdf</a>
-                               @endif
-                               
+                            <h5>{{ $pengumuman->judul }}</h5>
+                            <p>{{ $pengumuman->deskripsi }}</p>
+                            @if (substr($pengumuman->gambar, -3) == "jpg" or substr($pengumuman->gambar, -3) == "png" or substr($pengumuman->gambar, -3) == "jpeg")
+                            <img src="{{ asset('/content/'. $pengumuman->gambar) }}" alt="">
+                            @else
+                            <a href="{{ asset('/content/'. $pengumuman->gambar) }}" class="btn btn-info"><i class="fas fa-download"></i> Download file pdf</a>
+                            @endif
+
                         </div>
                     </div>
                 </div>

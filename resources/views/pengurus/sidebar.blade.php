@@ -24,33 +24,33 @@
         </li>
       </ul>
     </li>
-     
+
     @endif
     @if (auth()->user()->level == "pendidik")
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="santri">
-          <i class="fas fa-user"></i><span>Data Santri</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/data-nilai">
-          <i class="bi bi-journal-text"></i><span>Nilai Santri</span>
-        </a>
-      </li>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="santri">
+        <i class="fas fa-user"></i><span>Data Santri</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="/data-nilai">
+        <i class="bi bi-journal-text"></i><span>Nilai Santri</span>
+      </a>
+    </li>
     @endif
     @if (auth()->user()->level == "pengurus")
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/data-hafalan">
-          <i class="bi bi-menu-button-wide"></i><span>Data Hafalan</span>
-        </a>
-      </li>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="/data-hafalan">
+        <i class="bi bi-menu-button-wide"></i><span>Data Hafalan</span>
+      </a>
+    </li>
     @endif
     @if (auth()->user()->level == "pengurus")
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/data-informasi">
-          <i class="fas fa-bullhorn"></i><span>Informasi Pribadi</span>
-        </a>
-      </li>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="/data-informasi">
+        <i class="fas fa-bullhorn"></i><span>Informasi Pribadi</span>
+      </a>
+    </li>
     @endif
     <li class="nav-heading">Fitur Lainnya</li>
     <li class="nav-item">

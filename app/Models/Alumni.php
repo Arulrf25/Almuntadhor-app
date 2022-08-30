@@ -9,6 +9,6 @@ class Alumni extends Model
 {
     use HasFactory;
 
-    protected $table= 'data_alumni';
+    protected $table = 'data_alumni';
     protected $fillable = ['nama', 'angkatan', 'alamat', 'no_hp', 'created_at', 'updated_at'];
 }

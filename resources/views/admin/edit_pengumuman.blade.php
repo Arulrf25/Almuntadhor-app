@@ -18,7 +18,7 @@
                                     <input name="judul" value="{{$pengumuman->judul}}" type="text" class="form-control">
                                 </div>
 
-                                    <input name="kategori" value="{{$pengumuman->kategori}}" type="text" class="form-control" hidden>
+                                <input name="kategori" value="{{$pengumuman->kategori}}" type="text" class="form-control" hidden>
                                 <div class="mb-3">
                                     <label for="gambar" class="form-label">Gambar/File</label>
                                     <div class="row">
@@ -26,12 +26,12 @@
                                             <input readonly type="text" class="form-control mt-3" name="old_image" value="{{ $pengumuman->gambar }}">
                                         </div>
                                         <div class="col">
-                                            <input  name="gambar" id="new_gambar" type="file" class="form-control-file" style="z-index: 1; margin-right:-105px ; margin-top:20px;"> 
+                                            <input name="gambar" id="new_gambar" type="file" class="form-control-file" style="z-index: 1; margin-right:-105px ; margin-top:20px;">
                                             <label for="new_gambar" class="btn btn-info mt-3" style="z-index: 2; margin-left:-315px ;margin-bottom:20px;"><i class="fas fa-upload"></i> Ganti gambar/file</label>
                                         </div>
                                     </div>
-                                    
-                                   
+
+
                                 </div>
                                 <div class="mb-3">
                                     <label for="" class="form-label">Deskripsi</label>

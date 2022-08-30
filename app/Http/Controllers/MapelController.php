@@ -46,7 +46,6 @@ class MapelController extends Controller
         Mapel::create($dataMapel);
 
         return redirect()->route('data-mapel');
-
     }
 
     /**

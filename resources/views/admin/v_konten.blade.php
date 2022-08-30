@@ -25,10 +25,10 @@
                                     <div class="mb-3">
                                         <label for="" class="form-label">Kategori Content</label>
                                         <select name="kategori" class="form-select" aria-label="Default select example">
-                                        <option hidden selected>Pilih kategori</option>
-                                        <option value="Dashboard">Dashboard</option>
-                                        <option value="Gallery">Gallery</option>
-                                        <option value="Informasi">Information</option>
+                                            <option hidden selected>Pilih kategori</option>
+                                            <option value="Dashboard">Dashboard</option>
+                                            <option value="Gallery">Gallery</option>
+                                            <option value="Informasi">Information</option>
                                         </select>
                                     </div>
                                     <div class="mb-3">
@@ -40,11 +40,11 @@
                                         <textarea required name="deskripsi" type="text" class="form-control" placeholder="Tambahkan deskripsi"></textarea>
                                     </div>
                             </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Simpan</button>
-                                    </div>
-                                </form>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Simpan</button>
+                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                     <div class="card">
                         <div class="card-body">
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <i class="fas fa-plus-circle"></i> Tambah Data</button>
+                                <i class="fas fa-plus-circle"></i> Tambah Data</button>
                             <div class="table-responsive">
                                 <table class="table table-stiped table-hover">
                                     <thead>
@@ -77,11 +77,9 @@
                                             <td>{{ $upload->deskripsi }}</td>
                                             <td class="text-center">
                                                 <form action="{{route('data-konten.destroy', $upload->id)}}" method="POST">
-                                                    <a href="{{ asset('/content/'. $upload->gambar) }}" 
-                                                        class="btn btn-warning fas fa-eye"></a>
-                                                    <a href="{{route('data-konten.edit', $upload->id)}}" 
-                                                        class="btn btn-primary fas fa-edit"></a>
-                                                    @csrf    
+                                                    <a href="{{ asset('/content/'. $upload->gambar) }}" class="btn btn-warning fas fa-eye"></a>
+                                                    <a href="{{route('data-konten.edit', $upload->id)}}" class="btn btn-primary fas fa-edit"></a>
+                                                    @csrf
                                                     @method('delete')
                                                     <button type="submit" class="btn btn-danger fas fa-trash-alt"></button>
                                                 </form>
@@ -93,7 +91,7 @@
                             </div>
                         </div>
                         <div class="page-bottom" style="margin: 20px">
-                            <br/>
+                            <br />
                             <!-- pagination -->
                             Current Page: {{ $uploads->currentPage() }}<br>
                             Jumlah Data: {{ $uploads->total() }}<br>
@@ -108,4 +106,3 @@
         </div>
     </div>
 </div>
-        

@@ -39,13 +39,13 @@ class UploadController extends Controller
         $image_lama = $request->old_image;
         $image_baru = $request->file('bukti');
 
-        if($image_baru == null) {
+        if ($image_baru == null) {
             $gambar = $image_lama;
             $deskripsi = "Gambar Lama";
         } else {
-            $new_image = rand() .'.'. $image_baru->getClientOriginalExtension();
+            $new_image = rand() . '.' . $image_baru->getClientOriginalExtension();
             $gambar = $new_image;
-            $image_baru->move(public_path('img'), $new_image); 
+            $image_baru->move(public_path('img'), $new_image);
         }
 
         $uploadBukti = Pembayaran::findOrFail($id);
@@ -57,7 +57,7 @@ class UploadController extends Controller
             'bukti' => $gambar,
             'keterangan' => $request->keterangan,
         ));
-            
+
         return redirect('tagihan');
     }
 

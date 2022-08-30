@@ -92,18 +92,18 @@ class JadwalKegiatanController extends Controller
         $setting = Setting::findOrFail(1);
 
         return view('users.jadwal', [
-            'ahad' => $ahad, 
-            'senin' => $senin, 
-            'selasa' => $selasa, 
-            'rabu' => $rabu, 
-            'kamis' => $kamis, 
-            'jumat' => $jumat, 
+            'ahad' => $ahad,
+            'senin' => $senin,
+            'selasa' => $selasa,
+            'rabu' => $rabu,
+            'kamis' => $kamis,
+            'jumat' => $jumat,
             'sabtu' => $sabtu,
 
             'tampilContent' => $tampilContent,
-            'notif_tagihan'=>$notif_tagihan,
-            'notif_info'=>$notif_info,
-            'setting'=>$setting,
+            'notif_tagihan' => $notif_tagihan,
+            'notif_info' => $notif_info,
+            'setting' => $setting,
         ]);
     }
 }

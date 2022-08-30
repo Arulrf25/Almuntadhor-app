@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pembayaran extends Model
 {
-    protected $table= 'data_pembayaran';
+    protected $table = 'data_pembayaran';
     protected $guarded = [];
 
     public function user()

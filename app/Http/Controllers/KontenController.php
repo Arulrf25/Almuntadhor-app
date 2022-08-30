@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\File;
 class KontenController extends Controller
 {
     public function index()
-    {   
+    {
         $santri = Auth::user()->username;
         $content = Konten::latest()->paginate(5);
-       
+
         return view('admin.v_konten', [
-            'uploads' => $content, 
+            'uploads' => $content,
             'title' => 'Data Konten',
 
         ]);
@@ -32,16 +32,16 @@ class KontenController extends Controller
     public function store(Request $request)
     {
         $upload = $request->gambar;
-        $namaFile = time().rand(100,999).".".$upload->getClientOriginalExtension();
+        $namaFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
 
-            $dataUpload = new Konten;
-            $dataUpload->judul = $request->judul;
-            $dataUpload->kategori = $request->kategori;
-            $dataUpload->gambar = $namaFile;
-            $dataUpload->deskripsi = $request->deskripsi;
+        $dataUpload = new Konten;
+        $dataUpload->judul = $request->judul;
+        $dataUpload->kategori = $request->kategori;
+        $dataUpload->gambar = $namaFile;
+        $dataUpload->deskripsi = $request->deskripsi;
 
-            $upload->move(public_path().'/content', $namaFile);
-            $dataUpload->save();
+        $upload->move(public_path() . '/content', $namaFile);
+        $dataUpload->save();
 
         return redirect('data-konten')->with('success', 'Upload content baru berhasil!');
     }
@@ -64,13 +64,13 @@ class KontenController extends Controller
         $image_lama = $request->old_image;
         $image_baru = $request->file('gambar');
 
-        if($image_baru == '') {
+        if ($image_baru == '') {
             $gambar = $image_lama;
             $deskripsi = "Gambar Lama";
         } else {
-            $new_image = rand() .'.'. $image_baru->getClientOriginalExtension();
+            $new_image = rand() . '.' . $image_baru->getClientOriginalExtension();
             $gambar = $new_image;
-            $image_baru->move(public_path('content'), $new_image); 
+            $image_baru->move(public_path('content'), $new_image);
         }
 
         $content = Konten::findOrFail($id);
@@ -80,7 +80,7 @@ class KontenController extends Controller
             'gambar' => $gambar,
             'deskripsi' => $request->deskripsi,
         ));
-            
+
         return redirect('data-konten');
     }
 
@@ -113,15 +113,16 @@ class KontenController extends Controller
     }
 
     public function homeUser()
-    {   $santri = Auth::user()->username;
+    {
+        $santri = Auth::user()->username;
         $waktu = Carbon::now();
         $notif_tagihan = Tagihan::where('status', 'aktif')->where('nis', $santri)->where('tahun', Carbon::now()->year)->where('bulan', $waktu->isoFormat('MMMM'))->paginate(1);
         $notif_info = Informasi::where('penerima', $santri)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
         $tampilContent = Konten::where('kategori', 'Dashboard')->get();
         return view('users.dashboard', [
             'tampilContent' => $tampilContent,
-            'notif_tagihan'=>$notif_tagihan,
-            'notif_info'=>$notif_info,
+            'notif_tagihan' => $notif_tagihan,
+            'notif_info' => $notif_info,
         ]);
     }
 

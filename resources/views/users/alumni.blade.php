@@ -16,34 +16,33 @@
       </h3>
     </div>
     <div class="card">
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-hover">
-              <thead>
-                <th scope="col">NO</th>
-                <th scope="col">NAMA LENGKAP</th>
-                <th scope="col">ALAMAT</th>
-              </thead>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <th scope="col">NO</th>
+              <th scope="col">NAMA LENGKAP</th>
+              <th scope="col">ALAMAT</th>
+            </thead>
 
-              <tbody>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tbody>
-            </table>
-          </div>
-    </div>
-        </div>
-  </div>
-  </div>
-  </div>
-  </div>
-          <!-- selesai content -->
-          <!-- Footer -->
-          @include('partials.footer')
-  
-
-
+            <tbody>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tbody>
+          </table>
         </div>
       </div>
-   
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<!-- selesai content -->
+<!-- Footer -->
+@include('partials.footer')
+
+
+
+</div>
+</div>

@@ -16,13 +16,13 @@ class SantriController extends Controller
             'datas' => $data_santri
         ]);
     }
-    
-    public function countData() 
+
+    public function countData()
     {
         $santri = DB::table('users')->where('level', '=', 'santri')->count();
         $guru = DB::table('users')->where('level', '=', 'pendidik')->count();
         $pembayaran = DB::table('data_pembayaran')->where('status', '=', 'settlement')->count();
 
-        return view('pengurus.v_dashboard', ['santri'=>$santri, 'guru'=>$guru, 'pembayaran'=>$pembayaran]);
+        return view('pengurus.v_dashboard', ['santri' => $santri, 'guru' => $guru, 'pembayaran' => $pembayaran]);
     }
 }

@@ -22,7 +22,7 @@
                                         <label for="" class="form-label">Judul Pengumuman</label>
                                         <input required name="judul" type="text" class="form-control" placeholder="Masukkan judul pengumuman">
                                     </div>
-                                   <input type="text" name="kategori" value="pengumuman" hidden>
+                                    <input type="text" name="kategori" value="pengumuman" hidden>
                                     <div class="mb-3">
                                         <label for="" class="form-label">Gambar/File</label>
                                         <input name="gambar" id="gambar" type="file" class="form-control">
@@ -32,11 +32,11 @@
                                         <textarea required name="deskripsi" class="form-control" rows="10" placeholder="Tambahkan deskripsi"></textarea>
                                     </div>
                             </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Simpan</button>
-                                    </div>
-                                </form>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Simpan</button>
+                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                     <div class="card">
                         <div class="card-body">
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <i class="fas fa-plus-circle"></i> Tambah Pengumuman</button>
+                                <i class="fas fa-plus-circle"></i> Tambah Pengumuman</button>
                             <div class="table-responsive">
                                 <table class="table table-stiped table-hover">
                                     <thead>
@@ -67,11 +67,9 @@
                                             <td>{{ $p->deskripsi }}</td>
                                             <td class="text-center">
                                                 <form action="{{route('data-pengumuman.destroy', $p->id)}}" method="POST">
-                                                    <a href="{{route('data-pengumuman.show', $p->id)}}" 
-                                                        class="btn btn-warning fas fa-eye"></a>
-                                                    <a href="{{route('data-pengumuman.edit', $p->id)}}" 
-                                                        class="btn btn-primary fas fa-edit"></a>
-                                                    @csrf    
+                                                    <a href="{{route('data-pengumuman.show', $p->id)}}" class="btn btn-warning fas fa-eye"></a>
+                                                    <a href="{{route('data-pengumuman.edit', $p->id)}}" class="btn btn-primary fas fa-edit"></a>
+                                                    @csrf
                                                     @method('delete')
                                                     <button type="submit" class="btn btn-danger fas fa-trash-alt"></button>
                                                 </form>
@@ -83,7 +81,7 @@
                             </div>
                         </div>
                         <div class="page-bottom" style="margin: 20px">
-                            <br/>
+                            <br />
                             <!-- pagination -->
                             Current Page: {{ $pengumuman->currentPage() }}<br>
                             Jumlah Data: {{ $pengumuman->total() }}<br>
@@ -98,4 +96,3 @@
         </div>
     </div>
 </div>
-        

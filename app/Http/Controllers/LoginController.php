@@ -8,13 +8,13 @@ use App\Http\Requests\ChangePasswordRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Session;
+
 class LoginController extends Controller
 {
     public function postlogin(Request $request)
     {
-        
-        if(Auth::attempt($request->only('username','password')))
-        {
+
+        if (Auth::attempt($request->only('username', 'password'))) {
             if (Auth::user()->level == 'admin') {
                 return redirect('/dashboard-admin');
             } elseif (Auth::user()->level == 'pengurus') {
@@ -31,18 +31,17 @@ class LoginController extends Controller
 
     public function index()
     {
-        if (Auth::check()) 
-        {
+        if (Auth::check()) {
             if (Auth::user()->level == 'admin') {
-                    return redirect('/dashboard-admin');
-                } elseif (Auth::user()->level == 'pengurus') {
-                    return redirect('/dashboard-pengurus');
-                } elseif (Auth::user()->level == 'pendidik') {
-                    return redirect('/dashboard-pengurus');
-                } else {
-                    return redirect('/dashboard');
-                }
+                return redirect('/dashboard-admin');
+            } elseif (Auth::user()->level == 'pengurus') {
+                return redirect('/dashboard-pengurus');
+            } elseif (Auth::user()->level == 'pendidik') {
+                return redirect('/dashboard-pengurus');
+            } else {
+                return redirect('/dashboard');
             }
+        }
         return view('login');
     }
 

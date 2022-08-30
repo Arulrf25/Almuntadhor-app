@@ -87,23 +87,24 @@ class HafalanController extends Controller
         $notif_info = Informasi::where('penerima', $santri)->where('created_at', '>', date('Y-m-d', strtotime("-3 days")))->latest()->paginate(1);
         $tampilContent = Konten::where('kategori', 'Dashboard')->get();
         $setting = Setting::findOrFail(1);
-        
+
         return view('users.hafalan', [
             'riwayatHafalan' => $riwayatHafalan,
             'prestasi' => $prestasi,
             'tampilContent' => $tampilContent,
-            'notif_tagihan'=>$notif_tagihan,
-            'notif_info'=>$notif_info,
-            'setting'=>$setting,
+            'notif_tagihan' => $notif_tagihan,
+            'notif_info' => $notif_info,
+            'setting' => $setting,
         ]);
     }
 
-    public function cetak(){
+    public function cetak()
+    {
 
         $santri = Auth::user()->username;
         $data = Hafalan::where('nis', $santri)->get();
         $tanggal = Carbon::now();
-        $pdf = PDF::loadview('users.cetak_capaian', ['data' => $data, 'tanggal'=>$tanggal, 'title'=>'Capaian Santri']);
+        $pdf = PDF::loadview('users.cetak_capaian', ['data' => $data, 'tanggal' => $tanggal, 'title' => 'Capaian Santri']);
         $pdf->setPaper('A4', 'potrait');
         return $pdf->download('Capaian Santri.pdf');
     }

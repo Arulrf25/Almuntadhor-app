@@ -1,24 +1,24 @@
 @extends('pengurus.main')
-  <!-- container -->
-  @section('pengurus')
-  <!-- Navbar -->
-  @include('pengurus.navbar')
-  <!-- Sidebar -->
-  @include('pengurus.sidebar')
-  <!-- Content Wrapper. Contains page content -->
-  <main id="main" class="main">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Profile</h1>
-          </div>
+<!-- container -->
+@section('pengurus')
+<!-- Navbar -->
+@include('pengurus.navbar')
+<!-- Sidebar -->
+@include('pengurus.sidebar')
+<!-- Content Wrapper. Contains page content -->
+<main id="main" class="main">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Profile</h1>
         </div>
-      </div><!-- /.container-fluid -->
-    </section>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
 
-<section class="section profile">
+  <section class="section profile">
     <div class="row">
       <div class="col-xl-4">
         <div class="card">
@@ -55,7 +55,7 @@
             <div class="tab-content pt-2">
 
               <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                
+
 
                 <h5 class="card-title">Profile</h5>
 
@@ -75,9 +75,9 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8">{{ auth()->user()->email }}</div>
-                  </div>
+                  <div class="col-lg-3 col-md-4 label">Email</div>
+                  <div class="col-lg-9 col-md-8">{{ auth()->user()->email }}</div>
+                </div>
 
               </div>
 

@@ -11,7 +11,7 @@
     <div class="page-header">
       <h3 class="page-title">
         <span class="page-title-icon bg-gradient-success text-white me-2">
-            <a href="{{ URL::previous() }}" style="color:white"><i class="fas fa-arrow-circle-left"></i></a>
+          <a href="{{ URL::previous() }}" style="color:white"><i class="fas fa-arrow-circle-left"></i></a>
         </span> Akun Saya
       </h3>
     </div>
@@ -38,37 +38,37 @@
           <div class="tab-content pt-2">
 
             <div class="tab-pane fade show active profile-overview" id="profile-overview">
-              
-                <div class="card-body d-flex flex-column align-items-center">
-                  <img src="{{ URL::to('/')}}/profil/{{ $accounts->foto }}" alt="Profile" class="rounded" width="200px">
-                  <h4>{{ auth()->user()->name }}</h4>
-                  <h5>{{ auth()->user()->username }}</h5>
-                </div>
+
+              <div class="card-body d-flex flex-column align-items-center">
+                <img src="{{ URL::to('/')}}/profil/{{ $accounts->foto }}" alt="Profile" class="rounded" width="200px">
+                <h4>{{ auth()->user()->name }}</h4>
+                <h5>{{ auth()->user()->username }}</h5>
+              </div>
 
               <h5 class="card-title">Profile</h5>
 
               <ul class="list-group list-group-flush">
-                <li class="list-group-item"><b>Nomor Induk Santri</b> <br/>{{ auth()->user()->username }}</li>
-                <li class="list-group-item"><b>Nama Lengkap</b> <br/>{{ auth()->user()->name }}</li>
-                <li class="list-group-item"><b>Tanggal Lahir</b> <br/>{{auth()->user()->tgl_lahir}}</li>
-                <li class="list-group-item"><b>Alamat</b> <br/>{{ auth()->user()->alamat }}</li>
-                <li class="list-group-item"><b>Angkatan</b> <br/>{{ auth()->user()->angkatan }}</li>
-                <li class="list-group-item"><b>Kelas</b> <br/>{{ auth()->user()->kelas }}</li>
+                <li class="list-group-item"><b>Nomor Induk Santri</b> <br />{{ auth()->user()->username }}</li>
+                <li class="list-group-item"><b>Nama Lengkap</b> <br />{{ auth()->user()->name }}</li>
+                <li class="list-group-item"><b>Tanggal Lahir</b> <br />{{auth()->user()->tgl_lahir}}</li>
+                <li class="list-group-item"><b>Alamat</b> <br />{{ auth()->user()->alamat }}</li>
+                <li class="list-group-item"><b>Angkatan</b> <br />{{ auth()->user()->angkatan }}</li>
+                <li class="list-group-item"><b>Kelas</b> <br />{{ auth()->user()->kelas }}</li>
               </ul>
-                <div class="mt-4">
+              <div class="mt-4">
                 <div class="card-title"> Wali/Orangtua</div>
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item"><b>Nama Ayah</b> <br/>{{ auth()->user()->nama_ayah }}</li>
-                  <li class="list-group-item"><b>Nama Ibu</b> <br/>{{ auth()->user()->nama_ibu }}</li>
-                  <li class="list-group-item"><b>No Handphone </b> <br/>{{ auth()->user()->no_hp }}</li>
+                  <li class="list-group-item"><b>Nama Ayah</b> <br />{{ auth()->user()->nama_ayah }}</li>
+                  <li class="list-group-item"><b>Nama Ibu</b> <br />{{ auth()->user()->nama_ibu }}</li>
+                  <li class="list-group-item"><b>No Handphone </b> <br />{{ auth()->user()->no_hp }}</li>
                 </ul>
-                </div>
-              
+              </div>
+
             </div>
             <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
               <!-- Profile Edit Form -->
-             
+
               <form action="{{ route('profil-user.update', $accounts->id) }}" method="POST" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
@@ -87,72 +87,71 @@
                 <div class="row mb-3">
                   <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nama Lengkap</label>
                   <div class="col-md-8 col-lg-9">
-                    <input class="form-control" type="text" id="name" name="name" value="{{auth()->user()->name}}" autofocus
-                    />
+                    <input class="form-control" type="text" id="name" name="name" value="{{auth()->user()->name}}" autofocus />
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="company" class="col-md-4 col-lg-3 col-form-label">NIS</label>
                   <div class="col-md-8 col-lg-9">
-                    <input class="form-control" type="text" name="username" id="username" value="{{auth()->user()->username}}" readonly/>
+                    <input class="form-control" type="text" name="username" id="username" value="{{auth()->user()->username}}" readonly />
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="Job" class="col-md-4 col-lg-3 col-form-label">Level</label>
                   <div class="col-md-8 col-lg-9">
-                    <input class="form-control" name="level" type="text" id="level" value="{{auth()->user()->level}}" readonly/>
+                    <input class="form-control" name="level" type="text" id="level" value="{{auth()->user()->level}}" readonly />
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                   <div class="col-md-8 col-lg-9">
-                    <input class="form-control" type="text" id="email" name="email" value="{{auth()->user()->email}}"/>
+                    <input class="form-control" type="text" id="email" name="email" value="{{auth()->user()->email}}" />
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="Email" class="col-md-4 col-lg-3 col-form-label">Tanggal Lahir</label>
                   <div class="col-md-8 col-lg-9">
-                    <input class="form-control" name="tgl_lahir" type="date" id="tgl_lahir" value="{{auth()->user()->tgl_lahir}}"/>
+                    <input class="form-control" name="tgl_lahir" type="date" id="tgl_lahir" value="{{auth()->user()->tgl_lahir}}" />
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="Email" class="col-md-4 col-lg-3 col-form-label">Alamat</label>
                   <div class="col-md-8 col-lg-9">
-                    <textarea class="form-control" name="alamat" type="text" id="alamat" >{{auth()->user()->alamat}}</textarea>
+                    <textarea class="form-control" name="alamat" type="text" id="alamat">{{auth()->user()->alamat}}</textarea>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="Email" class="col-md-4 col-lg-3 col-form-label">Angkatan</label>
                   <div class="col-md-8 col-lg-9">
-                    <input class="form-control" name="angkatan" type="text" id="angkatan" value="{{auth()->user()->angkatan}}"/>
+                    <input class="form-control" name="angkatan" type="text" id="angkatan" value="{{auth()->user()->angkatan}}" />
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="Email" class="col-md-4 col-lg-3 col-form-label">Kelas</label>
                   <div class="col-md-8 col-lg-9">
-                    <input class="form-control" name="kelas" type="text" id="kelas" value="{{auth()->user()->kelas}}" readonly/>
+                    <input class="form-control" name="kelas" type="text" id="kelas" value="{{auth()->user()->kelas}}" readonly />
                   </div>
                 </div>
-            <div class="card-title">Data Orangtua/wali</div>
+                <div class="card-title">Data Orangtua/wali</div>
                 <div class="row mb-3">
                   <label for="Email" class="col-md-4 col-lg-3 col-form-label">Nama Ayah</label>
                   <div class="col-md-8 col-lg-9">
-                    <input class="form-control" name="nama_ayah" type="text" id="nama_ayah" value="{{auth()->user()->nama_ayah}}"/>
+                    <input class="form-control" name="nama_ayah" type="text" id="nama_ayah" value="{{auth()->user()->nama_ayah}}" />
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="Email" class="col-md-4 col-lg-3 col-form-label">Nama Ibu</label>
                   <div class="col-md-8 col-lg-9">
-                    <input class="form-control" name="nama_ibu" type="text" id="nama_ibu" value="{{auth()->user()->nama_ibu}}"/>
+                    <input class="form-control" name="nama_ibu" type="text" id="nama_ibu" value="{{auth()->user()->nama_ibu}}" />
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="Email" class="col-md-4 col-lg-3 col-form-label">No Telp</label>
                   <div class="col-md-8 col-lg-9">
-                    <input class="form-control" name="no_hp" type="text" id="no_hp" value="{{auth()->user()->no_hp}}"/>
+                    <input class="form-control" name="no_hp" type="text" id="no_hp" value="{{auth()->user()->no_hp}}" />
                   </div>
                 </div>
                 <div class="mt-2">
@@ -167,23 +166,23 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-            @endif
+              @endif
 
-            @if(Session::get('failed'))
+              @if(Session::get('failed'))
               <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 {{ Session::get('failed') }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-            @endif
+              @endif
             </div>
 
 
             <div class="tab-pane fade pt-3" id="profile-change-password">
               <!-- Change Password Form -->
               <form action="{{ route('password-user', $accounts->id)}}" method="POST">
-                @method('PUT')  
+                @method('PUT')
                 @csrf
                 <div class="row mb-3">
                   <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Password Lama</label>
@@ -212,28 +211,21 @@
                 </div>
               </form><!-- End Change Password Form -->
 
-          
 
-          </div><!-- End Bordered Tabs -->
 
+            </div><!-- End Bordered Tabs -->
+
+          </div>
         </div>
       </div>
-      </div>
-    </div>
   </div>
+</div>
 </section>
 
-  </div>
-  @include('partials.footer')
+</div>
+@include('partials.footer')
 </div>
 
 
-  <!-- selesai content -->
-      <!-- Footer -->
-      
-  
-        
-    
-
-        
-   
+<!-- selesai content -->
+<!-- Footer -->

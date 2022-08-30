@@ -14,15 +14,15 @@ use Illuminate\Support\Facades\File;
 
 class PengumumanController extends Controller
 {
-    
+
 
     public function pengumuman()
-    {   
+    {
         $santri = Auth::user()->username;
         $pengumuman = Konten::where('kategori', 'pengumuman')->paginate(5);
-       
+
         return view('admin.v_pengumuman', [
-            'pengumuman' => $pengumuman, 
+            'pengumuman' => $pengumuman,
             'title' => 'Data Konten',
 
         ]);
@@ -36,31 +36,31 @@ class PengumumanController extends Controller
     public function store(Request $request)
     {
         $upload = $request->gambar;
-        $namaFile = time().rand(100,999).".".$upload->getClientOriginalExtension();
-        
-           
-            if ($upload == "") {
-                $gambar = "null";
-                $dataUpload = new Konten;
-                $dataUpload->judul = $request->judul;
-                $dataUpload->kategori = $request->kategori;
-                $dataUpload->gambar = $gambar;
-                $dataUpload->deskripsi = $request->deskripsi;
-                $dataUpload->save();
-            } else {
-               $gambar = $namaFile;
-               $dataUpload = new Konten;
-                $dataUpload->judul = $request->judul;
-                $dataUpload->kategori = $request->kategori;
-                $dataUpload->gambar = $gambar;
-                $dataUpload->deskripsi = $request->deskripsi;
-                $upload->move(public_path().'/content', $namaFile);
-                $dataUpload->save();
-            }
-            
-          
-           
-            
+        $namaFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+
+
+        if ($upload == "") {
+            $gambar = "null";
+            $dataUpload = new Konten;
+            $dataUpload->judul = $request->judul;
+            $dataUpload->kategori = $request->kategori;
+            $dataUpload->gambar = $gambar;
+            $dataUpload->deskripsi = $request->deskripsi;
+            $dataUpload->save();
+        } else {
+            $gambar = $namaFile;
+            $dataUpload = new Konten;
+            $dataUpload->judul = $request->judul;
+            $dataUpload->kategori = $request->kategori;
+            $dataUpload->gambar = $gambar;
+            $dataUpload->deskripsi = $request->deskripsi;
+            $upload->move(public_path() . '/content', $namaFile);
+            $dataUpload->save();
+        }
+
+
+
+
 
         return redirect('data-pengumuman')->with('success', 'Upload Pengumuman baru berhasil!');
     }
@@ -68,7 +68,7 @@ class PengumumanController extends Controller
     public function show($id)
     {
         $pengumuman = Konten::findOrFail($id);
-        return view('admin.show_pengumuman',[
+        return view('admin.show_pengumuman', [
             'pengumuman' => $pengumuman, 'title' => 'Detail Pengumuman'
         ]);
     }
@@ -81,12 +81,12 @@ class PengumumanController extends Controller
         ]);
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         $image_lama = $request->old_image;
         $image_baru = $request->file('gambar');
 
-        if($image_baru == '') {
+        if ($image_baru == '') {
             $gambar = $image_lama;
             $deskripsi = "Gambar Lama";
             $content = Konten::findOrFail($id);
@@ -97,9 +97,9 @@ class PengumumanController extends Controller
                 'deskripsi' => $request->deskripsi,
             ));
         } else {
-            $new_image = rand() .'.'. $image_baru->getClientOriginalExtension();
+            $new_image = rand() . '.' . $image_baru->getClientOriginalExtension();
             $gambar = $new_image;
-            $image_baru->move(public_path('content'), $new_image); 
+            $image_baru->move(public_path('content'), $new_image);
             $content = Konten::findOrFail($id);
             $content->update(array(
                 'judul' => $request->judul,
@@ -107,7 +107,7 @@ class PengumumanController extends Controller
                 'gambar' => $gambar,
                 'deskripsi' => $request->deskripsi,
             ));
-            File::delete('content/'.$request->old_image);
+            File::delete('content/' . $request->old_image);
         }
         return redirect('data-pengumuman');
     }
